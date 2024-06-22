@@ -1,0 +1,23 @@
+{
+    "original": [
+        "請輸入英文文章。"
+    ],
+    "list": [
+        "➢範例句",
+        "➢範例句",
+        "➢範例句"
+    ],
+    "translation": [
+        {"original": "原句","translated": "翻譯"},
+        {"original": "原句","translated": "翻譯"}
+    ],
+    "notes": [
+        "筆記",
+        "筆記"
+    ],
+    "lookup": [
+        {"chinese": "中文"},
+        {"english": "英文"},
+        {"example": "例句"}
+    ]
+}
