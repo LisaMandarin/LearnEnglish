@@ -5,7 +5,7 @@
     import AreaJSON from './area.json'
     import { RenderHint } from './RenderHint';
     import { RenderArea } from './RenderArea';
-    // import { RenderCheckBox } from './RenderCheckBox';
+    import { RenderCheckBox } from './RenderCheckBox';
 
     export function Section({ title, idName, button1, button2 }) {
         const [ showHint, setShowHint ] = useState(false)
@@ -45,9 +45,9 @@
                 <div className='buttonBox'>
                     <button type='button' onClick={clearContent}>{button1}</button>
                     <button type='button' >{button2}</button>
-                    {/* {idName === 'translation' && (
+                    {idName === 'translation' && (
                         <RenderCheckBox json={AreaJSON} objKey='lookup' />
-                    )} */}
+                    )}
                 </div>
             </section>
         )

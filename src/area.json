@@ -15,9 +15,9 @@
         "筆記",
         "筆記"
     ],
-    "lookup": [
-        {"chinese": "中文"},
-        {"english": "英文"},
-        {"example": "例句"}
-    ]
+    "lookup": {
+        "chinese": "中文",
+        "english": "英文",
+        "example": "例句"
+    }
 }

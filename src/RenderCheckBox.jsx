@@ -3,16 +3,17 @@ import { useEffect, useState } from "react";
 export function RenderCheckBox({json, objKey}) {
     const [ lookupKeys, setLookupKeys ] = useState([])
     
+    // Set the lookup keys when json or objKey changes
     useEffect(() => {
-        setLookupKeys(json[objKey].map(item => Object.keys(item)[0]))
-    })
-    // console.log(lookupKeys)
+        setLookupKeys(Object.entries(json[objKey]))
+    }, [json, objKey])
+    
     return (
         <>
-            {lookupKeys.map((lookupKey, index) => (
-                <label key={index} htmlFor={lookupKey}>
-                    <input id={lookupKey} />
-                    {json[objKey][lookupKey]}
+            {lookupKeys.map(([key, value], index) => (
+                <label key={index} htmlFor={key}>
+                    <input type="checkbox" id={key} />
+                    {value}
                 </label>
             ))}
         </>
