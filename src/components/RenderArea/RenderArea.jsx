@@ -1,13 +1,11 @@
-import React from "react"
-
-export function RenderArea({idName, json}) {
+export function RenderArea({idName, jsonArray}) {
     
     return (
         <>
             {/* originalArea text */}
             {idName === 'original' && (
             <ul>
-                {json[idName].map((text, index) => (
+                {jsonArray.map((text, index) => (
                     <li key={index}>{text}</li>
                 ))}
             </ul>
@@ -16,7 +14,7 @@ export function RenderArea({idName, json}) {
             {/* listArea text */}
             {idName === 'list' && (
                 <ul>
-                    {json[idName].map((text, index) => (
+                    {jsonArray.map((text, index) => (
                         <li key={index}>{text}</li>
                     ))}
                 </ul>
@@ -25,7 +23,7 @@ export function RenderArea({idName, json}) {
             {/* translationArea text */}
             {idName === 'translation' && (
                 <ul>
-                    {json[idName].map((text, index) => (
+                    {jsonArray.map((text, index) => (
                         <div key={index}>
                             <li className="original-text">{text.original}</li>
                             <li className="translated-text">{text.translated}</li>
@@ -37,7 +35,7 @@ export function RenderArea({idName, json}) {
             {/* notesArea text */}
             {idName === 'notes' && (
                 <>
-                    {json[idName].map((text, index) => (
+                    {jsonArray.map((text, index) => (
                         <div key={index}>{text}</div>
                     ))}
                 </>

@@ -3,20 +3,17 @@
     import { Icon } from '@iconify/react';
     import HintJSON from '../../data/hint.json'
     import AreaJSON from '../../data/area.json'
+    import LookupJSON from '../../data/lookupCheckbox.json'
     import { RenderHint } from '../RenderHint/RenderHint';
     import { RenderArea } from '../RenderArea/RenderArea';
     import { RenderCheckBox } from '../RenderCheckBox/RenderCheckBox';
 
     export function Section({ title, idName, button1, button2 }) {
         const [ showHint, setShowHint ] = useState(false)
-        const [ area, setArea ] = useState(AreaJSON)
+        const [ area, setArea ] = useState(AreaJSON[idName] || [])
             
         function clearContent() {
-            setArea(current => (
-                {...current,
-                [idName]: []
-                }
-            ))
+            setArea([])
         }
 
         return (
@@ -38,7 +35,7 @@
                 
                 {/* Input and Output Area */}
                 <div contentEditable className='area'>
-                    <RenderArea idName={idName} json={area}/>
+                    <RenderArea idName={idName} jsonArray={area}/>
                 </div>
                 
                 {/* Buttons */}
@@ -46,7 +43,7 @@
                     <button type='button' onClick={clearContent}>{button1}</button>
                     <button type='button' >{button2}</button>
                     {idName === 'translation' && (
-                        <RenderCheckBox json={AreaJSON} objKey='lookup' />
+                        <RenderCheckBox json={LookupJSON} />
                     )}
                 </div>
             </section>

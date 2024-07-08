@@ -16,7 +16,7 @@
 }
 
 
-#root div {
+#root > div {
     width: 90vw;
     font-family: var(--tc-font), var(--en-font);
     margin: 0 auto;
