@@ -1,10 +1,10 @@
-import { Header } from "./Header"
-import { Section } from "./Section"
+import { Header } from "./components/Header/Header"
+import { Section } from "./components/Section/Section"
 import './App.css'
 
 export default function App() {
   return (
-    <body>
+    <div>
       <Header />
       <Section 
         title="輸入文字"
@@ -26,6 +26,6 @@ export default function App() {
         idName='notes' 
         button1="清除"
         button2="筆記生成" />
-    </body>
+    </div>
   )
 }

@@ -1,11 +1,11 @@
     import './Section.css'
     import { useState } from 'react';
     import { Icon } from '@iconify/react';
-    import HintJSON from './hint.json'
-    import AreaJSON from './area.json'
-    import { RenderHint } from './RenderHint';
-    import { RenderArea } from './RenderArea';
-    import { RenderCheckBox } from './RenderCheckBox';
+    import HintJSON from '../../data/hint.json'
+    import AreaJSON from '../../data/area.json'
+    import { RenderHint } from '../RenderHint/RenderHint';
+    import { RenderArea } from '../RenderArea/RenderArea';
+    import { RenderCheckBox } from '../RenderCheckBox/RenderCheckBox';
 
     export function Section({ title, idName, button1, button2 }) {
         const [ showHint, setShowHint ] = useState(false)
