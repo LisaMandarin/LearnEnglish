@@ -7,7 +7,7 @@
     import { RenderHint } from '../RenderHint/RenderHint';
     import { RenderArea } from '../RenderArea/RenderArea';
     import { RenderCheckBox } from '../RenderCheckBox/RenderCheckBox';
-    import { BreakSentence } from '../BreakSentence/BreakSentence';
+    import breakSentence from '../BreakSentence/breakSentence.js'
 
     export function Section({ title, idName, button1, button2, divRef1, divRef2 }) {
         const [ showHint, setShowHint ] = useState(false)
@@ -15,10 +15,13 @@
             
         function clearContent() {
             setArea([])
+            if (divRef1.current) {
+                divRef1.current.innerHTML = ''
+            }
         }
         function executeFunction() {
             if (idName === 'original') {
-                BreakSentence(divRef1, divRef2)
+                breakSentence(divRef1, divRef2)
             } else {
                 return
             }
