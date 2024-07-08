@@ -7,13 +7,21 @@
     import { RenderHint } from '../RenderHint/RenderHint';
     import { RenderArea } from '../RenderArea/RenderArea';
     import { RenderCheckBox } from '../RenderCheckBox/RenderCheckBox';
+    import { BreakSentence } from '../BreakSentence/BreakSentence';
 
-    export function Section({ title, idName, button1, button2 }) {
+    export function Section({ title, idName, button1, button2, divRef1, divRef2 }) {
         const [ showHint, setShowHint ] = useState(false)
         const [ area, setArea ] = useState(AreaJSON[idName] || [])
             
         function clearContent() {
             setArea([])
+        }
+        function executeFunction() {
+            if (idName === 'original') {
+                BreakSentence(divRef1, divRef2)
+            } else {
+                return
+            }
         }
 
         return (
@@ -34,14 +42,14 @@
                 </div>
                 
                 {/* Input and Output Area */}
-                <div contentEditable className='area'>
+                <div contentEditable className='area' ref={divRef1}>
                     <RenderArea idName={idName} jsonArray={area}/>
                 </div>
                 
                 {/* Buttons */}
                 <div className='buttonBox'>
                     <button type='button' onClick={clearContent}>{button1}</button>
-                    <button type='button' >{button2}</button>
+                    <button type='button' onClick={executeFunction}>{button2}</button>
                     {idName === 'translation' && (
                         <RenderCheckBox json={LookupJSON} />
                     )}
