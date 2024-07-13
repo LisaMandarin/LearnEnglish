@@ -1,5 +1,5 @@
     import './Section.css'
-    import { useState } from 'react';
+    import { forwardRef, useState } from 'react';
     import { Icon } from '@iconify/react';
     import HintJSON from '../../data/hint.json'
     import AreaJSON from '../../data/area.json'
@@ -7,23 +7,29 @@
     import { RenderHint } from '../RenderHint/RenderHint';
     import { RenderArea } from '../RenderArea/RenderArea';
     import { RenderCheckBox } from '../RenderCheckBox/RenderCheckBox';
-    import breakSentence from '../BreakSentence/breakSentence.js'
+    import { BreakSentence } from '../BreakSentence/BreakSentence';
+    import { Translate } from '../Translate/Translate.jsx'
+    
 
-    export function Section({ title, idName, button1, button2, divRef1, divRef2 }) {
+    const Section = forwardRef(({ title, idName, button1, button2, nextDivRef }, divRef) => {
         const [ showHint, setShowHint ] = useState(false)
         const [ area, setArea ] = useState(AreaJSON[idName] || [])
-            
+        const [ showBreakSentence, setShowBreakSentence ] = useState(false)
+        const [ showTranslate, setShowTranslate ] = useState(false)
+
         function clearContent() {
             setArea([])
-            if (divRef1.current) {
-                divRef1.current.innerHTML = ''
+            if (divRef.current) {
+                divRef.current.innerHTML = ''
             }
         }
+
         function executeFunction() {
             if (idName === 'original') {
-                breakSentence(divRef1, divRef2)
-            } else {
-                return
+                setShowBreakSentence(true)
+            }
+            if (idName === 'list') {
+                setShowTranslate(true)
             }
         }
 
@@ -45,8 +51,10 @@
                 </div>
                 
                 {/* Input and Output Area */}
-                <div contentEditable className='area' ref={divRef1}>
-                    <RenderArea idName={idName} jsonArray={area}/>
+                <div contentEditable className='area' ref={divRef}>
+                    <RenderArea idName={idName} jsonArray={area} />
+                    {showBreakSentence && <BreakSentence divRef={divRef} nextDivRef={nextDivRef} />}
+                    {showTranslate && <Translate divRef={divRef} nextDivRef={nextDivRef} />}
                 </div>
                 
                 {/* Buttons */}
@@ -59,4 +67,7 @@
                 </div>
             </section>
         )
-    }
+    })
+
+Section.displayName = 'Section'
+export default Section
