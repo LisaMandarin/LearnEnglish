@@ -59,10 +59,10 @@
     padding: 0;
 }
 
-.card .area ul .original-text {
+.original-text {
     color: black
 }
 
-.card .area ul .translated-text {
+.translated-text {
     color: var(--dark-blue)
 }

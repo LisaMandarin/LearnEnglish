@@ -74,6 +74,7 @@ export function Translate({divRef, nextDivRef}) {
                         <span className="original-text">{sentence}</span>
                         <br />
                         {data[index] && <span className="translated-text">{data[index]}</span>}
+                        <hr />
                     </div>
                 ))}
             </>
