@@ -1,5 +1,5 @@
     import './Section.css'
-    import { forwardRef, useState } from 'react';
+    import { forwardRef, useRef, useState } from 'react';
     import { Icon } from '@iconify/react';
     import HintJSON from '../../data/hint.json'
     import AreaJSON from '../../data/area.json'
@@ -17,6 +17,8 @@
         const [ showBreakSentence, setShowBreakSentence ] = useState(false)
         const [ showTranslate, setShowTranslate ] = useState(false)
         const [ showLookup, setShowLookup ] = useState(false)
+        const [ isAnyCheckboxChecked, setIsAnyCheckboxChecked ] = useState(false)
+        const lookupRef = useRef(null)
 
         function clearContent() {
             setArea([])
@@ -34,6 +36,9 @@
             }
             if (idName === 'translation') {
                 setShowLookup(true)
+                if (lookupRef.current) {
+                    lookupRef.current.handleLookup()
+                }
             }
         }
 
@@ -59,7 +64,7 @@
                     <RenderArea idName={idName} jsonArray={area} />
                     {showBreakSentence && <BreakSentence divRef={divRef} nextDivRef={nextDivRef} />}
                     {showTranslate && <Translate divRef={divRef} nextDivRef={nextDivRef} />}
-                    {showLookup && <Lookup divRef={divRef} nextDivRef={nextDivRef}/>}
+                    {showLookup && <Lookup nextDivRef={nextDivRef} isAnyCheckboxChecked={isAnyCheckboxChecked} ref={lookupRef}/>}
                 </div>
                 
                 {/* Buttons */}
@@ -67,7 +72,7 @@
                     <button type='button' onClick={clearContent}>{button1}</button>
                     <button type='button' onClick={executeFunction}>{button2}</button>
                     {idName === 'translation' && (
-                        <RenderCheckBox json={LookupJSON} />
+                        <RenderCheckBox json={LookupJSON} setIsAnyChecked={setIsAnyCheckboxChecked}/>
                     )}
                 </div>
             </section>

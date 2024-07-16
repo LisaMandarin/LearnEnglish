@@ -1,24 +1,23 @@
-import { useEffect, useState } from "react"
+import { forwardRef, useImperativeHandle } from "react"
 
-export function Lookup({divRef, nextDivRef}) {
-    const [ selection, setSelection ] = useState('')
-    
-    useEffect(() => {
-        const handleMouseUp = () => {
+export const Lookup = forwardRef(({nextDivRef, isAnyCheckboxChecked}, ref) => {
+       
+    useImperativeHandle(ref, () => ({
+        handleLookup() {
             const selectedText = document.getSelection().toString().trim()
-            setSelection(selectedText)
-        }
-        document.addEventListener('mouseup', handleMouseUp)
+            
+            if (!isAnyCheckboxChecked) {
+                alert('請勾選「中文」、「English」、「例句」')
+                return
+            }
 
-        return () => {
-            document.removeEventListener('mouseup', handleMouseUp)
+            if (selectedText.length === 0) {
+                alert('請先選取字再查單詞')
+            } else if (nextDivRef.current){
+                nextDivRef.current.innerHTML += `<div>${selectedText}</div>`
+            }
         }
-    }, [])
+    }))
 
-    useEffect(() => {
-        if (selection.length === 0) {
-            alert ('請先選取字再查單詞')
-        }
-    }, [selection])
-    return null
-}
+})
+Lookup.displayName = 'Lookup'
