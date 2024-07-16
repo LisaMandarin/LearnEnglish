@@ -28,7 +28,10 @@ export function RenderCheckBox({json, setIsAnyChecked}) {
             <>
                 {lookupKeys.map(([key, value], index) => (
                     <label key={index} htmlFor={key}>
-                        <input type="checkbox" id={key} onChange={e => handleCheckboxChange(key, e.target.checked)}/>
+                        <input 
+                            type="checkbox" 
+                            id={key} 
+                            onChange={e => handleCheckboxChange(key, e.target.checked)}/>
                         {value}
                     </label>
                 ))}

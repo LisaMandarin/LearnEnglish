@@ -1,7 +1,6 @@
 import { forwardRef, useImperativeHandle } from "react"
 
 export const Lookup = forwardRef(({nextDivRef, isAnyCheckboxChecked}, ref) => {
-       
     useImperativeHandle(ref, () => ({
         handleLookup() {
             const selectedText = document.getSelection().toString().trim()
@@ -16,8 +15,8 @@ export const Lookup = forwardRef(({nextDivRef, isAnyCheckboxChecked}, ref) => {
             } else if (nextDivRef.current){
                 nextDivRef.current.innerHTML += `<div>${selectedText}</div>`
             }
-        }
+        } 
     }))
-
+    return null
 })
 Lookup.displayName = 'Lookup'
