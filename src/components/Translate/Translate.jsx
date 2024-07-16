@@ -47,9 +47,7 @@ export function Translate({divRef, nextDivRef}) {
         fetch(url, options, { signal: controller.signal})
             .then(res => res.json())
             .then(results => {
-                console.log('results', results)
-                const translations = results.map(result => result.translations[0].text)
-                setData(translations)})
+                setData(results.map(result => result.translations[0].text))})
             .catch(e => {
                 if (e?.name === "AbortError") return
                 setError(e)
@@ -61,6 +59,7 @@ export function Translate({divRef, nextDivRef}) {
             }
     }, [sentences])
 
+    // set content for loading effect, error message, and results
     let content
     if (loading) {
         content = <span>Loading...</span>
@@ -81,6 +80,7 @@ export function Translate({divRef, nextDivRef}) {
         )
     }
 
+    // put content into translation area
     useEffect(() => {
         if (nextDivRef.current && !rootRef.current) {
             rootRef.current = createRoot(nextDivRef.current)

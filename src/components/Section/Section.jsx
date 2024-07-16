@@ -9,13 +9,14 @@
     import { RenderCheckBox } from '../RenderCheckBox/RenderCheckBox';
     import { BreakSentence } from '../BreakSentence/BreakSentence';
     import { Translate } from '../Translate/Translate.jsx'
-    
+    import { Lookup } from '../Lookup/Lookup.jsx';
 
     const Section = forwardRef(({ title, idName, button1, button2, nextDivRef }, divRef) => {
         const [ showHint, setShowHint ] = useState(false)
         const [ area, setArea ] = useState(AreaJSON[idName] || [])
         const [ showBreakSentence, setShowBreakSentence ] = useState(false)
         const [ showTranslate, setShowTranslate ] = useState(false)
+        const [ showLookup, setShowLookup ] = useState(false)
 
         function clearContent() {
             setArea([])
@@ -30,6 +31,9 @@
             }
             if (idName === 'list') {
                 setShowTranslate(true)
+            }
+            if (idName === 'translation') {
+                setShowLookup(true)
             }
         }
 
@@ -55,6 +59,7 @@
                     <RenderArea idName={idName} jsonArray={area} />
                     {showBreakSentence && <BreakSentence divRef={divRef} nextDivRef={nextDivRef} />}
                     {showTranslate && <Translate divRef={divRef} nextDivRef={nextDivRef} />}
+                    {showLookup && <Lookup divRef={divRef} nextDivRef={nextDivRef}/>}
                 </div>
                 
                 {/* Buttons */}

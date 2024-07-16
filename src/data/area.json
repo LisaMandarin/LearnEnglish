@@ -3,13 +3,13 @@
         "請輸入英文文章。"
     ],
     "list": [
-        "➢範例句",
-        "➢範例句",
-        "➢範例句"
+        "➢English sentence 1.",
+        "➢English sentence 2.",
+        "➢English sentence 3."
     ],
     "translation": [
-        {"original": "原句","translated": "翻譯"},
-        {"original": "原句","translated": "翻譯"}
+        {"original": "➢English Sentence","translated": "➢翻譯"},
+        {"original": "➢English Sentence","translated": "➢翻譯"}
     ],
     "notes": [
         "筆記",

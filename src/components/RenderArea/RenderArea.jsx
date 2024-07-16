@@ -27,6 +27,7 @@ export function RenderArea({idName, jsonArray}) {
                         <div key={index}>
                             <li className="original-text">{text.original}</li>
                             <li className="translated-text">{text.translated}</li>
+                            <hr />
                         </div>
                     ))}
                 </ul>
