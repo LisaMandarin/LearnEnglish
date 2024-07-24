@@ -18,6 +18,33 @@
 
 #root > div {
     width: 90vw;
-    font-family: var(--tc-font), var(--en-font);
+    font-family: var(--en-font), var(--tc-font);
     margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+}
+header > p {
+  text-align: center;
+  color: var(--dark-blue)
+}
+section > div:first-child {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+textarea {
+  width: 100%;
+  min-height: 75px;
+  padding: var(--space-big);
+}
+section > div:last-child {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+section > div:last-child button {
+  margin: var(--space-small);
 }

@@ -1,49 +1,68 @@
-import { Header } from "./components/Header/Header"
-import Section from "./components/Section/Section"
 import './App.css'
-import { useRef } from "react"
+import HintJSON from './data/hint.json'
+import { Section } from './components/Section'
 
-export default function App() {
-  const originalRef = useRef(null)
-  const listRef = useRef(null)
-  const translationRef = useRef(null)
-  const notesRef = useRef(null)
-
+export default function App() {  
   return (
     <div>
-      <Header />
-      <Section 
-        title='輸入文字'
-        idName='original'
-        button1='清除原文'
-        button2='陳列句子'
-        ref={originalRef}
-        nextDivRef={listRef} />  
-      
-      <Section 
-        title='陳列句子'
-        idName='list' 
-        button1='清除句子'
-        button2='翻譯'
-        ref={listRef}
-        nextDivRef={translationRef} />
-
-      <Section 
-        title='翻譯'
-        idName='translation' 
-        button1='清除'
-        button2='查單詞'
-        ref={translationRef}
-        nextDivRef={notesRef} />
-
-      <Section 
-        title='筆記'
-        idName='notes' 
-        button1='清除'
-        button2='筆記生成'
-        ref={notesRef}
-        nextDivRef={notesRef}
+      <header>
+        <h1>句句通</h1>
+        <p>把英文文章分句翻譯，也可以查詢單詞意思，最後把翻譯和查詢的資料編輯後炇成pdf檔儲存。</p>
+        <p>👉🏻👉🏻請按照以下的步驟1→2→3→4完成你的筆記</p>
+      </header>
+      <main>
+        <Section
+          sectionKey='article'
+          title='1. 輸入文章'
+          json={HintJSON}
+          placeholder='請輸入英文原文'
+          buttons={
+            <div>
+              <button>清除文字</button>
+              <button>斷句</button>
+            </div>
+          }
         />
+          <Section
+          sectionKey='sentences'
+          title='2. 陳列句子'
+          json={HintJSON}
+          placeholder='➣範例句'
+          buttons={
+            <div>
+              <button>清除文字</button>
+              <button>翻譯</button>
+            </div>
+          }
+        />
+        <Section
+          sectionKey='translation'
+          title='3. 翻譯'
+          json={HintJSON}
+          placeholder='➣原句。翻譯句。'
+          buttons={
+            <div>
+              <button>清除文字</button>
+              <button>查詢單詞</button>
+              <input type='checkbox' id='chinese' name='chinese' /><label htmlFor='chinese'>中文</label>
+              <input type='checkbox' id='english' name='english' /><label htmlFor='english'>英文</label>
+              <input type='checkbox' id='example' name='example' /><label htmlFor='example'>例句</label>
+            </div>
+          }
+        />
+        <Section
+          sectionKey='notes'
+          title='4. 筆記'
+          json={HintJSON}
+          placeholder='筆記1'
+          buttons={
+            <div>
+              <button>清除文字</button>
+              <button>PDF生成</button>
+            </div>
+          }
+        />       
+      </main>
     </div>
   )
 }
