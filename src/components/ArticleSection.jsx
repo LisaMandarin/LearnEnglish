@@ -9,7 +9,7 @@ export function ArticleSection({article, setArticle, setSentences}) {
         const regex = /[^.!?]+[.!?]+/g  // not start with .!? but end with .!?
         const matchedSentences = article.match(regex)
         if (matchedSentences) {
-            setSentences([...matchedSentences])
+            setSentences(matchedSentences)
         }
     }
 
