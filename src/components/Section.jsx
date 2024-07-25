@@ -2,7 +2,7 @@ import { Icon } from '@iconify/react';
 import { useEffect, useState } from 'react';
 import { Hint } from './Hint';
 
-export function Section({sectionKey, title, json, placeholder, buttons}) {
+export function Section({sectionKey, title, json, placeholder, buttons, executeFunction, functionName}) {
     const [ content, setContent ] = useState('')
     const [ showHint, setShowHint ] = useState(false)
     
@@ -24,6 +24,7 @@ export function Section({sectionKey, title, json, placeholder, buttons}) {
                       onChange={e => setContent(e.target.value)} />
             <div>
                 <button onClick={clearContent}>清除文字</button>
+                <button onClick={executeFunction}>{functionName}</button>
                 {buttons}
             </div>
         </section>

@@ -15,13 +15,11 @@
   box-sizing: border-box;
 }
 
-
 #root > div {
     width: 90vw;
     font-family: var(--en-font), var(--tc-font);
     margin: 0 auto;
 }
-
 h1 {
   text-align: center;
 }
@@ -39,6 +37,21 @@ textarea {
   width: 100%;
   min-height: 75px;
   padding: var(--space-big);
+}
+section > div:nth-child(3) {
+  border: 1px solid #9a9a9a;
+  width: 100%;
+  min-height: 75px;
+  padding: var(--space-big);
+}
+.textArea ul{
+  list-style-type: none;
+  padding: 0;
+}
+.textArea li::before {
+  content: '➣';
+  display: inline-block;
+  padding-right: var(--space-small);
 }
 section > div:last-child {
   display: flex;
