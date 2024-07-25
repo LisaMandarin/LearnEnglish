@@ -17,10 +17,7 @@ export default function App() {
           json={HintJSON}
           placeholder='請輸入英文原文'
           buttons={
-            <div>
-              <button>清除文字</button>
               <button>斷句</button>
-            </div>
           }
         />
           <Section
@@ -29,10 +26,7 @@ export default function App() {
           json={HintJSON}
           placeholder='➣範例句'
           buttons={
-            <div>
-              <button>清除文字</button>
               <button>翻譯</button>
-            </div>
           }
         />
         <Section
@@ -41,13 +35,12 @@ export default function App() {
           json={HintJSON}
           placeholder='➣原句。翻譯句。'
           buttons={
-            <div>
-              <button>清除文字</button>
-              <button>查詢單詞</button>
-              <input type='checkbox' id='chinese' name='chinese' /><label htmlFor='chinese'>中文</label>
-              <input type='checkbox' id='english' name='english' /><label htmlFor='english'>英文</label>
-              <input type='checkbox' id='example' name='example' /><label htmlFor='example'>例句</label>
-            </div>
+              <>
+                <button>查詢單詞</button>
+                <input type='checkbox' id='chinese' name='chinese' /><label htmlFor='chinese'>中文</label>
+                <input type='checkbox' id='english' name='english' /><label htmlFor='english'>英文</label>
+                <input type='checkbox' id='example' name='example' /><label htmlFor='example'>例句</label>
+              </>
           }
         />
         <Section
@@ -56,10 +49,7 @@ export default function App() {
           json={HintJSON}
           placeholder='筆記1'
           buttons={
-            <div>
-              <button>清除文字</button>
               <button>PDF生成</button>
-            </div>
           }
         />       
       </main>

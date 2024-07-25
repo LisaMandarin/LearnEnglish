@@ -1,10 +1,14 @@
 import { Icon } from '@iconify/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Hint } from './Hint';
 
 export function Section({sectionKey, title, json, placeholder, buttons}) {
+    const [ content, setContent ] = useState('')
     const [ showHint, setShowHint ] = useState(false)
     
+    const clearContent = () => setContent('')
+
+    useEffect(() => console.log("Content: ", content), [content])
     return (
         <section>
             <div>
@@ -15,8 +19,11 @@ export function Section({sectionKey, title, json, placeholder, buttons}) {
                   />
             </div>
             { showHint && <Hint json={json[sectionKey]}/> }
-            <textarea placeholder={placeholder} />
+            <textarea placeholder={placeholder}
+                      value={content}
+                      onChange={e => setContent(e.target.value)} />
             <div>
+                <button onClick={clearContent}>清除文字</button>
                 {buttons}
             </div>
         </section>
