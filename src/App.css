@@ -71,3 +71,6 @@ section > div:last-child button {
 .translation-text {
   color: var(--dark-blue)
 }
+label {
+  align-self: center;
+}

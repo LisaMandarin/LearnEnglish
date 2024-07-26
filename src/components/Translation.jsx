@@ -18,7 +18,7 @@ export function TranslationSection({translation, setTranslation, sentences}) {
         const textArea = textAreaRef.current
         if (!textArea) return
         if (translation.length === 0) {
-            textArea.innerHTML = `<li class='sample'>原句<br>翻譯</li>`
+            textArea.innerHTML = `<li class='sample'>原句<br>&nbsp;&nbsp;&nbsp;翻譯</li>`
         } else {
             textArea.innerHTML = sentences.map((s, index) => `
             <div>
@@ -51,6 +51,9 @@ export function TranslationSection({translation, setTranslation, sentences}) {
             <div>
                 <button onClick={clearTranslation}>清除文字</button>
                 <button onClick={Lookup}>查詢單字</button>
+                <input type='checkbox' name='english' id='english' /><label htmlFor='english'>英文</label>
+                <input type='checkbox' name='chinese' id='chinese' /><label htmlFor='chinese'>中文</label>
+                <input type='checkbox' name='example' id='example' /><label htmlFor='example'>例句</label>
             </div>
         </section>
     )
