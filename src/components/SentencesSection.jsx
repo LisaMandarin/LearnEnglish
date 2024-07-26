@@ -2,11 +2,9 @@ import { Icon} from '@iconify/react'
 import HintJSON from '../data/hint.json'
 import { useEffect, useRef, useState } from 'react'
 
-export function SentencesSection({sentences, setSentences, setTranslation}) {
+export function SentencesSection({sentences, setSentences, setTranslation, setLoading, setError}) {
     const [ showHint, setShowHint ] = useState(false)
     const textAreaRef = useRef(null)
-    const [ error, setError ] = useState(null)
-    const [ loading, setLoading ] = useState(false)
 
     const clearSentences = () => {
         textAreaRef.current.innerHTML = ''
@@ -28,7 +26,7 @@ export function SentencesSection({sentences, setSentences, setTranslation}) {
         const options = {
             method: 'POST',
             headers: {
-                'x-rapidapi-key': '96feed9183msh49658918a216289p163110jsn5de6fd8ffbe9',
+                'x-rapidapi-key': '96feed9183msh49658918a216289p163110jsn5de6fd8ffbe',
                 'x-rapidapi-host': 'microsoft-translator-text-api3.p.rapidapi.com',
                 'Content-Type': 'application/json'
             },
@@ -57,26 +55,21 @@ export function SentencesSection({sentences, setSentences, setTranslation}) {
         const textArea = textAreaRef.current
         if (!textArea) return
         if (sentences.length > 0) {
-            textArea.innerHTML = sentences.map(sentence => `<li>${sentence}</li>`).join('')
+            textArea.innerHTML = sentences.map(sentence => `<li>${sentence.trim()}</li>`).join('')
         } else {
             textArea.innerHTML = "<li class='sample'>範例句</li>"
         }
 
     }, [sentences])
-
-    useEffect(() => {
-        if (loading) {
-            setTranslation('Loading...')
-        }
-    }, [setTranslation, loading])
     
     return (
         <section>
             <div>
                 <h2>2. 陳列句子</h2>
-                <Icon icon="heroicons-outline:question-mark-circle" 
-                  style={{color: '#207BFF', fontSize: '2rem', marginLeft: '5px'}}
-                  onClick={() => setShowHint(current => !current)}
+                <Icon className='icon-questionMark' 
+                    icon="heroicons-outline:question-mark-circle" 
+                    style={{color: '#207BFF', fontSize: '2rem', marginLeft: '5px'}}
+                    onClick={() => setShowHint(current => !current)}
                 />
             </div>
 

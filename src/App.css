@@ -23,6 +23,9 @@
 h1 {
   text-align: center;
 }
+.icon-questionMark {
+  cursor: pointer;
+}
 header > p {
   text-align: center;
   color: var(--dark-blue)

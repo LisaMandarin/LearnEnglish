@@ -8,11 +8,14 @@ export default function App() {
   const [ article, setArticle ] = useState('')
   const [ sentences, setSentences ] = useState([]) 
   const [ translation, setTranslation ] = useState([])
+  const [ error, setError ] = useState(null)
+  const [ loading, setLoading ] = useState(false)
 
   useEffect(() => {
     console.log('article: ', article)
     console.log('sentences: ', sentences)
     console.log('translation: ', translation)
+    console.log('Error: ', error)
   }, [article, sentences, translation])
   return (
     <div>
@@ -29,11 +32,15 @@ export default function App() {
         <SentencesSection
           sentences={sentences} 
           setSentences={setSentences} 
-          setTranslation={setTranslation}/>
+          setTranslation={setTranslation}
+          setLoading={setLoading}
+          setError={setError} />
         <TranslationSection
           sentences={sentences}
           translation={translation}
-          setTranslation={setTranslation} />
+          setTranslation={setTranslation}
+          error={error}
+          loading={loading} />
       </main>
     </div>
   )

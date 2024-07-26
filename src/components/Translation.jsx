@@ -2,7 +2,7 @@ import { Icon} from '@iconify/react'
 import HintJSON from '../data/hint.json'
 import { useEffect, useRef, useState } from 'react'
 
-export function TranslationSection({translation, setTranslation, sentences}) {
+export function TranslationSection({translation, setTranslation, sentences, error, loading}) {
     const [ showHint, setShowHint ] = useState(false)
     const textAreaRef = useRef(null)
     const clearTranslation = () => {
@@ -19,7 +19,13 @@ export function TranslationSection({translation, setTranslation, sentences}) {
         if (!textArea) return
         if (translation.length === 0) {
             textArea.innerHTML = `<li class='sample'>原句<br>&nbsp;&nbsp;&nbsp;翻譯</li>`
-        } else {
+        } else if (loading) {
+            textArea.innerText = 'Loading...'
+        } else if (error) {
+            textArea.innerText = `Error: ${error.message}` || 'Unknown Error!!'
+        }
+        
+        else {
             textArea.innerHTML = sentences.map((s, index) => `
             <div>
                 <span class='original-text'>➢${s}</span>
@@ -28,15 +34,16 @@ export function TranslationSection({translation, setTranslation, sentences}) {
             </div>
             `).join('')
         }
-    }, [sentences, translation])
+    }, [sentences, translation, loading])
 
     return (
         <section>
             <div>
                 <h2>3. 翻譯</h2>
-                <Icon icon="heroicons-outline:question-mark-circle" 
-                  style={{color: '#207BFF', fontSize: '2rem', marginLeft: '5px'}}
-                  onClick={() => setShowHint(current => !current)}
+                <Icon className='icon-questionMark' 
+                    icon="heroicons-outline:question-mark-circle" 
+                    style={{color: '#207BFF', fontSize: '2rem', marginLeft: '5px'}}
+                    onClick={() => setShowHint(current => !current)}
                   />
             </div>
 

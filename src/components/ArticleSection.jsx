@@ -17,9 +17,10 @@ export function ArticleSection({article, setArticle, setSentences}) {
         <section>
             <div>
                 <h2>1. 輸入文章</h2>
-                <Icon icon="heroicons-outline:question-mark-circle" 
-                  style={{color: '#207BFF', fontSize: '2rem', marginLeft: '5px'}}
-                  onClick={() => setShowHint(current => !current)}
+                <Icon className='icon-questionMark'
+                    icon="heroicons-outline:question-mark-circle" 
+                    style={{color: '#207BFF', fontSize: '2rem', marginLeft: '5px'}}
+                    onClick={() => setShowHint(current => !current)}
                   />
             </div>
 
