@@ -2,11 +2,18 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import { ArticleSection } from './components/ArticleSection'
 import { SentencesSection } from './components/SentencesSection'
+import { TranslationSection } from './components/Translation'
 
 export default function App() {
   const [ article, setArticle ] = useState('')
   const [ sentences, setSentences ] = useState([]) 
+  const [ translation, setTranslation ] = useState([])
 
+  useEffect(() => {
+    console.log('article: ', article)
+    console.log('sentences: ', sentences)
+    console.log('translation: ', translation)
+  }, [article, sentences, translation])
   return (
     <div>
       <header>
@@ -21,7 +28,12 @@ export default function App() {
           setSentences={setSentences} />
         <SentencesSection
           sentences={sentences} 
-          setSentences={setSentences} />
+          setSentences={setSentences} 
+          setTranslation={setTranslation}/>
+        <TranslationSection
+          sentences={sentences}
+          translation={translation}
+          setTranslation={setTranslation} />
       </main>
     </div>
   )

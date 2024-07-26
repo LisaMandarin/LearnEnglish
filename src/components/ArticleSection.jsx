@@ -13,8 +13,6 @@ export function ArticleSection({article, setArticle, setSentences}) {
         }
     }
 
-    useEffect(() => console.log('article: ', article), [article])
-
     return (
         <section>
             <div>
