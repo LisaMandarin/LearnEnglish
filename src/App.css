@@ -65,3 +65,9 @@ section > div:last-child button {
 .sample {
   color: #9a9a9a;
 }
+.original-text {
+  color: black
+}
+.translation-text {
+  color: var(--dark-blue)
+}

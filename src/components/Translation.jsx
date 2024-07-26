@@ -22,9 +22,9 @@ export function TranslationSection({translation, setTranslation, sentences}) {
         } else {
             textArea.innerHTML = sentences.map((s, index) => `
             <div>
-                <span class='original-text'>${s}</span>
+                <span class='original-text'>➢${s}</span>
                 <br>
-                <span class='translation-text'>${translation[index]}</span>}
+                <span class='translation-text'>&nbsp;&nbsp;&nbsp;${translation[index]}</span>}
             </div>
             `).join('')
         }
