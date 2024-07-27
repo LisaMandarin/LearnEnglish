@@ -1,16 +1,23 @@
 import { Icon } from "@iconify/react"
 import HintJSON from '../data/hint.json'
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 
-export function NotesSection() {
+export function NotesSection({notes, setNotes}) {
     const [ showHint, setShowHint ] = useState(false)
     const textAreaRef = useRef(null)
+    
+    const handleInput = e => setNotes(e.target.innerHTML)
+    useEffect(() => {
+        textAreaRef.current.innerHTML = notes
+    })
+    
     const clearNotes = () => {
-
+        textAreaRef.current.innerHTML = ''
+        setNotes('')
     }
     const GeneratePDF = () => {
-        
+
     }
 
     return (
@@ -29,7 +36,12 @@ export function NotesSection() {
                 ))}
             </ul>
             <div className="textArea">
-                <ul contentEditable='true' ref={textAreaRef} />
+                <div 
+                    contentEditable='true' 
+                    ref={textAreaRef}
+                    onInput={handleInput}>
+                    <span className="sample">{notes}</span>
+                </div>
             </div>
             <div>
                 <button onClick={clearNotes}>清除筆記</button>

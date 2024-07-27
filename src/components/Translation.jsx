@@ -3,7 +3,7 @@ import HintJSON from '../data/hint.json'
 import { useEffect, useRef, useState } from 'react'
 import OpenAI from 'openai'
 
-export function TranslationSection({translation, setTranslation, sentences, error, loading}) {
+export function TranslationSection({translation, setTranslation, sentences, error, loading, setNotes}) {
     const [ showHint, setShowHint ] = useState(false)
     const [ chinese, setChinese ] = useState(false)
     const [ english, setEnglish ] = useState(false)
@@ -105,15 +105,15 @@ export function TranslationSection({translation, setTranslation, sentences, erro
             })
             const response = JSON.parse(completion.choices[0].message.function_call.arguments)
             const { word: responseWord, partOfSpeech, chineseDefinition, englishDefinition, exampleSentence } = response
-            const formattedResponse = `${responseWord} (${partOfSpeech})\n`+
-                (chineseDefinition ? `・${chineseDefinition}\n`: '')+
-                (englishDefinition ? `・${englishDefinition}\n`: '')+
-                (exampleSentence ? `・${exampleSentence}\n`: '')
+            const formattedResponse = `${responseWord} (${partOfSpeech})<br>`+
+                (chineseDefinition ? `・${chineseDefinition}<br>`: '')+
+                (englishDefinition ? `・${englishDefinition}<br>`: '')+
+                (exampleSentence ? `・${exampleSentence}<br>`: '')
             return formattedResponse   
         }
         try {
             const result = await displayResult(selectedText, lookupTerms)
-            console.log(result)
+            setNotes(result)
         } catch (error) {
             console.error('Fetch Failure: ', error)
         }

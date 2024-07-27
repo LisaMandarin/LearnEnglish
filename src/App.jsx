@@ -9,6 +9,7 @@ export default function App() {
   const [ article, setArticle ] = useState('')
   const [ sentences, setSentences ] = useState([]) 
   const [ translation, setTranslation ] = useState([])
+  const [ notes, setNotes ] = useState('筆記')
   const [ error, setError ] = useState(null)
   const [ loading, setLoading ] = useState(false)
 
@@ -16,7 +17,8 @@ export default function App() {
     console.log('article: ', article)
     console.log('sentences: ', sentences)
     console.log('translation: ', translation)
-  }, [article, sentences, translation])
+    console.log('notes: ', notes)
+  }, [article, sentences, translation, notes])
   return (
     <div>
       <header>
@@ -40,8 +42,9 @@ export default function App() {
           translation={translation}
           setTranslation={setTranslation}
           error={error}
-          loading={loading} />
-        <NotesSection />
+          loading={loading}
+          setNotes={setNotes} />
+        <NotesSection notes={notes} setNotes={setNotes} />
       </main>
     </div>
   )
