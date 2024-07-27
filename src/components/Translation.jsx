@@ -9,6 +9,9 @@ export function TranslationSection({translation, setTranslation, sentences, erro
     const [ english, setEnglish ] = useState(false)
     const [ example, setExample ] = useState(false)
     const [ lookupTerms, setLookupTerms ] = useState([])
+    const termChinese = 'traditional Chinese definition'
+    const termEnglish = 'English definition'
+    const termExample = 'an example sentence'
     const textAreaRef = useRef(null)
 
     const clearTranslation = () => {
@@ -16,13 +19,10 @@ export function TranslationSection({translation, setTranslation, sentences, erro
         setTranslation([])
     }
     
+    // toggle checkboxes and save the values to lookupTerms
     useEffect(() => {
         setLookupTerms(current => {
             let newTerms = [...current]
-            const termChinese = 'English definition'
-            const termEnglish = 'traditional Chinese definition'
-            const termExample = 'an example'
-
             if (english) {
                 if (!newTerms.includes(termEnglish)) {
                     newTerms.push(termEnglish)
@@ -60,9 +60,35 @@ export function TranslationSection({translation, setTranslation, sentences, erro
         }
         const displayResult = async (word, lookupTerms) => {
             const openai = new OpenAI({
-                apiKey: import.meta.env.VITE_OPENAI_API_KEY
+                apiKey: import.meta.env.VITE_OPENAI_API_KEY,
+                dangerouslyAllowBrowser: true
             })
             const instructions = `You are a dictionary for ESL learners.  Word: ${word}.  Tell me the word's information of ${lookupTerms.join(',')} and its part of speech`
+            
+            const functionParameters = {
+                type: 'object',
+                properties: {
+                    word: { type: 'string', description: 'The word being defined' },
+                    partOfSpeech: { type: 'string', description: 'The part of speech of the word'},
+                },
+                required: ['word', 'partOfSpeech']
+            }
+
+            if (lookupTerms.includes(termChinese)) {
+                functionParameters.properties.chineseDefinition = { type: 'string', definition: 'The definition in traditional Chinese'}
+                functionParameters.required.push('chineseDefinition')
+            }
+
+            if (lookupTerms.includes(termEnglish)) {
+                functionParameters.properties.englishDefinition = { type: 'string', definition: 'The definition in English'}
+                functionParameters.required.push('englishDefinition')
+            }
+
+            if (lookupTerms.includes(termExample)) {
+                functionParameters.properties.exampleSentence = { type: 'string', definition: 'An example sentence using the word'}
+                functionParameters.required.push('exampleSentence')
+            }
+
             const completion = await openai.chat.completions.create({
                 messages: [
                 {role: "user", content: instructions},
@@ -70,17 +96,7 @@ export function TranslationSection({translation, setTranslation, sentences, erro
                 functions: [{
                     name: "format_response",
                     description: "Formats the response into word details",
-                    parameters: {
-                        type: "object", 
-                        properties: {
-                            word: {type: "string", description: "The word being defined"},
-                            partOfSpeech: {type: "string", description: "The part of speech of the word"},
-                            chineseDefinition: {type: "string", description: "The definition in traditional Chinese"},
-                            englishDefinition: {type: "string", description: "The definition in English"},
-                            exampleSentence: {type: "string", description: "An example sentence using the word"}
-                        },
-                        required: ["word", "partOfSpeech", "chineseDefinition", "englishDefinition", "exampleSentence"]
-                    }
+                    parameters: functionParameters
                 }],
                 function_call: {name: "format_response"},
                 model: "gpt-3.5-turbo",
@@ -89,7 +105,10 @@ export function TranslationSection({translation, setTranslation, sentences, erro
             })
             const response = JSON.parse(completion.choices[0].message.function_call.arguments)
             const { word: responseWord, partOfSpeech, chineseDefinition, englishDefinition, exampleSentence } = response
-            const formattedResponse = `${responseWord} (${partOfSpeech})\n∙${chineseDefinition}\n∙${englishDefinition}\n∙${exampleSentence}\n`
+            const formattedResponse = `${responseWord} (${partOfSpeech})\n`+
+                (chineseDefinition ? `・${chineseDefinition}\n`: '')+
+                (englishDefinition ? `・${englishDefinition}\n`: '')+
+                (exampleSentence ? `・${exampleSentence}\n`: '')
             return formattedResponse   
         }
         try {
@@ -99,6 +118,8 @@ export function TranslationSection({translation, setTranslation, sentences, erro
             console.error('Fetch Failure: ', error)
         }
     }
+
+    useEffect(() => console.log('lookupTerms: ', lookupTerms), [lookupTerms])
 
     // render and re-render textarea
     useEffect(() => {
