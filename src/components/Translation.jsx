@@ -4,11 +4,48 @@ import { useEffect, useRef, useState } from 'react'
 
 export function TranslationSection({translation, setTranslation, sentences, error, loading}) {
     const [ showHint, setShowHint ] = useState(false)
+    const [ chinese, setChinese ] = useState(false)
+    const [ english, setEnglish ] = useState(false)
+    const [ example, setExample ] = useState(false)
+    const [ lookupTerms, setLookupTerms ] = useState([])
     const textAreaRef = useRef(null)
     const clearTranslation = () => {
         textAreaRef.current.innerHTML = ''
         setTranslation([])
     }
+    
+    useEffect(() => {
+        setLookupTerms(current => {
+            let newTerms = [...current]
+            const termChinese = 'English definition'
+            const termEnglish = 'traditional Chinese definition'
+            const termExample = 'an example'
+
+            if (english) {
+                if (!newTerms.includes(termEnglish)) {
+                    newTerms.push(termEnglish)
+                }
+            } else {
+                newTerms = newTerms.filter(t => t !== termEnglish)
+            }
+            if (chinese) {
+                if (!newTerms.includes(termChinese)) {
+                    newTerms.push(termChinese)
+                }
+            } else {
+                newTerms = newTerms.filter(t => t !== termChinese)
+            }
+            if (example) {
+                if (!newTerms.includes(termExample)) {
+                    newTerms.push(termExample)
+                }
+            } else {
+                newTerms = newTerms.filter(t => t !== termExample)
+            }
+            return newTerms
+        })
+    }, [chinese, english, example])
+
     const Lookup = () => {
        
     }
@@ -58,9 +95,9 @@ export function TranslationSection({translation, setTranslation, sentences, erro
             <div>
                 <button onClick={clearTranslation}>清除文字</button>
                 <button onClick={Lookup}>查詢單字</button>
-                <input type='checkbox' name='english' id='english' /><label htmlFor='english'>英文</label>
-                <input type='checkbox' name='chinese' id='chinese' /><label htmlFor='chinese'>中文</label>
-                <input type='checkbox' name='example' id='example' /><label htmlFor='example'>例句</label>
+                <input type='checkbox' name='english' id='english' checked={english} onChange={e => setEnglish(e.target.checked)}/><label htmlFor='english'>英文解釋</label>
+                <input type='checkbox' name='chinese' id='chinese' checked={chinese} onChange={e => setChinese(e.target.checked)}/><label htmlFor='chinese'>中文定義</label>
+                <input type='checkbox' name='example' id='example' checked={example} onChange={e => setExample(e.target.checked)}/><label htmlFor='example'>例句</label>
             </div>
         </section>
     )

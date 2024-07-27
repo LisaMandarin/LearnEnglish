@@ -15,7 +15,6 @@ export default function App() {
     console.log('article: ', article)
     console.log('sentences: ', sentences)
     console.log('translation: ', translation)
-    console.log('Error: ', error)
   }, [article, sentences, translation])
   return (
     <div>

@@ -26,7 +26,7 @@ export function SentencesSection({sentences, setSentences, setTranslation, setLo
         const options = {
             method: 'POST',
             headers: {
-                'x-rapidapi-key': '96feed9183msh49658918a216289p163110jsn5de6fd8ffbe',
+                'x-rapidapi-key': '96feed9183msh49658918a216289p163110jsn5de6fd8ffbe9',
                 'x-rapidapi-host': 'microsoft-translator-text-api3.p.rapidapi.com',
                 'Content-Type': 'application/json'
             },
