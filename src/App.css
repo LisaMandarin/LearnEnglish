@@ -77,3 +77,16 @@ section > div:last-child button {
 label {
   align-self: center;
 }
+#notesArea {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 250px);
+  grid-gap: var(--space-big);
+  justify-content: start;
+}
+.textArea > div {
+  margin: 0;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  padding: var(--space-small);
+  font-size: 14px;
+}

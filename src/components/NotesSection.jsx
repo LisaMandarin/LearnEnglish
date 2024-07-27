@@ -7,11 +7,17 @@ export function NotesSection({notes, setNotes}) {
     const [ showHint, setShowHint ] = useState(false)
     const textAreaRef = useRef(null)
     
-    const handleInput = e => setNotes(e.target.innerHTML)
     useEffect(() => {
-        textAreaRef.current.innerHTML = notes
-    })
-    
+        textAreaRef.current.innerHTML += `<div>${notes}</div>`
+    }, [textAreaRef, notes])
+
+    // set the initial text for Notes section
+    useEffect(() => {
+        if (notes.length === 0) {
+            textAreaRef.current.innerHTML = `<div class="sample">筆記</div>`
+        }
+    }, [notes, textAreaRef])
+
     const clearNotes = () => {
         textAreaRef.current.innerHTML = ''
         setNotes('')
@@ -35,14 +41,12 @@ export function NotesSection({notes, setNotes}) {
                     <li key={index}>{hint}</li>
                 ))}
             </ul>
-            <div className="textArea">
-                <div 
-                    contentEditable='true' 
-                    ref={textAreaRef}
-                    onInput={handleInput}>
-                    <span className="sample">{notes}</span>
-                </div>
-            </div>
+            <div 
+                className="textArea" 
+                id="notesArea"
+                contentEditable='true' 
+                ref={textAreaRef}
+            />         
             <div>
                 <button onClick={clearNotes}>清除筆記</button>
                 <button onClick={GeneratePDF}>PDF生成</button>
