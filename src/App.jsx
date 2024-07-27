@@ -3,6 +3,7 @@ import './App.css'
 import { ArticleSection } from './components/ArticleSection'
 import { SentencesSection } from './components/SentencesSection'
 import { TranslationSection } from './components/Translation'
+import { NotesSection } from './components/NotesSection'
 
 export default function App() {
   const [ article, setArticle ] = useState('')
@@ -40,6 +41,7 @@ export default function App() {
           setTranslation={setTranslation}
           error={error}
           loading={loading} />
+        <NotesSection />
       </main>
     </div>
   )
