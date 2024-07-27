@@ -3,7 +3,7 @@ import HintJSON from '../data/hint.json'
 import { useEffect, useRef, useState } from 'react'
 import OpenAI from 'openai'
 
-export function TranslationSection({translation, setTranslation, sentences, error, loading, setNotes}) {
+export function TranslationSection({translation, setTranslation, sentences, error, loading, setNotes, translationAreaRef}) {
     const [ showHint, setShowHint ] = useState(false)
     const [ chinese, setChinese ] = useState(false)
     const [ english, setEnglish ] = useState(false)
@@ -126,7 +126,7 @@ export function TranslationSection({translation, setTranslation, sentences, erro
         const textArea = textAreaRef.current
         if (!textArea) return
         if (translation.length === 0) {
-            textArea.innerHTML = `<li class='sample'>原句<br>&nbsp;&nbsp;&nbsp;翻譯</li>`
+            textArea.innerHTML = `<li ref=${translationAreaRef} class='sample'>原句<br>&nbsp;&nbsp;&nbsp;翻譯</li>`
         } else if (loading) {
             textArea.innerText = 'Loading...'
         } else if (error) {

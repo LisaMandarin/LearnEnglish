@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import { ArticleSection } from './components/ArticleSection'
 import { SentencesSection } from './components/SentencesSection'
@@ -12,6 +12,7 @@ export default function App() {
   const [ notes, setNotes ] = useState('')
   const [ error, setError ] = useState(null)
   const [ loading, setLoading ] = useState(false)
+  const translationAreaRef = useRef(null)
 
   useEffect(() => {
     console.log('article: ', article)
@@ -43,8 +44,9 @@ export default function App() {
           setTranslation={setTranslation}
           error={error}
           loading={loading}
-          setNotes={setNotes} />
-        <NotesSection notes={notes} setNotes={setNotes} />
+          setNotes={setNotes} 
+          translationAreaRef={translationAreaRef} />
+        <NotesSection notes={notes} setNotes={setNotes} translationAreaRef={translationAreaRef}/>
       </main>
     </div>
   )

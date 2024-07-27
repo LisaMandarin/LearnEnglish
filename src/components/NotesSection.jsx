@@ -1,9 +1,12 @@
 import { Icon } from "@iconify/react"
 import HintJSON from '../data/hint.json'
 import { useEffect, useRef, useState } from "react"
+import jsPDF from "jspdf"
+import { NotoSansTC } from "./NotoSansTC-VariableFont_wght-normal"
 
 
-export function NotesSection({notes, setNotes}) {
+
+export function NotesSection({notes, setNotes, translationAreaRef}) {
     const [ showHint, setShowHint ] = useState(false)
     const textAreaRef = useRef(null)
     
@@ -23,8 +26,29 @@ export function NotesSection({notes, setNotes}) {
         setNotes('')
     }
     const GeneratePDF = () => {
+        // ----- basic pdf setting -----
+        const pdf = new jsPDF({lineHeight: 1})  // default unit: mm
+        pdf.addFileToVFS('NotoSansTC-VariableFont_wght-normal.ttf', NotoSansTC)
+        pdf.addFont('NotoSansTC-VariableFont_wght-normal.ttf', 'NotoSansTC', 'normal')
+        pdf.setFont('NotoSansTC')
 
+        const pageWidth = pdf.internal.pageSize.width;
+        const pageHeight = pdf.internal.pageSize.height;
+        const margins = {
+            left: 10,
+            right: 10,
+            top: 10,
+            bottom: 10
+        }
+        const maxWidth = pageWidth - (margins.left + margins.right);
+        // ----- end of basic pdf setting -----
+
+        // ----- generate translation section -----
+        const translationContent = translationAreaRef.current.innerText;
+        const splitTranslation = pdf.splitTextToSize(translationContent, maxWidth)  // split text to fit within the maxWidth
+        console.log('Translation: ', splitTranslation)
     }
+    
 
     return (
         <section>
