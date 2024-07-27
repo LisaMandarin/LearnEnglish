@@ -1,6 +1,7 @@
 import { Icon} from '@iconify/react'
 import HintJSON from '../data/hint.json'
 import { useEffect, useRef, useState } from 'react'
+import OpenAI from 'openai'
 
 export function TranslationSection({translation, setTranslation, sentences, error, loading}) {
     const [ showHint, setShowHint ] = useState(false)
@@ -9,6 +10,7 @@ export function TranslationSection({translation, setTranslation, sentences, erro
     const [ example, setExample ] = useState(false)
     const [ lookupTerms, setLookupTerms ] = useState([])
     const textAreaRef = useRef(null)
+
     const clearTranslation = () => {
         textAreaRef.current.innerHTML = ''
         setTranslation([])
@@ -46,8 +48,56 @@ export function TranslationSection({translation, setTranslation, sentences, erro
         })
     }, [chinese, english, example])
 
-    const Lookup = () => {
-       
+    const Lookup = async () => {
+        const selectedText = document.getSelection().toString().trim()
+        if (!chinese && !english && !example) {
+            alert ('請勾選「中文」、「English」、或「例句」')
+            return
+        }
+        if (!selectedText) {
+            alert ('請先選取字再查單詞')
+            return
+        }
+        const displayResult = async (word, lookupTerms) => {
+            const openai = new OpenAI({
+                apiKey: import.meta.env.VITE_OPENAI_API_KEY
+            })
+            const instructions = `You are a dictionary for ESL learners.  Word: ${word}.  Tell me the word's information of ${lookupTerms.join(',')} and its part of speech`
+            const completion = await openai.chat.completions.create({
+                messages: [
+                {role: "user", content: instructions},
+                ],
+                functions: [{
+                    name: "format_response",
+                    description: "Formats the response into word details",
+                    parameters: {
+                        type: "object", 
+                        properties: {
+                            word: {type: "string", description: "The word being defined"},
+                            partOfSpeech: {type: "string", description: "The part of speech of the word"},
+                            chineseDefinition: {type: "string", description: "The definition in traditional Chinese"},
+                            englishDefinition: {type: "string", description: "The definition in English"},
+                            exampleSentence: {type: "string", description: "An example sentence using the word"}
+                        },
+                        required: ["word", "partOfSpeech", "chineseDefinition", "englishDefinition", "exampleSentence"]
+                    }
+                }],
+                function_call: {name: "format_response"},
+                model: "gpt-3.5-turbo",
+                temperature: 1.5,
+                max_tokens: 100
+            })
+            const response = JSON.parse(completion.choices[0].message.function_call.arguments)
+            const { word: responseWord, partOfSpeech, chineseDefinition, englishDefinition, exampleSentence } = response
+            const formattedResponse = `${responseWord} (${partOfSpeech})\n∙${chineseDefinition}\n∙${englishDefinition}\n∙${exampleSentence}\n`
+            return formattedResponse   
+        }
+        try {
+            const result = await displayResult(selectedText, lookupTerms)
+            console.log(result)
+        } catch (error) {
+            console.error('Fetch Failure: ', error)
+        }
     }
 
     // render and re-render textarea
@@ -71,7 +121,7 @@ export function TranslationSection({translation, setTranslation, sentences, erro
             </div>
             `).join('')
         }
-    }, [sentences, translation, loading])
+    }, [sentences, translation, loading,error])
 
     return (
         <section>
