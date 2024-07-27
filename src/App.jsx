@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import { ArticleSection } from './components/ArticleSection'
 import { SentencesSection } from './components/SentencesSection'
-import { TranslationSection } from './components/Translation'
+import { TranslationSection } from './components/TranslationSection'
 import { NotesSection } from './components/NotesSection'
 
 export default function App() {
@@ -46,7 +46,10 @@ export default function App() {
           loading={loading}
           setNotes={setNotes} 
           translationAreaRef={translationAreaRef} />
-        <NotesSection notes={notes} setNotes={setNotes} translationAreaRef={translationAreaRef}/>
+        <NotesSection 
+          notes={notes} 
+          setNotes={setNotes} 
+          translationAreaRef={translationAreaRef}/>
       </main>
     </div>
   )

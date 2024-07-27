@@ -58,13 +58,13 @@ export function TranslationSection({translation, setTranslation, sentences, erro
             alert ('請先選取字再查單詞')
             return
         }
+        // ----- fetch OPENAI API -----
         const displayResult = async (word, lookupTerms) => {
             const openai = new OpenAI({
                 apiKey: import.meta.env.VITE_OPENAI_API_KEY,
                 dangerouslyAllowBrowser: true
             })
             const instructions = `You are a dictionary for ESL learners.  Word: ${word}.  Tell me the word's information of ${lookupTerms.join(',')} and its part of speech`
-            
             const functionParameters = {
                 type: 'object',
                 properties: {
@@ -117,6 +117,7 @@ export function TranslationSection({translation, setTranslation, sentences, erro
         } catch (error) {
             console.error('Fetch Failure: ', error)
         }
+        // ----- end of fetch OPENAI API ----
     }
 
     useEffect(() => console.log('lookupTerms: ', lookupTerms), [lookupTerms])
@@ -131,9 +132,7 @@ export function TranslationSection({translation, setTranslation, sentences, erro
             textArea.innerText = 'Loading...'
         } else if (error) {
             textArea.innerText = `Error: ${error.message}` || 'Unknown Error!!'
-        }
-        
-        else {
+        }else {
             textArea.innerHTML = sentences.map((s, index) => `
             <div>
                 <span class='original-text'>➢${s}</span>
@@ -142,7 +141,8 @@ export function TranslationSection({translation, setTranslation, sentences, erro
             </div>
             `).join('')
         }
-    }, [sentences, translation, loading,error])
+        }, [sentences, translation, loading,error, translationAreaRef])
+        
 
     return (
         <section>

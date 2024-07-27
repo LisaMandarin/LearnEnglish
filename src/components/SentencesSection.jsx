@@ -17,7 +17,7 @@ export function SentencesSection({sentences, setSentences, setTranslation, setLo
         console.log('updatedSentence: ', updatedSentences)
         setSentences(updatedSentences)
         
-        // Fetch API
+        // ----- Fetch Microsoft-translator API -----
         if (sentences.length === 0) return
         setLoading(true)
         setError(null)
@@ -48,6 +48,7 @@ export function SentencesSection({sentences, setSentences, setTranslation, setLo
             return () => {
                 controller.abort()
             }
+        // -----end of fetch Microsoft-translator API
     }
 
     // render and re-render textarea
