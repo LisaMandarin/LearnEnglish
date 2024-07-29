@@ -78,15 +78,24 @@ export function TranslationSection({translation, setTranslation, sentences, erro
                 ))}                 
             </ul>
             <ul className='renderingWindow'>
-                {translation.length === 0
-                    ? (<><span className='sample'>➢原句</span><br /><span className='sample'>&nbsp;&nbsp;&nbsp;翻譯</span></>
-                    )
-                    : sentences.map((s, index) => (
-                        <li key={index} className='original-text'>{s}
-                            <span className='translation-text'>{translation[index]}</span>
-                        </li>
+                { translation.length === 0 && loading ? (
+                    <span>Loading...</span>
+                ) : translation.length === 0 && error ? (
+                    <span>{error}</span>
+                ) : translation.length === 0 ? (
+                    <>
+                        <span className='sample'>➢原句</span> <br />
+                        <span className='sample'>&nbsp;&nbsp;&nbsp;翻譯</span>
+                    </>
+                ) : (
+                    sentences.map((s, index) => (
+                        <>
+                            <li key={index} className='original-text'>{s}
+                                <span className='translation-text'>{translation[index]}</span>
+                            </li>
+                        </>
                     ))
-                }
+                )} 
             </ul>
             <div>
                 <button onClick={clearTranslation}>清除文字</button>

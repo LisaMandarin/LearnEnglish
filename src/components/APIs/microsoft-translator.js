@@ -14,16 +14,21 @@ export function microsoftTranslator(sentences, setLoading, setError, setTranslat
         },
         body: JSON.stringify(sentences.map(sentence => ({text: sentence})))
     };
+
     fetch(url, options, {signal: controller.signal})
-        .then(res=> res.json())
+        .then(res=> {
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`)
+            }
+            return res.json()
+        })
         .then(results => {
             const translations = results.map(result => result.translations[0].text)
             setTranslation(translations)
         })
         .catch(e => {
             if (e?.name === "AbortError") return
-            setError(e)
-            setTranslation(`Error!! ${e.message}`)
+            setError(`Error! ${e.message}`)
         })
         .finally(() => setLoading(false))
     

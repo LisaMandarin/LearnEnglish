@@ -10,16 +10,17 @@ export default function App() {
   const [ sentences, setSentences ] = useState([]) 
   const [ translation, setTranslation ] = useState([])
   const [ notes, setNotes ] = useState('')
-  const [ error, setError ] = useState(null)
-  const [ loading, setLoading ] = useState(false)
-  const translationAreaRef = useRef(null)
+  const [ translationError, setTranslationError ] = useState(null)
+  const [ translationLoading, setTranslationLoading ] = useState(false)
+  
 
   useEffect(() => {
     console.log('article: ', article)
     console.log('sentences: ', sentences)
     console.log('translation: ', translation)
     console.log('notes: ', notes)
-  }, [article, sentences, translation, notes])
+    console.log('T-error: ', translationError)
+  }, [article, sentences, translation, notes, translationError])
   return (
     <div>
       <header>
@@ -36,20 +37,18 @@ export default function App() {
           sentences={sentences} 
           setSentences={setSentences} 
           setTranslation={setTranslation}
-          setLoading={setLoading}
-          setError={setError} />
+          setLoading={setTranslationLoading}
+          setError={setTranslationError} />
         <TranslationSection
           sentences={sentences}
           translation={translation}
           setTranslation={setTranslation}
-          error={error}
-          loading={loading}
-          setNotes={setNotes} 
-          translationAreaRef={translationAreaRef} />
+          error={translationError}
+          loading={translationLoading}
+          setNotes={setNotes} />
         <NotesSection 
           notes={notes} 
-          setNotes={setNotes} 
-          translationAreaRef={translationAreaRef}/>
+          setNotes={setNotes} />
       </main>
     </div>
   )
