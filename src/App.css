@@ -15,48 +15,66 @@
   box-sizing: border-box;
 }
 
+/* basic frame */
 #root > div {
     width: 90vw;
     font-family: var(--en-font), var(--tc-font);
     margin: 0 auto;
-}
+} 
+
+/* title */
 h1 {
   text-align: center;
 }
+
+/* question mark next to title */
 .icon-questionMark {
   cursor: pointer;
 }
+
+/* instructions below title */
 header > p {
   text-align: center;
   color: var(--dark-blue)
 }
+
+/* title and question mark of each section */
 section > div:first-child {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
-textarea {
+
+/* renderingWindow of each section */
+.renderingWindow {
   width: 100%;
-  min-height: 75px;
-  padding: var(--space-big);
-}
-section > div:nth-child(3) {
   border: 1px solid #9a9a9a;
-  width: 100%;
-  min-height: 75px;
+  min-height: 3rem;
   padding: var(--space-big);
-}
-.textArea ul{
   list-style-type: none;
-  padding: 0;
-  margin: 0;
+  margin: 0px;
 }
-.textArea li::before {
+
+/* listing of renderingWindow */
+.renderingWindow textarea {
+  width: 100%;
+  border: 0;
+}
+.renderingWindow > li {
+  display: flex;
+  flex-direction: row;
+}
+.renderingWindow li::before {
   content: '➣';
   display: inline-block;
   padding-right: var(--space-small);
 }
+.renderingWindow li textarea {
+  width: 95%;
+}
+
+/* button div */
 section > div:last-child {
   display: flex;
   flex-direction: row;
@@ -65,9 +83,7 @@ section > div:last-child {
 section > div:last-child button {
   margin: var(--space-small);
 }
-.sample {
-  color: #9a9a9a;
-}
+
 .original-text {
   color: black
 }

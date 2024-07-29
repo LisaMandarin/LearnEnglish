@@ -13,6 +13,7 @@ export function SentencesSection({sentences, setSentences, setTranslation, setLo
         newSentences[index] = value
         setSentences(newSentences)
     }
+
     const ProcessSentences = () => {
         microsoftTranslator(sentences, setLoading, setError, setTranslation)
     } 
@@ -34,11 +35,15 @@ export function SentencesSection({sentences, setSentences, setTranslation, setLo
                     <li key={index}>{hint}</li>
                 ))}                 
             </ul>
-            <div>
-                {sentences.map((sentence, index) => 
-                    (<textarea key={index} value={`➢${sentence}`} onChange={e => handleTextareaChange(e.target.value, index)}/>)
-                )}
-            </div>
+            <ul className='renderingWindow'>
+                {sentences.length === 0
+                    ? <textarea placeholder='➢句子'/>                     
+                    : sentences.map((s, index) => (
+                        <li key={index}>
+                            <textarea value={`${s}`} onChange={e => handleTextareaChange(e.target.value, index)}/>
+                        </li>
+                    ))}
+            </ul>
             <div>
                 <button onClick={clearSentences}>清除文字</button>
                 <button onClick={ProcessSentences}>翻譯</button>
