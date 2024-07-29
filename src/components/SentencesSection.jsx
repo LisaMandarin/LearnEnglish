@@ -40,7 +40,9 @@ export function SentencesSection({sentences, setSentences, setTranslation, setLo
                     ? <textarea placeholder='➢句子'/>                     
                     : sentences.map((s, index) => (
                         <li key={index}>
-                            <textarea value={`${s}`} onChange={e => handleTextareaChange(e.target.value, index)}/>
+                            <textarea 
+                                value={`${s}`} 
+                                onChange={e => handleTextareaChange(e.target.value, index)}/>
                         </li>
                     ))}
             </ul>

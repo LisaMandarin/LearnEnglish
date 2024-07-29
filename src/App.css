@@ -55,7 +55,9 @@ section > div:first-child {
   list-style-type: none;
   margin: 0px;
 }
-
+.sample {
+  color: #9a9a9a;
+}
 /* listing of renderingWindow */
 .renderingWindow textarea {
   width: 100%;
@@ -84,15 +86,29 @@ section > div:last-child button {
   margin: var(--space-small);
 }
 
+/* setting for translationSection */
+#translation-section .renderingWindow li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto, 1fr;
+  grid-template-areas: 
+    "arrow original-text"
+    "space translation-text";
+}
 .original-text {
-  color: black
+  color: black;
+  grid-area: original-text;
 }
 .translation-text {
-  color: var(--dark-blue)
+  color: var(--dark-blue);
+  grid-area: translation-text;
 }
+
+/* text next to translation buttons */
 label {
   align-self: center;
 }
+
 #notesArea {
   display: grid;
   grid-template-columns: repeat(auto-fill, 250px);

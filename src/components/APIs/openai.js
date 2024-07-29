@@ -1,0 +1,61 @@
+import OpenAI from "openai";
+export async function openAIResult (termChinese, termEnglish, termExample, selectedText, lookupTerms, setNotes) {
+    const displayResult = async (word, lookupTerms) => {
+        const openai = new OpenAI({
+            apiKey: import.meta.env.VITE_OPENAI_API_KEY,
+            dangerouslyAllowBrowser: true
+        })
+        const instructions = `You are a dictionary for ESL learners.  Word: ${word}.  Tell me the word's information of ${lookupTerms.join(',')} and its part of speech`
+        const functionParameters = {
+            type: 'object',
+            properties: {
+                word: { type: 'string', description: 'The word being defined' },
+                partOfSpeech: { type: 'string', description: 'The part of speech of the word'},
+            },
+            required: ['word', 'partOfSpeech']
+        }
+
+        if (lookupTerms.includes(termChinese)) {
+            functionParameters.properties.chineseDefinition = { type: 'string', definition: 'The definition in traditional Chinese'}
+            functionParameters.required.push('chineseDefinition')
+        }
+
+        if (lookupTerms.includes(termEnglish)) {
+            functionParameters.properties.englishDefinition = { type: 'string', definition: 'The definition in English'}
+            functionParameters.required.push('englishDefinition')
+        }
+
+        if (lookupTerms.includes(termExample)) {
+            functionParameters.properties.exampleSentence = { type: 'string', definition: 'An example sentence using the word'}
+            functionParameters.required.push('exampleSentence')
+        }
+
+        const completion = await openai.chat.completions.create({
+            messages: [
+            {role: "user", content: instructions},
+            ],
+            functions: [{
+                name: "format_response",
+                description: "Formats the response into word details",
+                parameters: functionParameters
+            }],
+            function_call: {name: "format_response"},
+            model: "gpt-3.5-turbo",
+            temperature: 1.5,
+            max_tokens: 100
+        })
+        const response = JSON.parse(completion.choices[0].message.function_call.arguments)
+        const { word: responseWord, partOfSpeech, chineseDefinition, englishDefinition, exampleSentence } = response
+        const formattedResponse = `${responseWord} (${partOfSpeech})<br>`+
+            (chineseDefinition ? `・${chineseDefinition}<br>`: '')+
+            (englishDefinition ? `・${englishDefinition}<br>`: '')+
+            (exampleSentence ? `・${exampleSentence}<br>`: '')
+        return formattedResponse   
+    }
+    try {
+        const result = await displayResult(selectedText, lookupTerms)
+        setNotes(result)
+    } catch (error) {
+        console.error('Fetch Failure: ', error)
+    }
+}
