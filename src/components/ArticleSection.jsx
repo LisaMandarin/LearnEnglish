@@ -1,13 +1,14 @@
 import { Icon} from '@iconify/react'
 import HintJSON from '../data/hint.json'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 export function ArticleSection({article, setArticle, setSentences}) {
     const [ showHint, setShowHint ] = useState(false)
     const clearArticle = () => setArticle('')
     const ProcessArticle = () => {
         const regex = /[^.!?]+[.!?]+/g  // not start with .!? but end with .!?
-        const matchedSentences = article.match(regex)
+        let matchedSentences = article.match(regex)
+        matchedSentences = matchedSentences.map(s => s.trim())
         if (matchedSentences) {
             setSentences(matchedSentences)
         }
