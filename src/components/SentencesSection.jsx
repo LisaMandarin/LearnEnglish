@@ -6,11 +6,20 @@ import { useEffect, useRef, useState } from 'react'
 export function SentencesSection({sentences, setSentences, setTranslation, setLoading, setError}) {
     const [ showHint, setShowHint ] = useState(false)
     
-    const clearSentences = () => setSentences([])
+    const clearSentences = () => {
+        const confirmed = window.confirm('確定清除文字？')
+        if (confirmed) {
+            setSentences([])
+        }
+    }
     
     const handleTextareaChange = (value, index) => {
         const newSentences = [...sentences]
-        newSentences[index] = value
+        if (value.trim() === '') {
+            newSentences.splice(index, 1)  // remove empty string during onChange
+        } else {
+            newSentences[index] = value
+        }
         setSentences(newSentences)
     }
 
@@ -37,12 +46,13 @@ export function SentencesSection({sentences, setSentences, setTranslation, setLo
             </ul>
             <ul className='renderingWindow'>
                 {sentences.length === 0
-                    ? <textarea placeholder='➢句子'/>                     
+                    ? <textarea placeholder='➢句子' style={{fontSize: '1rem'}}/>                     
                     : sentences.map((s, index) => (
                         <li key={index}>
                             <textarea 
                                 value={`${s}`} 
-                                onChange={e => handleTextareaChange(e.target.value, index)}/>
+                                onChange={e => handleTextareaChange(e.target.value, index)}
+                                style={{fontSize: '1rem'}}/>
                         </li>
                     ))}
             </ul>

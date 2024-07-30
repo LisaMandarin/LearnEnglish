@@ -48,12 +48,14 @@ section > div:first-child {
 
 /* renderingWindow of each section */
 .renderingWindow {
-  width: 100%;
   border: 1px solid #9a9a9a;
+  width: 100%;
   min-height: 3rem;
   padding: var(--space-big);
   list-style-type: none;
   margin: 0px;
+  font-size: 1rem;
+  font-family: var(--en-font), var(--tc-font);
 }
 .sample {
   color: #9a9a9a;
@@ -62,6 +64,7 @@ section > div:first-child {
 .renderingWindow textarea {
   width: 100%;
   border: 0;
+  font-family: var(--en-font), var(--tc-font);
 }
 .renderingWindow > li {
   display: flex;
@@ -71,9 +74,6 @@ section > div:first-child {
   content: '➣';
   display: inline-block;
   padding-right: var(--space-small);
-}
-.renderingWindow li textarea {
-  width: 95%;
 }
 
 /* button div */
@@ -109,16 +109,23 @@ label {
   align-self: center;
 }
 
-#notesArea {
+/* Rendering window of NotesSection */
+#notes-section .renderingWindow {
   display: grid;
   grid-template-columns: repeat(auto-fill, 250px);
   grid-gap: var(--space-big);
   justify-content: start;
+  border: 1px solid #9a9a9a;
+  min-height: 3rem;
+  padding: var(--space-big);
 }
-.textArea > div {
-  margin: 0;
-  border: 1px solid #ccc;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-  padding: var(--space-small);
-  font-size: 14px;
+#notes-section .renderingWindow textarea {
+  height: auto;
+  padding: var(--space-big);
+  font-size: 1rem;
+  font-family: var(--en-font), var(--tc-font);
+  box-shadow: 1px, 1px, 3px rgba(0, 0, 0, 0.3);
+  border: 1px solid #9a9a9a;
+  box-shadow: 1px 1px 3px #9a9a9a;
 }
+

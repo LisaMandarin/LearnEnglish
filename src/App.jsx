@@ -9,7 +9,7 @@ export default function App() {
   const [ article, setArticle ] = useState('')
   const [ sentences, setSentences ] = useState([]) 
   const [ translation, setTranslation ] = useState([])
-  const [ notes, setNotes ] = useState('')
+  const [ notes, setNotes ] = useState([])
   const [ translationError, setTranslationError ] = useState(null)
   const [ translationLoading, setTranslationLoading ] = useState(false)
   

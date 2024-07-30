@@ -4,7 +4,7 @@ import { openAIResult } from './APIs/openai'
 import { useEffect, useState } from 'react'
 
 
-export function TranslationSection({translation, setTranslation, sentences, error, loading, setNotes, translationAreaRef}) {
+export function TranslationSection({translation, setTranslation, sentences, error, loading, setNotes}) {
     const [ showHint, setShowHint ] = useState(false)
     const [ chinese, setChinese ] = useState(false)
     const [ english, setEnglish ] = useState(false)
@@ -15,7 +15,12 @@ export function TranslationSection({translation, setTranslation, sentences, erro
     const termExample = 'an example sentence'
     
 
-    const clearTranslation = () => setTranslation([])
+    const clearTranslation = () => {
+        const confirmed = window.confirm('確定清除文字？')
+        if (confirmed) {
+            setTranslation([])
+        }
+    }
     
     // toggle checkboxes and save the values to lookupTerms
     useEffect(() => {

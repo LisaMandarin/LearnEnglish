@@ -4,7 +4,14 @@ import { useState } from 'react'
 
 export function ArticleSection({article, setArticle, setSentences}) {
     const [ showHint, setShowHint ] = useState(false)
-    const clearArticle = () => setArticle('')
+
+    const clearArticle = () => {
+        const confirmed = window.confirm('確定清除文字？')
+        if (confirmed) {
+            setArticle('')
+        }
+    }
+    
     const ProcessArticle = () => {
         const regex = /[^.!?]+[.!?]+/g  // not start with .!? but end with .!?
         let matchedSentences = article.match(regex)

@@ -46,15 +46,17 @@ export async function openAIResult (termChinese, termEnglish, termExample, selec
         })
         const response = JSON.parse(completion.choices[0].message.function_call.arguments)
         const { word: responseWord, partOfSpeech, chineseDefinition, englishDefinition, exampleSentence } = response
-        const formattedResponse = `${responseWord} (${partOfSpeech})<br>`+
-            (chineseDefinition ? `・${chineseDefinition}<br>`: '')+
-            (englishDefinition ? `・${englishDefinition}<br>`: '')+
-            (exampleSentence ? `・${exampleSentence}<br>`: '')
+        const formattedResponse = `${responseWord} (${partOfSpeech})\n`+
+            (chineseDefinition ? `・${chineseDefinition}\n`: '')+
+            (englishDefinition ? `・${englishDefinition}\n`: '')+
+            (exampleSentence ? `・${exampleSentence}\n`: '')
         return formattedResponse   
     }
     try {
         const result = await displayResult(selectedText, lookupTerms)
-        setNotes(result)
+        setNotes(current => {
+            return [...current, {id: crypto.randomUUID, wordInfo: result}]
+        })
     } catch (error) {
         console.error('Fetch Failure: ', error)
     }
