@@ -22,6 +22,11 @@ export function NotesSection({notes, setNotes, loading, error}) {
         setNotes(newNotes)
     }
 
+    const deleteNote = (id) => {
+        const newNotes = notes.filter(n => n.id !== id)
+        setNotes(newNotes)
+    }
+
     return (
         <section id="notes-section">
             <div>
@@ -47,11 +52,13 @@ export function NotesSection({notes, setNotes, loading, error}) {
                     <span>{error}</span>
                 ) : notes && notes.length > 0 ? (
                     notes.map(n => (
-                        <textarea 
-                            key={n.id} 
-                            value={n.wordInfo} 
-                            onChange={e => handleTextareaChange(e.target.value, n.id)} 
-                        />
+                        <div key={n.id} className="note-container">
+                            <button className="close-button" onClick={() => deleteNote(n.id)}>X</button>
+                            <textarea 
+                                value={n.wordInfo} 
+                                onChange={e => handleTextareaChange(e.target.value, n.id)} 
+                            />
+                        </div>    
                     ))
                 ) : (
                     <textarea className="sample" value='筆記' />
@@ -59,7 +66,7 @@ export function NotesSection({notes, setNotes, loading, error}) {
                 
             </div>         
             <div>
-                <button onClick={clearNotes}>清除筆記</button>
+                <button onClick={clearNotes}>清除全部筆記</button>
                 <button>PDF生成</button>
             </div>
         </section>
