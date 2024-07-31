@@ -32,11 +32,13 @@ export function ArticleSection({article, setArticle, setSentences}) {
                   />
             </div>
 
-            <ul>
-                { showHint && HintJSON['article'].map((hint, index) => (
-                    <li key={index}>{hint}</li>
-                ))}                 
-            </ul>
+            {showHint && (
+                <ul>
+                    {HintJSON['article'].map((hint, index) => (
+                        <li key={index}>{hint}</li>
+                    ))}
+                </ul>
+            )}
             <textarea
                 className='renderingWindow'
                 placeholder='請輸入英文原文'

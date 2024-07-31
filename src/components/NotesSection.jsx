@@ -28,11 +28,14 @@ export function NotesSection({notes, setNotes, loading, error}) {
                     onClick={() => setShowHint(current => !current)} />
             </div>
 
-            <ul>
-                { showHint && HintJSON['notes'].map((hint, index) => (
-                    <li key={index}>{hint}</li>
-                ))}
-            </ul>
+            {showHint && (
+                <ul>
+                    {HintJSON['sentences'].map((hint, index) => (
+                        <li key={index}>{hint}</li>
+                    ))}
+                </ul>
+            )}
+            
             <div className="renderingWindow">
                 { loading ? (
                     <span>Loading...</span>

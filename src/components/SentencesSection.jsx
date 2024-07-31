@@ -1,10 +1,11 @@
 import { Icon} from '@iconify/react'
 import HintJSON from '../data/hint.json'
 import { microsoftTranslator } from './APIs/microsoft-translator'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 export function SentencesSection({sentences, setSentences, setTranslation, setLoading, setError}) {
     const [ showHint, setShowHint ] = useState(false)
+    const textareaRef = useRef(null)
     
     const clearSentences = () => {
         const confirmed = window.confirm('確定清除文字？')
@@ -27,7 +28,6 @@ export function SentencesSection({sentences, setSentences, setTranslation, setLo
         microsoftTranslator(sentences, setSentences, setLoading, setError, setTranslation)
     } 
         
-        
     return (
         <section>
             <div>
@@ -38,16 +38,23 @@ export function SentencesSection({sentences, setSentences, setTranslation, setLo
                     onClick={() => setShowHint(current => !current)}
                 />
             </div>
-
-            <ul>
+            {showHint && (
+                <ul>
+                    {HintJSON['sentences'].map((hint, index) => (
+                        <li key={index}>{hint}</li>
+                    ))}
+                </ul>
+            )}
+            {/* <ul>
                 { showHint && HintJSON['sentences'].map((hint, index) => (
                     <li key={index}>{hint}</li>
                 ))}                 
-            </ul>
+            </ul> */}
             <ul className='renderingWindow'>
                 {sentences.length === 0
                     ? <textarea 
                         placeholder='➢句子' 
+                        ref={textareaRef}
                         onChange={e => handleTextareaChange(e.target.value, 0)}
                         style={{fontSize: '1rem'}}/>                     
                     : sentences.map((s, index) => (

@@ -77,11 +77,14 @@ export function TranslationSection({translation, setTranslation, sentences, erro
                   />
             </div>
 
-            <ul>
-                { showHint && HintJSON['translation'].map((hint, index) => (
-                    <li key={index}>{hint}</li>
-                ))}                 
-            </ul>
+            {showHint && (
+                <ul>
+                    {HintJSON['sentences'].map((hint, index) => (
+                        <li key={index}>{hint}</li>
+                    ))}
+                </ul>
+            )}
+            
             <ul className='renderingWindow'>
                 { translation.length === 0 && loading ? (
                     <span>Loading...</span>
