@@ -4,7 +4,7 @@ import { openAIResult } from './APIs/openai'
 import { useEffect, useState } from 'react'
 
 
-export function TranslationSection({translation, setTranslation, sentences, error, loading, setNotes}) {
+export function TranslationSection({translation, setTranslation, sentences, error, loading, setNotes, setLoading, setError}) {
     const [ showHint, setShowHint ] = useState(false)
     const [ chinese, setChinese ] = useState(false)
     const [ english, setEnglish ] = useState(false)
@@ -61,7 +61,7 @@ export function TranslationSection({translation, setTranslation, sentences, erro
             alert ('請先選取字再查單詞')
             return
         }
-        openAIResult(termChinese, termEnglish, termExample, selectedText, lookupTerms, setNotes)
+        openAIResult(termChinese, termEnglish, termExample, selectedText, lookupTerms, setNotes, setLoading, setError)
     }
 
     useEffect(() => console.log('lookupTerms: ', lookupTerms), [lookupTerms])

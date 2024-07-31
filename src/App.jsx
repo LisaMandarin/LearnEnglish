@@ -12,6 +12,8 @@ export default function App() {
   const [ notes, setNotes ] = useState([])
   const [ translationError, setTranslationError ] = useState(null)
   const [ translationLoading, setTranslationLoading ] = useState(false)
+  const [ notesError, setNotesError ] = useState(null)
+  const [ notesLoading, setNotesLoading ] = useState(false)
   
 
   useEffect(() => {
@@ -20,7 +22,9 @@ export default function App() {
     console.log('translation: ', translation)
     console.log('notes: ', notes)
     console.log('T-error: ', translationError)
-  }, [article, sentences, translation, notes, translationError])
+    console.log('N-error: ', notesError)
+    console.log('N-loading: ', notesLoading)
+  }, [article, sentences, translation, notes, translationError, notesError, notesLoading])
   return (
     <div>
       <header>
@@ -45,10 +49,14 @@ export default function App() {
           setTranslation={setTranslation}
           error={translationError}
           loading={translationLoading}
-          setNotes={setNotes} />
+          setNotes={setNotes}
+          setLoading={setNotesLoading}
+          setError={setNotesError} />
         <NotesSection 
           notes={notes} 
-          setNotes={setNotes} />
+          setNotes={setNotes}
+          loading={notesError}
+          error={notesError} />
       </main>
     </div>
   )

@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-export async function openAIResult (termChinese, termEnglish, termExample, selectedText, lookupTerms, setNotes) {
+export async function openAIResult (termChinese, termEnglish, termExample, selectedText, lookupTerms, setNotes, setLoading, setError) {
     const displayResult = async (word, lookupTerms) => {
         const openai = new OpenAI({
             apiKey: import.meta.env.VITE_OPENAI_API_KEY,
@@ -53,11 +53,16 @@ export async function openAIResult (termChinese, termEnglish, termExample, selec
         return formattedResponse   
     }
     try {
+        setLoading(true)
         const result = await displayResult(selectedText, lookupTerms)
         setNotes(current => {
             return [...current, {id: crypto.randomUUID, wordInfo: result}]
         })
+        setLoading(false)
     } catch (error) {
-        console.error('Fetch Failure: ', error)
+        setLoading(false)
+        if (error) {
+            setError(error.message)
+        }       
     }
 }

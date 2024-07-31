@@ -2,7 +2,7 @@ import { Icon } from "@iconify/react"
 import HintJSON from '../data/hint.json'
 import { useEffect, useState } from "react"
 
-export function NotesSection({notes, setNotes}) {
+export function NotesSection({notes, setNotes, loading, error}) {
     const [ showHint, setShowHint ] = useState(false)
 
     const clearNotes = () => {
@@ -14,7 +14,7 @@ export function NotesSection({notes, setNotes}) {
 
     const handleTextareaChange = (value, index) => {
         const newNotes = [...notes]
-        newNotes[index] = value
+        newNotes[index].wordInfo = value
         setNotes(newNotes)
     }
 
@@ -34,12 +34,21 @@ export function NotesSection({notes, setNotes}) {
                 ))}
             </ul>
             <div className="renderingWindow">
-                { notes.length === 0
-                ? <textarea placeholder='筆記'/>
-                : notes.map((n) => (
-                    <textarea key={n.id} value={n.wordInfo} onChange={e => handleTextareaChange(e.target.value, n.id)} />
-                )) 
-                }
+                { loading ? (
+                    <span>Loading...</span>
+                ) : error ? (
+                    <span>{error}</span>
+                ) : notes && notes.length > 0 ? (
+                    notes.map(n => (
+                        <textarea 
+                            key={n.id} 
+                            value={n.wordInfo} 
+                            onChange={e => handleTextareaChange(e.target.value, n.id)} 
+                        />
+                    ))
+                ) : (
+                    <textarea className="sample" value='筆記' />
+                )}
                 
             </div>         
             <div>
