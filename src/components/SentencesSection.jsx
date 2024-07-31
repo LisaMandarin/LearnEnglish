@@ -24,7 +24,7 @@ export function SentencesSection({sentences, setSentences, setTranslation, setLo
     }
 
     const ProcessSentences = () => {
-        microsoftTranslator(sentences, setLoading, setError, setTranslation)
+        microsoftTranslator(sentences, setSentences, setLoading, setError, setTranslation)
     } 
         
         
@@ -46,7 +46,10 @@ export function SentencesSection({sentences, setSentences, setTranslation, setLo
             </ul>
             <ul className='renderingWindow'>
                 {sentences.length === 0
-                    ? <textarea placeholder='➢句子' style={{fontSize: '1rem'}}/>                     
+                    ? <textarea 
+                        placeholder='➢句子' 
+                        onChange={e => handleTextareaChange(e.target.value, 0)}
+                        style={{fontSize: '1rem'}}/>                     
                     : sentences.map((s, index) => (
                         <li key={index}>
                             <textarea 

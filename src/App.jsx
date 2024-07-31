@@ -22,9 +22,10 @@ export default function App() {
     console.log('translation: ', translation)
     console.log('notes: ', notes)
     console.log('T-error: ', translationError)
+    console.log('T-Loading: ', translationLoading)
     console.log('N-error: ', notesError)
     console.log('N-loading: ', notesLoading)
-  }, [article, sentences, translation, notes, translationError, notesError, notesLoading])
+  }, [article, sentences, translation, notes, translationError, translationLoading, notesError, notesLoading])
   return (
     <div>
       <header>
