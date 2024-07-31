@@ -56,7 +56,7 @@ export async function openAIResult (termChinese, termEnglish, termExample, selec
         setLoading(true)
         const result = await displayResult(selectedText, lookupTerms)
         setNotes(current => {
-            return [...current, {id: crypto.randomUUID, wordInfo: result}]
+            return [...current, {id: crypto.randomUUID(), wordInfo: result}]
         })
         setLoading(false)
     } catch (error) {

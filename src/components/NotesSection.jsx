@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react"
 import HintJSON from '../data/hint.json'
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 export function NotesSection({notes, setNotes, loading, error}) {
     const [ showHint, setShowHint ] = useState(false)
@@ -12,9 +12,13 @@ export function NotesSection({notes, setNotes, loading, error}) {
         }
     }
 
-    const handleTextareaChange = (value, index) => {
-        const newNotes = [...notes]
-        newNotes[index].wordInfo = value
+    const handleTextareaChange = (value, id) => {
+        const newNotes = notes.map(n => {
+            if (n.id === id) {
+                return { ...n, wordInfo: value}
+            }
+            return n
+        })
         setNotes(newNotes)
     }
 
