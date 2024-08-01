@@ -63,8 +63,6 @@ export function TranslationSection({translation, setTranslation, sentences, erro
         }
         openAIResult(termChinese, termEnglish, termExample, selectedText, lookupTerms, setNotes, setLoading, setError)
     }
-
-    useEffect(() => console.log('lookupTerms: ', lookupTerms), [lookupTerms])
    
     return (
         <section id='translation-section'>

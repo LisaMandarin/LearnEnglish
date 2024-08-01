@@ -16,17 +16,6 @@ export default function App() {
   const [ notesError, setNotesError ] = useState(null)
   const [ notesLoading, setNotesLoading ] = useState(false)
   
-
-  useEffect(() => {
-    console.log('article: ', article)
-    console.log('sentences: ', sentences)
-    console.log('translation: ', translation)
-    console.log('notes: ', notes)
-    console.log('T-error: ', translationError)
-    console.log('T-Loading: ', translationLoading)
-    console.log('N-error: ', notesError)
-    console.log('N-loading: ', notesLoading)
-  }, [article, sentences, translation, notes, translationError, translationLoading, notesError, notesLoading])
   return (
     <div>
       <header>

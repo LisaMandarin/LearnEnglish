@@ -22,7 +22,6 @@ export function GeneratePDF(sentences, translation, notes) {
 
         // ----- generate translation section -----
         const translationContent = sentences.map((s, index) => `**${s}\n   ${translation[index]}`)
-        console.log('translationContent: ', translationContent)
         const splitTranslation = translationContent.map(content => {
             const parts = content.split('\n')
             const englishPart = parts[0]
@@ -32,7 +31,6 @@ export function GeneratePDF(sentences, translation, notes) {
             const splitChinese = pdf.splitTextToSize(chinesePart, maxWidth)
             return [...splitEnglish, ...splitChinese]
         })
-        console.log('splitTranslation: ', splitTranslation)
 
         let currentY = margins.top;  // starting Y for translation header
         pdf.text('Translation: ', margins.left, currentY)  // add header
@@ -60,7 +58,6 @@ export function GeneratePDF(sentences, translation, notes) {
 
         for (let note of notes) {
             const splitNote = pdf.splitTextToSize(note.wordInfo, maxWidth).filter(line => line !== '');  // split each note text to fit within the maxWidth and filter out empty strings
-            console.log('splitNote: ', splitNote)
             for (let line of splitNote) {
                 if (currentY + 20 > pageHeight - margins.bottom) {
                     pdf.addPage();
