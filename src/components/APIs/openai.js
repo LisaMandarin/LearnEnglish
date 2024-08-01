@@ -5,7 +5,7 @@ export async function openAIResult (termChinese, termEnglish, termExample, selec
             apiKey: import.meta.env.VITE_OPENAI_API_KEY,
             dangerouslyAllowBrowser: true
         })
-        const instructions = `You are a dictionary for ESL learners.  Word: ${word}.  Tell me the word's information of ${lookupTerms.join(',')} and its part of speech`
+        const instructions = `You are an English-Chinese(traditional) dictionary for English learners.  Word: ${word}.  Tell me the word's information of ${lookupTerms.join(',')} and its part of speech`
         const functionParameters = {
             type: 'object',
             properties: {
@@ -44,13 +44,20 @@ export async function openAIResult (termChinese, termEnglish, termExample, selec
             temperature: 1.5,
             max_tokens: 100
         })
-        const response = JSON.parse(completion.choices[0].message.function_call.arguments)
-        const { word: responseWord, partOfSpeech, chineseDefinition, englishDefinition, exampleSentence } = response
-        const formattedResponse = `${responseWord} (${partOfSpeech})\n`+
-            (chineseDefinition ? `・${chineseDefinition}\n`: '')+
-            (englishDefinition ? `・${englishDefinition}\n`: '')+
-            (exampleSentence ? `・${exampleSentence}\n`: '')
-        return formattedResponse   
+        // const response = JSON.parse(completion.choices[0].message.function_call.arguments)
+        const response = completion.choices[0].message.function_call.arguments
+        try {
+            const parsedResponse = JSON.parse(response)
+            const { word: responseWord, partOfSpeech, chineseDefinition, englishDefinition, exampleSentence } = parsedResponse
+            const formattedResponse = `${responseWord} (${partOfSpeech})\n`+
+                (chineseDefinition ? `・${chineseDefinition}\n`: '')+
+                (englishDefinition ? `・${englishDefinition}\n`: '')+
+                (exampleSentence ? `・${exampleSentence}\n`: '')
+            return formattedResponse   
+        } catch (error) {
+            console.error('Error parsing JSON response: ', error, response)
+            throw new Error('Failed to parse response from OpenAI')
+        }
     }
     try {
         setLoading(true)
@@ -61,8 +68,9 @@ export async function openAIResult (termChinese, termEnglish, termExample, selec
         setLoading(false)
     } catch (error) {
         setLoading(false)
-        if (error) {
-            setError(error.message)
-        }       
+        // if (error) {
+        //     setError(error.message)
+        // }    
+        setError(error.message)   
     }
 }

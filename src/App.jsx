@@ -57,7 +57,7 @@ export default function App() {
         <NotesSection 
           notes={notes} 
           setNotes={setNotes}
-          loading={notesError}
+          loading={notesLoading}
           error={notesError}
           sentences={sentences}
           translation={translation} />
