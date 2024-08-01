@@ -40,7 +40,7 @@ export function GeneratePDF(sentences, translation, notes) {
         pdf.text('Translation: ', margins.left, currentY)  // add header
         currentY += 10;  // starting Y for translation content
 
-        for (let line of splitTranslation) {
+        for (let line of splitTranslation.flat()) {
             if (currentY + 10 > pageHeight - margins.bottom) {  // ensure enough space for new content
                 pdf.addPage();
                 currentY = margins.top;  // reset margin top for new page
