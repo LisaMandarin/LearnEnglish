@@ -1,7 +1,7 @@
 import jsPDF from "jspdf"
 import { NotoSansTC } from "./NotoSansTC-VariableFont_wght-normal"
+
 export function GeneratePDF(sentences, translation, notes) {
-    if (translationAreaRef.current) {
         // ----- basic pdf setting -----
         const pdf = new jsPDF({lineHeight: 1})  // default unit: mm
         pdf.addFileToVFS('NotoSansTC-VariableFont_wght-normal.ttf', NotoSansTC)
@@ -20,7 +20,7 @@ export function GeneratePDF(sentences, translation, notes) {
         // ----- end of basic pdf setting -----
 
         // ----- generate translation section -----
-        const translationContent = translationAreaRef.current.innerText;
+        const translationContent = sentences.map((s, index) => `➢${s}\n${translation[index]}`)
         const splitTranslation = pdf.splitTextToSize(translationContent, maxWidth)  // split text to fit within the maxWidth
         console.log('Translation: ', splitTranslation)
 
@@ -48,7 +48,7 @@ export function GeneratePDF(sentences, translation, notes) {
         pdf.text('Note: ', margins.left, currentY);
         currentY += 10;  // staring Y for notes content
 
-        const notesContent = textAreaRef.current.innerText;
+        const notesContent = notes.map(n => `${n}.wordInfo\n`);
         const splitNotes = pdf.splitTextToSize(notesContent, maxWidth);  // split text to fit within the maxWidth
         console.log('notes: ', splitNotes)
         for (let line of splitNotes) {
@@ -62,7 +62,5 @@ export function GeneratePDF(sentences, translation, notes) {
         // ----- end of generate notes section -----
 
         pdf.save('句句通.pdf');
-    } else {
-        console.log('translationAreaRef not existing')
-    }
+    
 }
