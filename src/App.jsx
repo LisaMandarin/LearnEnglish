@@ -58,7 +58,9 @@ export default function App() {
           notes={notes} 
           setNotes={setNotes}
           loading={notesError}
-          error={notesError} />
+          error={notesError}
+          sentences={sentences}
+          translation={translation} />
       </main>
     </div>
   )

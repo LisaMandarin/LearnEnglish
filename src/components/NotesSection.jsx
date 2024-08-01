@@ -1,8 +1,9 @@
 import { Icon } from "@iconify/react"
 import HintJSON from '../data/hint.json'
 import { useState } from "react"
+import { GeneratePDF } from "./GeneratePDF"
 
-export function NotesSection({notes, setNotes, loading, error}) {
+export function NotesSection({notes, setNotes, loading, error, sentences, translation}) {
     const [ showHint, setShowHint ] = useState(false)
 
     const clearNotes = () => {
@@ -67,7 +68,7 @@ export function NotesSection({notes, setNotes, loading, error}) {
             </div>         
             <div>
                 <button onClick={clearNotes}>清除全部筆記</button>
-                <button>PDF生成</button>
+                <button onClick={() => GeneratePDF(sentences, translation, notes)}>PDF生成</button>
             </div>
         </section>
     )
