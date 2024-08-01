@@ -10,7 +10,7 @@ export default function App() {
   const [ sentences, setSentences ] = useState([]) 
   const [ translation, setTranslation ] = useState([])
   const [ notes, setNotes ] = useState([])
-  // const [ notes, setNotes ] = useState([{id: "123", wordInfo: "123"},{id: "222", wordInfo: "222"}])
+
   const [ translationError, setTranslationError ] = useState(null)
   const [ translationLoading, setTranslationLoading ] = useState(false)
   const [ notesError, setNotesError ] = useState(null)

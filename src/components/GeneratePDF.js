@@ -12,10 +12,10 @@ export function GeneratePDF(sentences, translation, notes) {
         const pageWidth = pdf.internal.pageSize.width;
         const pageHeight = pdf.internal.pageSize.height;
         const margins = {
-            left: 10,
-            right: 10,
-            top: 10,
-            bottom: 10
+            left: 20,
+            right: 20,
+            top: 20,
+            bottom: 20
         }
         const maxWidth = pageWidth - (margins.left + margins.right);
         // ----- end of basic pdf setting -----
@@ -32,16 +32,14 @@ export function GeneratePDF(sentences, translation, notes) {
             const splitChinese = pdf.splitTextToSize(chinesePart, maxWidth)
             return [...splitEnglish, ...splitChinese]
         })
-        // pdf.splitTextToSize(content, maxWidth))
-        // const splitTranslation = pdf.splitTextToSize(translationContent, maxWidth)  // split text to fit within the maxWidth
         console.log('splitTranslation: ', splitTranslation)
 
         let currentY = margins.top;  // starting Y for translation header
         pdf.text('Translation: ', margins.left, currentY)  // add header
-        currentY += 10;  // starting Y for translation content
+        currentY += 20;  // starting Y for translation content
 
         for (let line of splitTranslation.flat()) {
-            if (currentY + 10 > pageHeight - margins.bottom) {  // ensure enough space for new content
+            if (currentY + 20 > pageHeight - margins.bottom) {  // ensure enough space for new content
                 pdf.addPage();
                 currentY = margins.top;  // reset margin top for new page
             }
@@ -50,29 +48,30 @@ export function GeneratePDF(sentences, translation, notes) {
         }
         // ----- end of generate translation section -----
 
-        currentY += 5; // gap between sections
+        currentY += 10; // gap between sections
 
         // ----- generate notes section -----
-        if (currentY + 10 > pageHeight - margins.bottom) {  // ensure enough space for new content
+        if (currentY + 20 > pageHeight - margins.bottom) {  // ensure enough space for new content
             pdf.addPage();
             currentY = margins.top;  // reset margin top for new page
         }
         pdf.text('Note: ', margins.left, currentY);
         currentY += 10;  // staring Y for notes content
 
-        const notesContent = notes.map(n => `${n.wordInfo}\n`);
-        const splitNotes = pdf.splitTextToSize(notesContent, maxWidth);  // split text to fit within the maxWidth
-        console.log('splitNotes: ', splitNotes)
-        for (let line of splitNotes) {
-            if (currentY + 10 > pageHeight - margins.bottom) {
-                pdf.addPage();
-                currentY = margins.top;
+        for (let note of notes) {
+            const splitNote = pdf.splitTextToSize(note.wordInfo, maxWidth).filter(line => line !== '');  // split each note text to fit within the maxWidth and filter out empty strings
+            console.log('splitNote: ', splitNote)
+            for (let line of splitNote) {
+                if (currentY + 20 > pageHeight - margins.bottom) {
+                    pdf.addPage();
+                    currentY = margins.top;
+                }
+                pdf.text(line, margins.left, currentY)
+                currentY += 10;
             }
-            pdf.text(line, margins.left, currentY);
-            currentY += 10;
+            currentY += 10;  // gap between notes
         }
         // ----- end of generate notes section -----
-
         pdf.save('句句通.pdf');
+        }
     
-}
