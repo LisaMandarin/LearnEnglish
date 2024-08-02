@@ -28,6 +28,10 @@
     margin: 0 auto;
 } 
 
+.switch {
+  display: flex;
+  gap: var(--space-small)
+}
 /* title */
 h1 {
   text-align: center;
