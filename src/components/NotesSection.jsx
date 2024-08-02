@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react"
+import { Button } from "antd"
 import HintJSON from '../data/hint.json'
 import { useState } from "react"
 import { GeneratePDF } from "./GeneratePDF"
@@ -67,8 +68,8 @@ export function NotesSection({notes, setNotes, loading, error, sentences, transl
                 
             </div>         
             <div>
-                <button onClick={clearNotes}>清除全部筆記</button>
-                <button onClick={() => GeneratePDF(sentences, translation, notes)}>PDF生成</button>
+                <Button onClick={clearNotes}>清除全部筆記</Button>
+                <Button type="primary" onClick={() => GeneratePDF(sentences, translation, notes)}>PDF生成</Button>
             </div>
         </section>
     )

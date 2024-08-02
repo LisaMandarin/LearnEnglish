@@ -1,4 +1,5 @@
 import { Icon} from '@iconify/react'
+import { Button } from 'antd'
 import HintJSON from '../data/hint.json'
 import { openAIResult } from './APIs/openai'
 import { useEffect, useState } from 'react'
@@ -104,8 +105,8 @@ export function TranslationSection({translation, setTranslation, sentences, erro
                 )} 
             </ul>
             <div>
-                <button onClick={clearTranslation}>清除文字</button>
-                <button onClick={Lookup}>查詢單字</button>
+                <Button onClick={clearTranslation}>清除文字</Button>
+                <Button type='primary' onClick={Lookup}>查詢單字</Button>
                 <input type='checkbox' name='english' id='english' checked={english} onChange={e => setEnglish(e.target.checked)}/><label htmlFor='english'>英文解釋</label>
                 <input type='checkbox' name='chinese' id='chinese' checked={chinese} onChange={e => setChinese(e.target.checked)}/><label htmlFor='chinese'>中文定義</label>
                 <input type='checkbox' name='example' id='example' checked={example} onChange={e => setExample(e.target.checked)}/><label htmlFor='example'>例句</label>

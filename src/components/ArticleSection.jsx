@@ -1,4 +1,5 @@
 import { Icon} from '@iconify/react'
+import { Button } from 'antd'
 import HintJSON from '../data/hint.json'
 import { useState } from 'react'
 
@@ -46,8 +47,8 @@ export function ArticleSection({article, setArticle, setSentences}) {
                 onChange={e => setArticle(e.target.value)}
                 />
             <div>
-                <button onClick={clearArticle}>清除文字</button>
-                <button onClick={ProcessArticle}>陳列句子</button>
+                <Button onClick={clearArticle}>清除文字</Button>
+                <Button type='primary' onClick={ProcessArticle}>陳列句子</Button>
             </div>
         </section>
     )

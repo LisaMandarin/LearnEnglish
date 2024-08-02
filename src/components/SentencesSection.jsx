@@ -1,4 +1,5 @@
 import { Icon} from '@iconify/react'
+import { Button } from 'antd'
 import HintJSON from '../data/hint.json'
 import { microsoftTranslator } from './APIs/microsoft-translator'
 import { useRef, useState } from 'react'
@@ -67,8 +68,8 @@ export function SentencesSection({sentences, setSentences, setTranslation, setLo
                     ))}
             </ul>
             <div>
-                <button onClick={clearSentences}>清除文字</button>
-                <button onClick={ProcessSentences}>翻譯</button>
+                <Button onClick={clearSentences}>清除文字</Button>
+                <Button type='primary' onClick={ProcessSentences}>翻譯</Button>
             </div>
         </section>
     )
