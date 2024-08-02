@@ -1,5 +1,7 @@
 // ----- Fetch Microsoft-translator API -----
 export function microsoftTranslator(sentences, setSentences, setLoading, setError, setTranslation) {
+    const apiKey = import.meta.env.VITE_MICROSOFT_API_KEY
+    console.log(apiKey)
     if (sentences.length === 0) return
 
     setLoading(true)
@@ -12,7 +14,7 @@ export function microsoftTranslator(sentences, setSentences, setLoading, setErro
     const options = {
         method: 'POST',
         headers: {
-            'x-rapidapi-key': '96feed9183msh49658918a216289p163110jsn5de6fd8ffbe9',
+            'x-rapidapi-key': apiKey,
             'x-rapidapi-host': 'microsoft-translator-text-api3.p.rapidapi.com',
             'Content-Type': 'application/json'
         },
@@ -40,24 +42,4 @@ export function microsoftTranslator(sentences, setSentences, setLoading, setErro
 
     return () => controller.abort()
 
-    // fetch(url, options, {signal: controller.signal})
-    //     .then(res=> {
-    //         if (!res.ok) {
-    //             throw new Error(`HTTP error! status: ${res.status}`)
-    //         }
-    //         return res.json()
-    //     })
-    //     .then(results => {
-    //         const translations = results.map(result => result.translations[0].text)
-    //         setTranslation(translations)
-    //     })
-    //     .catch(e => {
-    //         if (e?.name === "AbortError") return
-    //         setError(`Error! ${e.message}`)
-    //     })
-    //     .finally(() => setLoading(false))
-    
-    //     return () => {
-    //         controller.abort()
-    //     }
 }

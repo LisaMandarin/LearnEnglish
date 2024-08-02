@@ -44,7 +44,7 @@ export async function openAIResult (termChinese, termEnglish, termExample, selec
             temperature: 1.5,
             max_tokens: 100
         })
-        // const response = JSON.parse(completion.choices[0].message.function_call.arguments)
+
         const response = completion.choices[0].message.function_call.arguments
         try {
             const parsedResponse = JSON.parse(response)
@@ -68,9 +68,6 @@ export async function openAIResult (termChinese, termEnglish, termExample, selec
         setLoading(false)
     } catch (error) {
         setLoading(false)
-        // if (error) {
-        //     setError(error.message)
-        // }    
         setError(error.message)   
     }
 }
