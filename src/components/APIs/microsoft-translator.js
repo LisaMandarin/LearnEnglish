@@ -1,7 +1,7 @@
 // ----- Fetch Microsoft-translator API -----
 export function microsoftTranslator(sentences, setSentences, setLoading, setError, setTranslation) {
     const apiKey = import.meta.env.VITE_MICROSOFT_API_KEY
-    console.log(apiKey)
+    
     if (sentences.length === 0) return
 
     setLoading(true)
