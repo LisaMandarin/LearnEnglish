@@ -40,7 +40,8 @@ export default function App() {
           setSentences={setSentences} 
           setTranslation={setTranslation}
           setLoading={setTranslationLoading}
-          setError={setTranslationError} />
+          setError={setTranslationError}
+          darkMode={darkMode} />
         <TranslationSection
           sentences={sentences}
           translation={translation}
@@ -56,7 +57,8 @@ export default function App() {
           loading={notesLoading}
           error={notesError}
           sentences={sentences}
-          translation={translation} />
+          translation={translation}
+          darkMode={darkMode} />
       </main>
     </div>
   )

@@ -4,7 +4,7 @@ import HintJSON from '../data/hint.json'
 import { useState } from "react"
 import { GeneratePDF } from "./GeneratePDF"
 
-export function NotesSection({notes, setNotes, loading, error, sentences, translation}) {
+export function NotesSection({notes, setNotes, loading, error, sentences, translation, darkMode}) {
     const [ showHint, setShowHint ] = useState(false)
 
     const clearNotes = () => {
@@ -57,13 +57,14 @@ export function NotesSection({notes, setNotes, loading, error, sentences, transl
                         <div key={n.id} className="note-container">
                             <button className="close-button" onClick={() => deleteNote(n.id)}>X</button>
                             <textarea 
+                                className={ darkMode ? 'dark-mode' : ''}
                                 value={n.wordInfo} 
                                 onChange={e => handleTextareaChange(e.target.value, n.id)} 
                             />
                         </div>    
                     ))
                 ) : (
-                    <textarea className="sample" value='筆記' />
+                    <textarea className= { darkMode ? 'dark-mode sample' : 'sample'} value='筆記' />
                 )}
                 
             </div>         

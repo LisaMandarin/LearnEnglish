@@ -4,7 +4,7 @@ import HintJSON from '../data/hint.json'
 import { microsoftTranslator } from './APIs/microsoft-translator'
 import { useRef, useState } from 'react'
 
-export function SentencesSection({sentences, setSentences, setTranslation, setLoading, setError}) {
+export function SentencesSection({sentences, setSentences, setTranslation, setLoading, setError, darkMode}) {
     const [ showHint, setShowHint ] = useState(false)
     const textareaRef = useRef(null)
     
@@ -46,14 +46,10 @@ export function SentencesSection({sentences, setSentences, setTranslation, setLo
                     ))}
                 </ul>
             )}
-            {/* <ul>
-                { showHint && HintJSON['sentences'].map((hint, index) => (
-                    <li key={index}>{hint}</li>
-                ))}                 
-            </ul> */}
             <ul className='renderingWindow'>
                 {sentences.length === 0
                     ? <textarea 
+                        className={ darkMode ? 'dark-mode' : ''}
                         placeholder='➢句子' 
                         ref={textareaRef}
                         onChange={e => handleTextareaChange(e.target.value, 0)}
@@ -61,6 +57,7 @@ export function SentencesSection({sentences, setSentences, setTranslation, setLo
                     : sentences.map((s, index) => (
                         <li key={index}>
                             <textarea 
+                                className={ darkMode ? 'dark-mode' : ''}
                                 value={`${s}`} 
                                 onChange={e => handleTextareaChange(e.target.value, index)}
                                 style={{fontSize: '1rem'}}/>
