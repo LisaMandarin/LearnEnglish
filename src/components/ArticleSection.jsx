@@ -3,7 +3,7 @@ import { Button } from 'antd'
 import HintJSON from '../data/hint.json'
 import { useState } from 'react'
 
-export function ArticleSection({article, setArticle, setSentences}) {
+export function ArticleSection({article, setArticle, setSentences, darkMode}) {
     const [ showHint, setShowHint ] = useState(false)
 
     const clearArticle = () => {
@@ -41,7 +41,7 @@ export function ArticleSection({article, setArticle, setSentences}) {
                 </ul>
             )}
             <textarea
-                className='renderingWindow'
+                className={ darkMode ? 'dark-mode renderingWindow' : 'renderingWindow'}
                 placeholder='請輸入英文原文'
                 value={article}
                 onChange={e => setArticle(e.target.value)}

@@ -16,8 +16,14 @@
 }
 
 /* basic frame */
+.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
 #root > div {
-    width: 90vw;
+    width: 100vw;
+    padding: 3% 10%;
     font-family: var(--en-font), var(--tc-font);
     margin: 0 auto;
 } 
@@ -96,7 +102,6 @@ section > div:last-child button {
     "space translation-text";
 }
 .original-text {
-  color: black;
   grid-area: original-text;
 }
 .translation-text {

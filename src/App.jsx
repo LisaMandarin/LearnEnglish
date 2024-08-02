@@ -1,3 +1,4 @@
+import { Switch } from 'antd'
 import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import { ArticleSection } from './components/ArticleSection'
@@ -15,10 +16,15 @@ export default function App() {
   const [ translationLoading, setTranslationLoading ] = useState(false)
   const [ notesError, setNotesError ] = useState(null)
   const [ notesLoading, setNotesLoading ] = useState(false)
-  
+  const [ darkMode, setDarkMode ] = useState(true) 
+
+  const onChange = checked => {
+    setDarkMode(checked)
+  }
   return (
-    <div>
+    <div className={ darkMode ? 'dark-mode' : ''}>
       <header>
+        <Switch defaultChecked onChange={onChange}/>
         <h1>句句通</h1>
         <p>把英文文章分句翻譯，也可以查詢單詞意思，最後把翻譯和查詢的資料編輯後炇成pdf檔儲存。</p>
         <p>👉🏻👉🏻請按照以下的步驟1→2→3→4完成你的筆記</p>
@@ -27,7 +33,8 @@ export default function App() {
         <ArticleSection 
           article={article} 
           setArticle={setArticle}
-          setSentences={setSentences} />
+          setSentences={setSentences}
+          darkMode={darkMode} />
         <SentencesSection
           sentences={sentences} 
           setSentences={setSentences} 
