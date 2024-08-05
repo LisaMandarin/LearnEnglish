@@ -3,7 +3,7 @@ export function microsoftTranslator(sentences, setSentences, setLoading, setErro
     const apiKey = import.meta.env.VITE_MICROSOFT_API_KEY
     
     if (sentences.length === 0) return
-
+    
     setLoading(true)
     setError(null)
     
