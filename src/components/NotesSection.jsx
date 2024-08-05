@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react"
-import { Button } from "antd"
+import { Button, Input } from "antd"
 import { DownloadOutlined } from "@ant-design/icons"
 import HintJSON from '../data/hint.json'
 import { useState } from "react"
@@ -7,6 +7,7 @@ import { GeneratePDF } from "./GeneratePDF"
 
 export function NotesSection({notes, setNotes, loading, error, sentences, translation, darkMode, setError}) {
     const [ showHint, setShowHint ] = useState(false)
+    const { TextArea } = Input
 
     const clearNotes = () => {
         const confirmed = window.confirm('確定清除全部筆記？')
@@ -58,15 +59,22 @@ export function NotesSection({notes, setNotes, loading, error, sentences, transl
                     notes.map(n => (
                         <div key={n.id} className="note-container">
                             <button className={ darkMode ? 'close-button dark-mode' : 'close-button'} onClick={() => deleteNote(n.id)}>X</button>
-                            <textarea 
+                            <TextArea 
                                 className={ darkMode ? 'dark-mode' : ''}
                                 value={n.wordInfo} 
-                                onChange={e => handleTextareaChange(e.target.value, n.id)} 
+                                onChange={e => handleTextareaChange(e.target.value, n.id)}
+                                autoSize
+                                style={{backgroundColor: "inherit"}} 
                             />
                         </div>    
                     ))
                 ) : (
-                    <textarea className= { darkMode ? 'dark-mode sample' : 'sample'} placeholder='筆記' />
+                    <TextArea 
+                        className= { darkMode ? 'dark-mode sample' : 'sample'} 
+                        placeholder='筆記'
+                        autoSize
+                        style={{backgroundColor: "inherit"}}
+                     />
                 )}
                 
             </div>         

@@ -1,12 +1,13 @@
 import { Icon} from '@iconify/react'
-import { Button } from 'antd'
+import { Button, Input } from 'antd'
 import HintJSON from '../data/hint.json'
 import { microsoftTranslator } from './APIs/microsoft-translator'
 import { useState } from 'react'
 
 export function SentencesSection({sentences, setSentences, setTranslation, setLoading, setError, darkMode}) {
     const [ showHint, setShowHint ] = useState(false)
-    
+    const { TextArea } = Input
+
     const clearSentences = () => {
         const confirmed = window.confirm('確定清除文字？')
         if (confirmed) {
@@ -48,12 +49,14 @@ export function SentencesSection({sentences, setSentences, setTranslation, setLo
             <ul className='renderingWindow'>
                 { sentences.map((s, index) => (
                         <li key={index}>
-                            <textarea 
+                            <TextArea 
                                 className={ darkMode ? 'dark-mode' : ''}
                                 placeholder='句子'
                                 value={`${s}`} 
                                 onChange={e => handleTextareaChange(e.target.value, index)}
-                                style={{fontSize: '1rem'}}/>
+                                autoSize
+                                style={{fontSize: '1rem', backgroundColor: 'inherit'}}
+                            />
                         </li>
                     ))}
             </ul>

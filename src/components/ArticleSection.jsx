@@ -1,11 +1,11 @@
 import { Icon} from '@iconify/react'
-import { Button } from 'antd'
+import { Button, Input } from 'antd'
 import HintJSON from '../data/hint.json'
 import { useState } from 'react'
 
 export function ArticleSection({article, setArticle, setSentences, darkMode}) {
     const [ showHint, setShowHint ] = useState(false)
-
+    const { TextArea } = Input
     const clearArticle = () => {
         const confirmed = window.confirm('確定清除文字？')
         if (confirmed) {
@@ -40,11 +40,13 @@ export function ArticleSection({article, setArticle, setSentences, darkMode}) {
                     ))}
                 </ul>
             )}
-            <textarea
+            <TextArea
                 className={ darkMode ? 'dark-mode renderingWindow' : 'renderingWindow'}
                 placeholder='請輸入英文原文'
                 value={article}
                 onChange={e => setArticle(e.target.value)}
+                autoSize
+                style={{backgroundColor: 'inherit'}}
                 />
             <div>
                 <Button onClick={clearArticle}>清除文字</Button>
