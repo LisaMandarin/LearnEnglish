@@ -9,7 +9,7 @@ import { MoonOutlined, SunOutlined } from '@ant-design/icons'
 
 export default function App() {
   const [ article, setArticle ] = useState('')
-  const [ sentences, setSentences ] = useState([]) 
+  const [ sentences, setSentences ] = useState(['']) 
   const [ translation, setTranslation ] = useState([])
   const [ notes, setNotes ] = useState([])
 
@@ -22,6 +22,12 @@ export default function App() {
   const onChange = checked => {
     setDarkMode(checked)
   }
+
+  useEffect(() => {
+    console.log('Translation: ', translation)
+    console.log('Notes: ', notes)
+  }, [translation, notes])
+
   return (
     <div className={ darkMode ? 'dark-mode' : ''}>
       <header>
@@ -53,7 +59,8 @@ export default function App() {
           loading={translationLoading}
           setNotes={setNotes}
           setLoading={setNotesLoading}
-          setError={setNotesError} />
+          setError={setNotesError}
+          setSelfError={setTranslationError} />
         <NotesSection 
           notes={notes} 
           setNotes={setNotes}
@@ -61,7 +68,8 @@ export default function App() {
           error={notesError}
           sentences={sentences}
           translation={translation}
-          darkMode={darkMode} />
+          darkMode={darkMode}
+          setError={setNotesError} />
       </main>
     </div>
   )

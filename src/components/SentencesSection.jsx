@@ -2,22 +2,21 @@ import { Icon} from '@iconify/react'
 import { Button } from 'antd'
 import HintJSON from '../data/hint.json'
 import { microsoftTranslator } from './APIs/microsoft-translator'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 
 export function SentencesSection({sentences, setSentences, setTranslation, setLoading, setError, darkMode}) {
     const [ showHint, setShowHint ] = useState(false)
-    const textareaRef = useRef(null)
     
     const clearSentences = () => {
         const confirmed = window.confirm('確定清除文字？')
         if (confirmed) {
-            setSentences([])
+            setSentences([''])
         }
     }
     
     const handleTextareaChange = (value, index) => {
         const newSentences = [...sentences]
-        if (value.trim() === '') {
+        if (value.trim() === '' && sentences.length > 1) {
             newSentences.splice(index, 1)  // remove empty string during onChange
         } else {
             newSentences[index] = value
@@ -47,17 +46,11 @@ export function SentencesSection({sentences, setSentences, setTranslation, setLo
                 </ul>
             )}
             <ul className='renderingWindow'>
-                {sentences.length === 0
-                    ? <textarea 
-                        className={ darkMode ? 'dark-mode' : ''}
-                        placeholder='➢句子' 
-                        ref={textareaRef}
-                        onChange={e => handleTextareaChange(e.target.value, 0)}
-                        style={{fontSize: '1rem'}}/>                     
-                    : sentences.map((s, index) => (
+                { sentences.map((s, index) => (
                         <li key={index}>
                             <textarea 
                                 className={ darkMode ? 'dark-mode' : ''}
+                                placeholder='句子'
                                 value={`${s}`} 
                                 onChange={e => handleTextareaChange(e.target.value, index)}
                                 style={{fontSize: '1rem'}}/>

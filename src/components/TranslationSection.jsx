@@ -5,7 +5,7 @@ import { openAIResult } from './APIs/openai'
 import { useEffect, useState } from 'react'
 
 
-export function TranslationSection({translation, setTranslation, sentences, error, loading, setNotes, setLoading, setError}) {
+export function TranslationSection({translation, setTranslation, sentences, error, loading, setNotes, setLoading, setError, setSelfError}) {
     const [ showHint, setShowHint ] = useState(false)
     const [ chinese, setChinese ] = useState(false)
     const [ english, setEnglish ] = useState(false)
@@ -20,6 +20,7 @@ export function TranslationSection({translation, setTranslation, sentences, erro
         const confirmed = window.confirm('確定清除文字？')
         if (confirmed) {
             setTranslation([])
+            setSelfError(null)
         }
     }
     

@@ -5,13 +5,14 @@ import HintJSON from '../data/hint.json'
 import { useState } from "react"
 import { GeneratePDF } from "./GeneratePDF"
 
-export function NotesSection({notes, setNotes, loading, error, sentences, translation, darkMode}) {
+export function NotesSection({notes, setNotes, loading, error, sentences, translation, darkMode, setError}) {
     const [ showHint, setShowHint ] = useState(false)
 
     const clearNotes = () => {
         const confirmed = window.confirm('確定清除全部筆記？')
         if (confirmed) {
             setNotes([])
+            setError(null)
         }
     }
 
@@ -56,7 +57,7 @@ export function NotesSection({notes, setNotes, loading, error, sentences, transl
                 ) : notes && notes.length > 0 ? (
                     notes.map(n => (
                         <div key={n.id} className="note-container">
-                            <button className="close-button" onClick={() => deleteNote(n.id)}>X</button>
+                            <button className={ darkMode ? 'close-button dark-mode' : 'close-button'} onClick={() => deleteNote(n.id)}>X</button>
                             <textarea 
                                 className={ darkMode ? 'dark-mode' : ''}
                                 value={n.wordInfo} 
@@ -65,7 +66,7 @@ export function NotesSection({notes, setNotes, loading, error, sentences, transl
                         </div>    
                     ))
                 ) : (
-                    <textarea className= { darkMode ? 'dark-mode sample' : 'sample'} value='筆記' />
+                    <textarea className= { darkMode ? 'dark-mode sample' : 'sample'} placeholder='筆記' />
                 )}
                 
             </div>         
