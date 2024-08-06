@@ -150,4 +150,6 @@ label {
   border: none;
   cursor: pointer;
   font-size: 1rem;
+  color: inherit;
+  z-index: 10;
 }
