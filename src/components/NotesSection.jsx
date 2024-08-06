@@ -9,6 +9,7 @@ export function NotesSection({notes, setNotes, loading, error, sentences, transl
     const [ showHint, setShowHint ] = useState(false)
     const { TextArea } = Input
 
+    // clear all notes containers
     const clearNotes = () => {
         const confirmed = window.confirm('確定清除全部筆記？')
         if (confirmed) {
@@ -17,6 +18,7 @@ export function NotesSection({notes, setNotes, loading, error, sentences, transl
         }
     }
 
+    // dynamically change the value of textarea
     const handleTextareaChange = (value, id) => {
         const newNotes = notes.map(n => {
             if (n.id === id) {
@@ -27,11 +29,28 @@ export function NotesSection({notes, setNotes, loading, error, sentences, transl
         setNotes(newNotes)
     }
 
+    // delete note button on the top-right corner of each note
     const deleteNote = (id) => {
         const newNotes = notes.filter(n => n.id !== id)
         setNotes(newNotes)
     }
 
+    const renderNotes = notes && notes.map((n, index) => (
+        <div key={n.id} className="note-container">
+            <button 
+                className={darkMode ? 'dark-mode close-button' : 'close-button'}
+                onClick={() => deleteNote(n.id)}
+            >
+                X
+            </button>
+            <TextArea 
+                className={darkMode? 'dark-mode' : ''}
+                value={n.wordInfo}
+                onChange={e => handleTextareaChange(e.target.value, n.id)}
+                autoSize
+                style={{backgroundColor: 'inherit'}} />
+        </div>
+    ))
     return (
         <section id="notes-section">
             <div>
@@ -49,35 +68,20 @@ export function NotesSection({notes, setNotes, loading, error, sentences, transl
                     ))}
                 </ul>
             )}
-            
             <div className="renderingWindow">
                 { loading ? (
                     <span>Loading...</span>
-                ) : error ? (
-                    <span>{error}</span>
                 ) : notes && notes.length > 0 ? (
-                    notes.map(n => (
-                        <div key={n.id} className="note-container">
-                            <button className='close-button' onClick={() => deleteNote(n.id)}>X</button>
-                            <TextArea 
-                                className={ darkMode ? 'dark-mode' : ''}
-                                value={n.wordInfo} 
-                                onChange={e => handleTextareaChange(e.target.value, n.id)}
-                                autoSize
-                                style={{backgroundColor: "inherit"}} 
-                            />
-                        </div>    
-                    ))
+                    renderNotes
                 ) : (
                     <TextArea 
-                        className= { darkMode ? 'dark-mode sample' : 'sample'} 
+                        className={darkMode ? 'dark-mode sample' : 'sample'} 
                         placeholder='筆記'
                         autoSize
                         style={{backgroundColor: "inherit"}}
-                     />
+                    />
                 )}
-                
-            </div>         
+            </div>           
             <div>
                 <Button onClick={clearNotes}>清除全部筆記</Button>
                 <Button 
