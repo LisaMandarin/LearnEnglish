@@ -6,6 +6,7 @@ export function microsoftTranslator(sentences, setSentences, setLoading, setErro
     
     setLoading(true)
     setError(null)
+    setTranslation([])
     
     const newSentences = sentences.map(s => s.split('\n')).flat()
     

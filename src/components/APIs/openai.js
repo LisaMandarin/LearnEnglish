@@ -65,9 +65,14 @@ export async function openAIResult (termChinese, termEnglish, termExample, selec
         setNotes(current => {
             return [...current, {id: crypto.randomUUID(), wordInfo: result}]
         })
-        setLoading(false)
+        setError(null)
     } catch (error) {
         setLoading(false)
-        setError(error.message)   
+        setError(error.message)
+        setNotes(current => {
+            return [...current, {id: crypto.randomUUID(), wordInfo: error.message}]
+        })   
+    } finally {
+        setLoading(false)
     }
 }
