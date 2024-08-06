@@ -15,7 +15,7 @@ export function TranslationSection({translation, setTranslation, sentences, erro
     const termEnglish = 'English definition'
     const termExample = 'an example sentence'
     
-
+    // clear textarea
     const clearTranslation = () => {
         const confirmed = window.confirm('確定清除文字？')
         if (confirmed) {
@@ -53,6 +53,7 @@ export function TranslationSection({translation, setTranslation, sentences, erro
         })
     }, [chinese, english, example])
 
+    // Look up the selected text through OpenAI
     const Lookup = async () => {
         const selectedText = document.getSelection().toString().trim()
         if (!chinese && !english && !example) {
@@ -79,7 +80,7 @@ export function TranslationSection({translation, setTranslation, sentences, erro
 
             {showHint && (
                 <ul>
-                    {HintJSON['sentences'].map((hint, index) => (
+                    {HintJSON['translation'].map((hint, index) => (
                         <li key={index}>{hint}</li>
                     ))}
                 </ul>

@@ -44,7 +44,7 @@ export function NotesSection({notes, setNotes, loading, error, sentences, transl
 
             {showHint && (
                 <ul>
-                    {HintJSON['sentences'].map((hint, index) => (
+                    {HintJSON['notes'].map((hint, index) => (
                         <li key={index}>{hint}</li>
                     ))}
                 </ul>
