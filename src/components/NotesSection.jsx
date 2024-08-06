@@ -58,7 +58,7 @@ export function NotesSection({notes, setNotes, loading, error, sentences, transl
                 ) : notes && notes.length > 0 ? (
                     notes.map(n => (
                         <div key={n.id} className="note-container">
-                            <button className={ darkMode ? 'close-button dark-mode' : 'close-button'} onClick={() => deleteNote(n.id)}>X</button>
+                            <button className='close-button' onClick={() => deleteNote(n.id)}>X</button>
                             <TextArea 
                                 className={ darkMode ? 'dark-mode' : ''}
                                 value={n.wordInfo} 
