@@ -19,10 +19,7 @@ export function ArticleSection() {
   const ProcessArticle = () => {
     const regex = /[^.!?]+[.!?]+/g; // not start with .!? but end with .!?
     let matchedSentences = article.match(regex);
-    
-    console.log('article: ', article)
-    console.log('matchedSentences: ', matchedSentences)
-    
+        
     matchedSentences = matchedSentences.map((s) => s.trim());
     if (matchedSentences) {
       setSentences(matchedSentences);

@@ -35,34 +35,34 @@ export function TranslationSection() {
     }
   };
 
+  const Checkbox = ({nameC, nameE, checked, onChange}) => (
+    <>
+      <input 
+        type="checkbox"
+        id={nameE}
+        checked={checked}
+        onChange={onChange}
+      />
+      <label htmlFor={nameE}>{nameC}</label>
+    </>
+  )
+
   // toggle checkboxes and save the values to lookupTerms
   useEffect(() => {
-    setLookupTerms((current) => {
-      let newTerms = [...current];
-      if (english) {
-        if (!newTerms.includes(termEnglish)) {
-          newTerms.push(termEnglish);
-        }
-      } else {
-        newTerms = newTerms.filter((t) => t !== termEnglish);
-      }
-      if (chinese) {
-        if (!newTerms.includes(termChinese)) {
-          newTerms.push(termChinese);
-        }
-      } else {
-        newTerms = newTerms.filter((t) => t !== termChinese);
-      }
-      if (example) {
-        if (!newTerms.includes(termExample)) {
-          newTerms.push(termExample);
-        }
-      } else {
-        newTerms = newTerms.filter((t) => t !== termExample);
-      }
-      return newTerms;
-    });
-  }, [chinese, english, example]);
+    setLookupTerms(current => {
+      const newTerms = new Set(current)
+      if (english) newTerms.add(termEnglish)
+        else newTerms.delete(termEnglish)
+      
+      if (chinese) newTerms.add(termChinese)
+        else newTerms.delete(termChinese)
+      
+      if (example) newTerms.add(termExample)
+        else newTerms.delete(termExample)
+
+      return Array.from(newTerms)
+    })
+  }, [english, chinese, example])
 
   // Look up the selected text through OpenAI
   const Lookup = async () => {
@@ -133,30 +133,24 @@ export function TranslationSection() {
         <Button type="primary" onClick={Lookup}>
           查詢單字
         </Button>
-        <input
-          type="checkbox"
-          name="english"
-          id="english"
-          checked={english}
-          onChange={(e) => setEnglish(e.target.checked)}
-        />
-        <label htmlFor="english">英文解釋</label>
-        <input
-          type="checkbox"
-          name="chinese"
-          id="chinese"
+        <Checkbox 
+          nameC='中文定義'
+          nameE='chinese'
           checked={chinese}
-          onChange={(e) => setChinese(e.target.checked)}
+          onChange={e=>setChinese(e.target.checked)}
         />
-        <label htmlFor="chinese">中文定義</label>
-        <input
-          type="checkbox"
-          name="example"
-          id="example"
+        <Checkbox 
+          nameC='英文解釋'
+          nameE='english'
+          checked={english}
+          onChange={e=>setEnglish(e.target.checked)}
+        />
+        <Checkbox 
+          nameC='例句'
+          nameE='example'
           checked={example}
-          onChange={(e) => setExample(e.target.checked)}
+          onChange={e=>setExample(e.target.checked)}
         />
-        <label htmlFor="example">例句</label>
       </div>
     </section>
   );
