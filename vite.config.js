@@ -10,7 +10,6 @@ export default defineConfig({
       output: {
         manualChunks: {
           'jspdf': ['jspdf'],
-          'NotoSansTC': ['./NotoSansTC-VariableFont_wght-normal'],
         },
       },
     },
