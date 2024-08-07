@@ -103,7 +103,7 @@ export function NotesSection() {
           type="primary"
           icon={<DownloadOutlined />}
           iconPosition="end"
-          onClick={() => GeneratePDF(sentences, translation, notes)}
+          onClick={async() => await GeneratePDF(sentences, translation, notes)}
         >
           PDF生成
         </Button>
