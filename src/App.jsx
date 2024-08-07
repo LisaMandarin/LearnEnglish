@@ -23,11 +23,6 @@ export default function App() {
     setDarkMode(checked)
   }
 
-  useEffect(() => {
-    console.log('Translation: ', translation)
-    console.log('Notes: ', notes)
-  }, [translation, notes])
-
   return (
     <div className={ darkMode ? 'dark-mode' : ''}>
       <header>

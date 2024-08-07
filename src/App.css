@@ -21,6 +21,10 @@
   color: white;
 }
 
+.dark-mode textarea::placeholder {
+  color: #9a9a9a;
+}
+
 #root > div {
     width: 100vw;
     padding: 3% 10%;
@@ -142,6 +146,8 @@ label {
 .note-container {
   position: relative;
 }
+
+/* delete button of notes */
 .close-button {
   position: absolute;
   top: 5px;
