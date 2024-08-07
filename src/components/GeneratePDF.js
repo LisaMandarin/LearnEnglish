@@ -1,7 +1,7 @@
 import jsPDF from "jspdf"
 
 export async function GeneratePDF(sentences, translation, notes) {
-    const { NotoSansTC } = (await import('./NotoSansTC-VariableFont_wght-normal')).default
+    const NotoSansTC = (await import('./NotoSansTC-VariableFont_wght-normal.js')).default
     
     // ----- basic pdf setting -----
     const pdf = new jsPDF({lineHeight: 2})  // default unit: mm
