@@ -1,5 +1,6 @@
 import OpenAI from "openai";
-export async function openAIResult (termChinese, termEnglish, termExample, selectedText, lookupTerms, setNotes, setLoading, setError) {
+
+export async function openAIResult (termChinese, termEnglish, termExample, selectedText, lookupTerms, setNotesLoading, setNotesError, setNotes) {
     const displayResult = async (word, lookupTerms) => {
         const openai = new OpenAI({
             apiKey: import.meta.env.VITE_OPENAI_API_KEY,
@@ -60,19 +61,19 @@ export async function openAIResult (termChinese, termEnglish, termExample, selec
         }
     }
     try {
-        setLoading(true)
+        setNotesLoading(true)
         const result = await displayResult(selectedText, lookupTerms)
         setNotes(current => {
             return [...current, {id: crypto.randomUUID(), wordInfo: result}]
         })
-        setError(null)
+        setNotesError(null)
     } catch (error) {
-        setLoading(false)
-        setError(error.message)
+        setNotesLoading(false)
+        setNotesError(error.message)
         setNotes(current => {
             return [...current, {id: crypto.randomUUID(), wordInfo: error.message}]
         })   
     } finally {
-        setLoading(false)
+        setNotesLoading(false)
     }
 }
