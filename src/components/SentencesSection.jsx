@@ -55,13 +55,11 @@ export function SentencesSection() {
           onClick={() => setShowHint((current) => !current)}
         />
       </div>
-      {showHint && (
-        <ul>
+        <ul className={`hint-div ${ showHint ? 'expand' : ''}`}>
           {HintJSON["sentences"].map((hint, index) => (
             <li key={index}>{hint}</li>
           ))}
         </ul>
-      )}
       <ul className="renderingWindow">
         {sentences.map((s, index) => (
           <li key={index}>

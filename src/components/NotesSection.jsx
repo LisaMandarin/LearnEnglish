@@ -75,14 +75,11 @@ export function NotesSection() {
           onClick={() => setShowHint((current) => !current)}
         />
       </div>
-
-      {showHint && (
-        <ul>
+        <ul className={`hint-div ${ showHint ? "expand" : ""}`}>
           {HintJSON["notes"].map((hint, index) => (
             <li key={index}>{hint}</li>
           ))}
         </ul>
-      )}
       <div className="renderingWindow">
         {notesLoading ? (
           <span>Loading...</span>

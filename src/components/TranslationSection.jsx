@@ -36,7 +36,7 @@ export function TranslationSection() {
   };
 
   const Checkbox = ({nameC, nameE, checked, onChange}) => (
-    <>
+    <div>
       <input 
         type="checkbox"
         id={nameE}
@@ -44,7 +44,7 @@ export function TranslationSection() {
         onChange={onChange}
       />
       <label htmlFor={nameE}>{nameC}</label>
-    </>
+    </div>
   )
 
   // toggle checkboxes and save the values to lookupTerms
@@ -99,13 +99,11 @@ export function TranslationSection() {
         />
       </div>
 
-      {showHint && (
-        <ul>
+        <ul className={`hint-div ${ showHint ? "expand" : ""}`}>
           {HintJSON["translation"].map((hint, index) => (
             <li key={index}>{hint}</li>
           ))}
         </ul>
-      )}
 
       <ul className="renderingWindow">
         {translation.length === 0 && translationLoading ? (
@@ -114,8 +112,8 @@ export function TranslationSection() {
           <span>{translationError}</span>
         ) : translation.length === 0 ? (
           <>
-            <span className="sample">➢原句</span> <br />
-            <span className="sample">&nbsp;&nbsp;&nbsp;翻譯</span>
+            <span style={{color: '#9a9a9a'}}>➢原句</span> <br />
+            <span style={{color: '#9a9a9a'}}>&nbsp;&nbsp;&nbsp;翻譯</span>
           </>
         ) : (
           sentences.map((s, index) => (
@@ -133,24 +131,26 @@ export function TranslationSection() {
         <Button type="primary" onClick={Lookup}>
           查詢單字
         </Button>
-        <Checkbox 
-          nameC='中文定義'
-          nameE='chinese'
-          checked={chinese}
-          onChange={e=>setChinese(e.target.checked)}
-        />
-        <Checkbox 
-          nameC='英文解釋'
-          nameE='english'
-          checked={english}
-          onChange={e=>setEnglish(e.target.checked)}
-        />
-        <Checkbox 
-          nameC='例句'
-          nameE='example'
-          checked={example}
-          onChange={e=>setExample(e.target.checked)}
-        />
+        <div>
+          <Checkbox 
+            nameC='中文定義'
+            nameE='chinese'
+            checked={chinese}
+            onChange={e=>setChinese(e.target.checked)}
+          />
+          <Checkbox 
+            nameC='英文解釋'
+            nameE='english'
+            checked={english}
+            onChange={e=>setEnglish(e.target.checked)}
+          />
+          <Checkbox 
+            nameC='例句'
+            nameE='example'
+            checked={example}
+            onChange={e=>setExample(e.target.checked)}
+          />
+        </div>
       </div>
     </section>
   );

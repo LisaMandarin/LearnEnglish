@@ -38,13 +38,12 @@ export function ArticleSection() {
         />
       </div>
 
-      {showHint && (
-        <ul>
-          {HintJSON["article"].map((hint, index) => (
-            <li key={index}>{hint}</li>
-          ))}
-        </ul>
-      )}
+      <ul className={`hint-div ${showHint ? 'expand' : ''}`}>
+        {HintJSON["article"].map((hint, index) => (
+          <li key={index}>{hint}</li>
+        ))}
+      </ul>
+      
       <TextArea
         className={darkMode ? "dark-mode renderingWindow" : "renderingWindow"}
         placeholder="請輸入英文原文"

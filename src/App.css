@@ -49,7 +49,7 @@ h1 {
 /* instructions below title */
 header > p {
   text-align: center;
-  color: var(--dark-blue)
+  color: var(--dark-blue);
 }
 
 /* title and question mark of each section */
@@ -58,6 +58,19 @@ section > div:first-child {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+.hint-div {
+  max-height: 0;
+  width: 80%;
+  margin: 0 auto;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.hint-div.expand {
+  max-height: 1000px;
+  transition: max-height 0.5s ease;
 }
 
 /* renderingWindow of each section */
@@ -71,9 +84,7 @@ section > div:first-child {
   font-size: 1rem;
   font-family: var(--en-font), var(--tc-font);
 }
-.sample {
-  color: #9a9a9a;
-}
+
 /* listing of renderingWindow */
 .renderingWindow textarea {
   width: 100%;
