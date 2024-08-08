@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import { Button, Input } from "antd";
+import { Button, Input, Popconfirm } from "antd";
 import { DownloadOutlined } from "@ant-design/icons";
 import HintJSON from "../data/hint.json";
 import { useContext, useState } from "react";
@@ -12,7 +12,7 @@ export function NotesSection() {
           notes, 
           notesLoading,      
           setNotes, 
-          setError, 
+          setNotesError, 
           darkMode 
            } =
     useContext(AppContext);
@@ -21,11 +21,8 @@ export function NotesSection() {
 
   // clear all notes containers
   const clearNotes = () => {
-    const confirmed = window.confirm("確定清除全部筆記？");
-    if (confirmed) {
       setNotes([]);
-      setError(null);
-    }
+      setNotesError(null);
   };
 
   // dynamically change the value of textarea
@@ -86,16 +83,24 @@ export function NotesSection() {
         ) : notes && notes.length > 0 ? (
           renderNotes
         ) : (
-          <TextArea
-            className={darkMode ? "dark-mode sample" : "sample"}
-            placeholder="筆記"
-            autoSize
-            style={{ backgroundColor: "inherit" }}
-          />
+          <div
+            className={ darkMode ? 'dark-mode' : ''}
+            style={{color: '#9a9a9a'}}
+            >
+            筆記
+          </div>
         )}
       </div>
       <div>
-        <Button onClick={clearNotes}>清除全部筆記</Button>
+        <Popconfirm
+          placement="left"
+          title='確定清除全部筆記'
+          onConfirm={clearNotes}
+          okText='Yes'
+          cancelText='No'
+        >
+          <Button>清除全部筆記</Button>
+        </Popconfirm>
         <Button
           type="primary"
           icon={<DownloadOutlined />}

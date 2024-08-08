@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import { Button } from "antd";
+import { Button, Popconfirm } from "antd";
 import HintJSON from "../data/hint.json";
 import { openAIResult } from "./APIs/openai";
 import { useContext, useEffect, useState } from "react";
@@ -28,11 +28,8 @@ export function TranslationSection() {
 
   // clear textarea
   const clearTranslation = () => {
-    const confirmed = window.confirm("確定清除文字？");
-    if (confirmed) {
       setTranslation([]);
       setTranslationError(null);
-    }
   };
 
   const Checkbox = ({nameC, nameE, checked, onChange}) => (
@@ -127,7 +124,16 @@ export function TranslationSection() {
         )}
       </ul>
       <div>
-        <Button onClick={clearTranslation}>清除文字</Button>
+        <Popconfirm
+          placement='left'
+          title='碓定清除文字？'
+          onConfirm={clearTranslation}
+          okText='Yes'
+          cancelText='No'
+          >
+          <Button>清除文字</Button>
+        </Popconfirm>
+
         <Button type="primary" onClick={Lookup}>
           查詢單字
         </Button>

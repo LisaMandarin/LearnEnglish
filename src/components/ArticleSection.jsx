@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
-import { Button, Input } from "antd";
+import { Button, Input, Popconfirm } from "antd";
+
 import HintJSON from "../data/hint.json";
 import { useContext, useState } from "react";
 import { AppContext } from "../AppContext";
@@ -9,11 +10,13 @@ export function ArticleSection() {
     useContext(AppContext);
   const [showHint, setShowHint] = useState(false);
   const { TextArea } = Input;
+
   const clearArticle = () => {
-    const confirmed = window.confirm("確定清除文字？");
-    if (confirmed) {
-      setArticle("");
-    }
+    // const confirmed = window.confirm("確定清除文字？");
+    // if (confirmed) {
+    //   setArticle("");
+    // }
+    setArticle('')
   };
 
   const ProcessArticle = () => {
@@ -53,7 +56,15 @@ export function ArticleSection() {
         style={{ backgroundColor: "inherit" }}
       />
       <div>
-        <Button onClick={clearArticle}>清除文字</Button>
+        <Popconfirm
+          placement='left'
+          title='確定清除文字？'
+          onConfirm={clearArticle}
+          onText='Yes'
+          cancelText='No'
+        >
+          <Button>清除文字</Button>
+        </Popconfirm>
         <Button type="primary" onClick={ProcessArticle}>
           陳列句子
         </Button>

@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import { Button, Input } from "antd";
+import { Button, Input, Popconfirm } from "antd";
 import HintJSON from "../data/hint.json";
 import { microsoftTranslator } from "./APIs/microsoft-translator";
 import { useContext, useState } from "react";
@@ -17,12 +17,8 @@ export function SentencesSection() {
   const [showHint, setShowHint] = useState(false);
   const { TextArea } = Input;
 
-  const clearSentences = () => {
-    const confirmed = window.confirm("確定清除文字？");
-    if (confirmed) {
-      setSentences([""]);
-    }
-  };
+  const clearSentences = () => setSentences([""]);
+  ;
 
   const handleTextareaChange = (value, index) => {
     const newSentences = [...sentences];
@@ -75,7 +71,15 @@ export function SentencesSection() {
         ))}
       </ul>
       <div>
-        <Button onClick={clearSentences}>清除文字</Button>
+        <Popconfirm
+          placement='left'
+          title='確定清除文字？'
+          onConfirm={clearSentences}
+          okText='Yes'
+          cancelText='No'
+          >
+          <Button>清除文字</Button>
+        </Popconfirm>
         <Button type="primary" onClick={ProcessSentences}>
           翻譯
         </Button>
