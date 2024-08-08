@@ -73,7 +73,7 @@ useEffect(() => {
   }
 
   document.addEventListener('selectionchange', handleSelectionChange)
-  document.addEventListener('touched', handleSelectionChange)
+  document.addEventListener('touchend', handleSelectionChange)
 
   return () => {
     document.removeEventListener('selectionchange', handleSelectionChange)
