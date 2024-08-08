@@ -138,12 +138,12 @@ label {
   display: grid;
   grid-template-columns: repeat(auto-fill, 250px);
   grid-gap: var(--space-big);
-  justify-content: start;
+  justify-content: center;
   border: 1px solid #9a9a9a;
   min-height: 3rem;
   padding: var(--space-big);
 }
-#notes-section .renderingWindow textarea, #notes-section .renderingWindow div {
+#notes-section .renderingWindow textarea {
   height: auto;
   padding: var(--space-big);
   font-size: 1rem;
