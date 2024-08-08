@@ -22,6 +22,7 @@ export function TranslationSection() {
   const [english, setEnglish] = useState(false);
   const [example, setExample] = useState(false);
   const [lookupTerms, setLookupTerms] = useState([]);
+  const [selectedText, setSelectedText] = useState('')
   const termChinese = "traditional Chinese definition";
   const termEnglish = "English definition";
   const termExample = "an example sentence";
@@ -32,6 +33,7 @@ export function TranslationSection() {
       setTranslationError(null);
   };
 
+  // nameC = Chinese name, nameE = English name
   const Checkbox = ({nameC, nameE, checked, onChange}) => (
     <div>
       <input 
@@ -60,6 +62,24 @@ export function TranslationSection() {
       return Array.from(newTerms)
     })
   }, [english, chinese, example])
+
+// detect select on both desktop and mobile devices
+useEffect(() => {
+  const handleSelectionChange = () => {
+    const selection = document.getSelection()
+    const text = selection ? selection.toString().trim() : ''
+
+    setSelectedText(text)
+  }
+
+  document.addEventListener('selectionchange', handleSelectionChange)
+  document.addEventListener('touched', handleSelectionChange)
+
+  return () => {
+    document.removeEventListener('selectionchange', handleSelectionChange)
+    document.removeEventListener('touchend', handleSelectionChange)
+  }
+}, [])
 
   // Look up the selected text through OpenAI
   const Lookup = async () => {
