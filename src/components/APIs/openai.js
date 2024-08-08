@@ -4,7 +4,6 @@ export async function openAIResult (termChinese, termEnglish, termExample, selec
     const displayResult = async (word, lookupTerms) => {
         const openai = new OpenAI({
             apiKey: import.meta.env.VITE_OPENAI_API_KEY,
-            // apiKey: process.env.VITE_OPENAI_API_KEY,
             dangerouslyAllowBrowser: true
         })
         const instructions = `You are an English-Chinese(traditional) dictionary for English learners.  Word: ${word}.  Tell me the word's information of ${lookupTerms.join(',')} and its part of speech`
