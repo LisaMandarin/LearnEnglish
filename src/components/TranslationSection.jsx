@@ -83,7 +83,6 @@ useEffect(() => {
 
   // Look up the selected text through OpenAI
   const Lookup = async () => {
-    const selectedText = document.getSelection().toString().trim();
     if (!chinese && !english && !example) {
       alert("請勾選「中文」、「English」、或「例句」");
       return;
