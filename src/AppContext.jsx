@@ -4,7 +4,7 @@ export const AppContext = createContext()
 
 export const AppProvider = ({children}) => {
     const [ article, setArticle ] = useState('')
-    const [ sentences, setSentences ] = useState(['']) 
+    const [ sentences, setSentences ] = useState([]) 
     const [ translation, setTranslation ] = useState([])
     const [ notes, setNotes ] = useState([])
     

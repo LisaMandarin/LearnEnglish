@@ -17,12 +17,11 @@ export function SentencesSection() {
   const [showHint, setShowHint] = useState(false);
   const { TextArea } = Input;
 
-  const clearSentences = () => setSentences([""]);
-  ;
-
+  const clearSentences = () => setSentences([]);
+  
   const handleTextareaChange = (value, index) => {
     const newSentences = [...sentences];
-    if (value.trim() === "" && sentences.length > 1) {
+    if (value.trim() === "") {
       newSentences.splice(index, 1); // remove empty string during onChange
     } else {
       newSentences[index] = value;
@@ -51,25 +50,49 @@ export function SentencesSection() {
           onClick={() => setShowHint((current) => !current)}
         />
       </div>
-        <ul className={`hint-div ${ showHint ? 'expand' : ''}`}>
-          {HintJSON["sentences"].map((hint, index) => (
-            <li key={index}>{hint}</li>
-          ))}
-        </ul>
-      <ul className="renderingWindow">
+      <ul className={`hint-div ${ showHint ? 'expand' : ''}`}>
+        {HintJSON["sentences"].map((hint, index) => (
+          <li key={index}>{hint}</li>
+        ))}
+      </ul>
+      { sentences.length === 0 ? (
+        <div
+          style={{
+            border: "1px solid #9a9a9a",
+            padding: "15px",
+            color: "#9a9a9a"
+          }}
+        >按「陳列句子」後，句子會條列在這區，更多資訊請按上方「問號」。</div>
+      ) : (
+      <ol
+        className={darkMode ? "dark-mode" : ''}
+        style={{
+          border: "1px solid #9a9a9a",
+          padding: "11px 4px 11px 22px",
+        }}
+        >
         {sentences.map((s, index) => (
           <li key={index}>
             <TextArea
-              className={darkMode ? "dark-mode" : ""}
+              className={darkMode ? "dark-mode" : ''}
               placeholder="句子"
               value={`${s}`}
               onChange={(e) => handleTextareaChange(e.target.value, index)}
               autoSize
-              style={{ fontSize: "1rem", backgroundColor: "inherit" }}
+              style={{ 
+                fontSize: "1rem", 
+                backgroundColor: "inherit", 
+                display: "block",
+                border: 0
+              }}
             />
           </li>
         ))}
-      </ul>
+      </ol>
+      )
+
+      }
+      
       <div>
         <Popconfirm
           placement='left'
