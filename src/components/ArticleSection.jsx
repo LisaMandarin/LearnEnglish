@@ -1,6 +1,5 @@
 import { Icon } from "@iconify/react";
 import { Button, Input, Popconfirm } from "antd";
-
 import HintJSON from "../data/hint.json";
 import { useContext, useState } from "react";
 import { AppContext } from "../AppContext";
@@ -26,7 +25,7 @@ export function ArticleSection() {
   };
 
   return (
-    <section>
+    <section id="article-section">
       <div>
         <h2>1. 輸入文章</h2>
         <Icon

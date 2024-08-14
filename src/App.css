@@ -76,8 +76,6 @@ section > div:first-child {
 /* renderingWindow of each section */
 .renderingWindow {
   border: 1px solid #9a9a9a;
-  width: 100%;
-  min-height: 3rem;
   padding: var(--space-big);
   list-style-type: none;
   margin: 0px;
@@ -110,6 +108,12 @@ section > div:last-child {
 section > div:last-child button {
   margin: var(--space-small);
 }
+
+/* setting for articleSection */
+#article-section .renderingWindow {
+  border-radius: 0;
+}
+
 
 /* setting for translationSection */
 #translation-section .renderingWindow li {
