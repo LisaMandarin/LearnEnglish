@@ -113,6 +113,14 @@ section > div:last-child button {
 #article-section .renderingWindow {
   border-radius: 0;
 }
+#article-section .renderingWindow span {
+  color: #9a9a9a;
+}
+
+/* setting for sentenceSection */
+#sentences-section .renderingWindow li::before {
+  color: #9a9a9a;
+}
 
 
 /* setting for translationSection */

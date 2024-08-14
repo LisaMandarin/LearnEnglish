@@ -41,7 +41,7 @@ export function SentencesSection() {
   };
 
   return (
-    <section>
+    <section id="sentences-section">
       <div>
         <h2>2. 陳列句子</h2>
         <Icon

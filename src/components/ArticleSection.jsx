@@ -44,11 +44,13 @@ export function ArticleSection() {
       
       <TextArea
         className={darkMode ? "dark-mode renderingWindow" : "renderingWindow"}
+        showCount
+        maxLength={10000}
         placeholder="請輸入英文原文"
         value={article}
         onChange={(e) => setArticle(e.target.value)}
         autoSize
-        style={{ backgroundColor: "inherit" }}
+        style={{ backgroundColor: "inherit", marginBottom: "17px"}}
       />
       <div>
         <Popconfirm
