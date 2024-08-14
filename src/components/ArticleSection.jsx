@@ -17,7 +17,12 @@ export function ArticleSection() {
   const ProcessArticle = () => {
     const regex = /[^.!?]+[.!?]+/g; // not start with .!? but end with .!?
     let matchedSentences = article.match(regex);
-        
+    
+    if (!matchedSentences || matchedSentences.length === 0) {
+      alert('Please provide meaningful sentences.')
+      setArticle('')
+      return
+    }
     matchedSentences = matchedSentences.map((s) => s.trim());
     if (matchedSentences) {
       setSentences(matchedSentences);
@@ -43,14 +48,20 @@ export function ArticleSection() {
       </ul>
       
       <TextArea
-        className={darkMode ? "dark-mode renderingWindow" : "renderingWindow"}
+        className={darkMode ? "dark-mode" : ""}
         showCount
         maxLength={10000}
-        placeholder="請輸入英文原文"
+        placeholder="請貼上英文文章，更多資訊請按上方「問號」。"
         value={article}
         onChange={(e) => setArticle(e.target.value)}
         autoSize
-        style={{ backgroundColor: "inherit", marginBottom: "17px"}}
+        style={{ 
+          backgroundColor: "inherit", 
+          marginBottom: "17px", // marginBottom: leave room for showCount
+          borderRadius: 0,
+          padding: "11px 4px",
+          fontSize: "1rem"
+        }}  
       />
       <div>
         <Popconfirm

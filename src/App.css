@@ -18,7 +18,7 @@
 /* basic frame */
 .dark-mode {
   background-color: #121212;
-  color: white;
+  color: var(--milky)
 }
 
 .dark-mode textarea::placeholder {
@@ -71,6 +71,10 @@ section > div:first-child {
 .hint-div.expand {
   max-height: 1000px;
   transition: max-height 0.5s ease;
+}
+
+#article-section .dark-mode .ant-input-data-count {
+  color: var(--milky);
 }
 
 /* renderingWindow of each section */
