@@ -68,7 +68,7 @@ export function NotesSection() {
         <Icon
           className="icon-questionMark"
           icon="heroicons-outline:question-mark-circle"
-          style={{ color: "#207BFF", fontSize: "2rem", marginLeft: "5px" }}
+          style={{ color: "#5fa0ff", fontSize: "2rem", marginLeft: "5px" }}
           onClick={() => setShowHint((current) => !current)}
         />
       </div>

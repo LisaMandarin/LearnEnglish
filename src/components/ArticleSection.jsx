@@ -12,10 +12,6 @@ export function ArticleSection() {
   const { TextArea } = Input;
 
   const clearArticle = () => {
-    // const confirmed = window.confirm("確定清除文字？");
-    // if (confirmed) {
-    //   setArticle("");
-    // }
     setArticle('')
   };
 
@@ -36,7 +32,7 @@ export function ArticleSection() {
         <Icon
           className="icon-questionMark"
           icon="heroicons-outline:question-mark-circle"
-          style={{ color: "#207BFF", fontSize: "2rem", marginLeft: "5px" }}
+          style={{ color: "#5fa0ff", fontSize: "2rem", marginLeft: "5px" }}
           onClick={() => setShowHint((current) => !current)}
         />
       </div>
