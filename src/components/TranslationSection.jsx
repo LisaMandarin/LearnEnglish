@@ -18,9 +18,9 @@ export function TranslationSection() {
     setNotes,
   } = useContext(AppContext);
   const [showHint, setShowHint] = useState(false);
-  const [chinese, setChinese] = useState(false);
-  const [english, setEnglish] = useState(false);
-  const [example, setExample] = useState(false);
+  const [chinese, setChinese] = useState(true);
+  const [english, setEnglish] = useState(true);
+  const [example, setExample] = useState(true);
   const [lookupTerms, setLookupTerms] = useState([]);
   const [selectedText, setSelectedText] = useState('')
   const termChinese = "traditional Chinese definition";
@@ -128,8 +128,7 @@ useEffect(() => {
           <span>{translationError}</span>
         ) : translation.length === 0 ? (
           <>
-            <span style={{color: '#9a9a9a'}}>➢原句</span> <br />
-            <span style={{color: '#9a9a9a'}}>&nbsp;&nbsp;&nbsp;翻譯</span>
+            <span style={{color: '#9a9a9a'}}>按「翻譯」後，原句和翻譯會呈現在這區，更多資訊請按上方「問號」。</span> <br />
           </>
         ) : (
           sentences.map((s, index) => (
