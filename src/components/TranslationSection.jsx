@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../AppContext";
 import { SectionHead } from "./SectionHead";
 import { TranslationCheckbox } from "./TranslationCheckbox";
+import { useLookupTerms } from "./useLookupTerms";
 
 export function TranslationSection() {
   const {
@@ -22,10 +23,12 @@ export function TranslationSection() {
   const [english, setEnglish] = useState(true);
   const [example, setExample] = useState(true);
   const [lookupTerms, setLookupTerms] = useState([]);
-  const [selectedText, setSelectedText] = useState('')
   const termChinese = "traditional Chinese definition";
   const termEnglish = "English definition";
   const termExample = "an example sentence";
+  
+  const [selectedText, setSelectedText] = useState('')
+  
 
   // clear textarea
   const clearTranslation = () => {
@@ -34,39 +37,33 @@ export function TranslationSection() {
   };
 
   // toggle checkboxes and save the values to lookupTerms
+  useLookupTerms(
+    {setLookupTerms,
+    english,
+    chinese,
+    example,
+    termChinese,
+    termEnglish,
+    termExample}
+  )
+
+  // detect text selection (desktop and mobile)
   useEffect(() => {
-    setLookupTerms(current => {
-      const newTerms = new Set(current)
-      if (english) newTerms.add(termEnglish)
-        else newTerms.delete(termEnglish)
-      
-      if (chinese) newTerms.add(termChinese)
-        else newTerms.delete(termChinese)
-      
-      if (example) newTerms.add(termExample)
-        else newTerms.delete(termExample)
+    const handleSelectionChange = () => {
+      const selection = document.getSelection()
+      const text = selection ? selection.toString().trim() : ''
 
-      return Array.from(newTerms)
-    })
-  }, [english, chinese, example])
+      setSelectedText(text)
+    }
 
-// detect select on both desktop and mobile devices
-useEffect(() => {
-  const handleSelectionChange = () => {
-    const selection = document.getSelection()
-    const text = selection ? selection.toString().trim() : ''
+    document.addEventListener('selectionchange', handleSelectionChange)
+    document.addEventListener('touchend', handleSelectionChange)
 
-    setSelectedText(text)
-  }
-
-  document.addEventListener('selectionchange', handleSelectionChange)
-  document.addEventListener('touchend', handleSelectionChange)
-
-  return () => {
-    document.removeEventListener('selectionchange', handleSelectionChange)
-    document.removeEventListener('touchend', handleSelectionChange)
-  }
-}, [])
+    return () => {
+      document.removeEventListener('selectionchange', handleSelectionChange)
+      document.removeEventListener('touchend', handleSelectionChange)
+    }
+  }, [])
 
   // Look up the selected text through OpenAI
   const Lookup = async () => {
