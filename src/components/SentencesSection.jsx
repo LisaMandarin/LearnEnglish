@@ -1,6 +1,6 @@
 import { Button, Input, Popconfirm } from "antd";
 import { microsoftTranslator } from "../APIs/microsoft-translator";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AppContext } from "../AppContext";
 import { SectionHead } from "./SectionHead";
 
