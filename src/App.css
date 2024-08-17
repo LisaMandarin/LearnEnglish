@@ -71,32 +71,6 @@ section > div:first-child {
   color: var(--milky);
 }
 
-/* renderingWindow of each section */
-/* .renderingWindow {
-  border: 1px solid #9a9a9a;
-  padding: var(--space-big);
-  list-style-type: none;
-  margin: 0px;
-  font-size: 1rem;
-  font-family: var(--en-font), var(--tc-font);
-} */
-
-/* listing of renderingWindow */
-/* .renderingWindow textarea {
-  width: 100%;
-  border: 0;
-  font-family: var(--en-font), var(--tc-font);
-}
-.renderingWindow > li {
-  display: flex;
-  flex-direction: row;
-}
-.renderingWindow li::before {
-  content: '➣';
-  display: inline-block;
-  padding-right: var(--space-small);
-} */
-
 /* button div */
 section > div:last-child {
   display: flex;
