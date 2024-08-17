@@ -45,9 +45,24 @@ export function NotesSection() {
   const renderNotes =
     notes &&
     notes.map((n) => (
-      <div key={n.id} className="note-container">
+      <div 
+        key={n.id}
+        style={{
+          position: "relative",
+        }}>
         <button
-          className={darkMode ? "dark-mode close-button" : "close-button"}
+          className={darkMode ? "dark-mode" : ""}
+          style={{
+            position: "absolute",
+            top: "5px",
+            right: "5px",
+            backgroundColor: "transparent",
+            border: "none",
+            cursor: "pointer",
+            fontSize: "1rem",
+            color: "inherit",
+            zIndex: "10"
+            }}
           onClick={() => deleteNote(n.id)}
         >
           X
@@ -57,7 +72,12 @@ export function NotesSection() {
           value={n.wordInfo}
           onChange={(e) => handleTextareaChange(e.target.value, n.id)}
           autoSize
-          style={{ backgroundColor: "inherit" }}
+          style={{
+            backgroundColor: "inherit",
+            fontSize: "1rem",
+            border: "1px solid #9a9a9a",
+            boxShadow: "1px 1px 3px #9a9a9a"
+          }}
         />
       </div>
     ));
@@ -77,7 +97,16 @@ export function NotesSection() {
             <li key={index}>{hint}</li>
           ))}
         </ul>
-      <div className="renderingWindow">
+      <div
+        style={{
+          border: "1px solid #9a9a9a",
+          padding: "15px",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, 250px)",
+          gridGap: "15px",
+          
+        }}
+      >
         {notesLoading ? (
           <span>Loading...</span>
         ) : notes && notes.length > 0 ? (

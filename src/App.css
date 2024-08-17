@@ -150,7 +150,7 @@ label {
 }
 
 /* Rendering window of NotesSection */
-#notes-section .renderingWindow {
+/* #notes-section .renderingWindow {
   display: grid;
   grid-template-columns: repeat(auto-fill, 250px);
   grid-gap: var(--space-big);
@@ -158,8 +158,8 @@ label {
   border: 1px solid #9a9a9a;
   min-height: 3rem;
   padding: var(--space-big);
-}
-#notes-section .renderingWindow textarea {
+} */
+/* #notes-section .renderingWindow textarea {
   height: auto;
   padding: var(--space-big);
   font-size: 1rem;
@@ -167,22 +167,5 @@ label {
   box-shadow: 1px, 1px, 3px rgba(0, 0, 0, 0.3);
   border: 1px solid #9a9a9a;
   box-shadow: 1px 1px 3px #9a9a9a;
-}
+} */
 
-/* close button for NotesSection */
-.note-container {
-  position: relative;
-}
-
-/* delete button of notes */
-.close-button {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  color: inherit;
-  z-index: 10;
-}

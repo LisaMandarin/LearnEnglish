@@ -17,6 +17,9 @@ export function SentencesSection() {
   const [showHint, setShowHint] = useState(false);
   const { TextArea } = Input;
 
+  const maxCount = 5000
+  const totalCount = sentences.reduce((acc, sentence) => acc + sentence.length, 0)
+
   const clearSentences = () => setSentences([]);
   
   const handleTextareaChange = (value, index) => {
@@ -64,31 +67,42 @@ export function SentencesSection() {
           }}
         >按「陳列句子」後，句子會條列在這區，更多資訊請按上方「問號」。</div>
       ) : (
-      <ol
-        className={darkMode ? "dark-mode" : ''}
-        style={{
-          border: "1px solid #9a9a9a",
-          padding: "11px 4px 11px 22px",
-        }}
-        >
-        {sentences.map((s, index) => (
-          <li key={index}>
-            <TextArea
-              className={darkMode ? "dark-mode" : ''}
-              placeholder="句子"
-              value={`${s}`}
-              onChange={(e) => handleTextareaChange(e.target.value, index)}
-              autoSize
-              style={{ 
-                fontSize: "1rem", 
-                backgroundColor: "inherit", 
-                display: "block",
-                border: 0
-              }}
-            />
-          </li>
-        ))}
-      </ol>
+      <>
+        <ol
+          className={darkMode ? "dark-mode" : ''}
+          style={{
+            border: "1px solid #9a9a9a",
+            padding: "11px 4px 11px 22px",
+            margin: "0"
+          }}
+          >
+          {sentences.map((s, index) => (
+            <li key={index}>
+              <TextArea
+                className={darkMode ? "dark-mode" : ''}
+                placeholder="句子"
+                value={`${s}`}
+                onChange={(e) => handleTextareaChange(e.target.value, index)}
+                autoSize
+                style={{ 
+                  fontSize: "1rem", 
+                  backgroundColor: "inherit", 
+                  display: "block",
+                  border: 0
+                }}
+              />
+            </li>
+          ))}
+        </ol>
+        <div
+          style={{
+            textAlign: "right",
+            color: darkMode ? "white" : "rgba(0, 0, 0, 0.45)"
+          }}
+          >
+          {totalCount} / {maxCount}
+        </div>
+      </>
       )
 
       }
