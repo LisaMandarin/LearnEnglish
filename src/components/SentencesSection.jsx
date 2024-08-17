@@ -1,9 +1,8 @@
-import { Icon } from "@iconify/react";
 import { Button, Input, Popconfirm } from "antd";
-import HintJSON from "../data/hint.json";
 import { microsoftTranslator } from "./APIs/microsoft-translator";
 import { useContext, useState } from "react";
 import { AppContext } from "../AppContext";
+import { SectionHead } from "./SectionHead";
 
 export function SentencesSection() {
   const {
@@ -14,7 +13,6 @@ export function SentencesSection() {
     setTranslationError,
     setTranslation,
   } = useContext(AppContext);
-  const [showHint, setShowHint] = useState(false);
   const { TextArea } = Input;
 
   const maxCount = 5000
@@ -44,20 +42,10 @@ export function SentencesSection() {
 
   return (
     <section id="sentences-section">
-      <div>
-        <h2>2. 陳列句子</h2>
-        <Icon
-          className="icon-questionMark"
-          icon="heroicons-outline:question-mark-circle"
-          style={{ color: "#5fa0ff", fontSize: "2rem", marginLeft: "5px" }}
-          onClick={() => setShowHint((current) => !current)}
-        />
-      </div>
-      <ul className={`hint-div ${ showHint ? 'expand' : ''}`}>
-        {HintJSON["sentences"].map((hint, index) => (
-          <li key={index}>{hint}</li>
-        ))}
-      </ul>
+      <SectionHead 
+        sectionTitle="2. 陳列句子"
+        hintName="sentences"
+      />
       { sentences.length === 0 ? (
         <div
           style={{

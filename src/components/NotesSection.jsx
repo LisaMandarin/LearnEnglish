@@ -1,10 +1,9 @@
-import { Icon } from "@iconify/react";
 import { Button, Input, Popconfirm } from "antd";
 import { DownloadOutlined } from "@ant-design/icons";
-import HintJSON from "../data/hint.json";
 import { useContext, useState } from "react";
 import { GeneratePDF } from "./GeneratePDF";
 import { AppContext } from "../AppContext";
+import { SectionHead } from "./SectionHead";
 
 export function NotesSection() {
   const { sentences, 
@@ -16,7 +15,6 @@ export function NotesSection() {
           darkMode 
            } =
     useContext(AppContext);
-  const [showHint, setShowHint] = useState(false);
   const { TextArea } = Input;
 
   // clear all notes containers
@@ -93,21 +91,10 @@ export function NotesSection() {
   </div>
   return (
     <section id="notes-section">
-      <div>
-        <h2>4. 筆記</h2>
-        <Icon
-          className="icon-questionMark"
-          icon="heroicons-outline:question-mark-circle"
-          style={{ color: "#5fa0ff", fontSize: "2rem", marginLeft: "5px" }}
-          onClick={() => setShowHint((current) => !current)}
-        />
-      </div>
-        <ul className={`hint-div ${ showHint ? "expand" : ""}`}>
-          {HintJSON["notes"].map((hint, index) => (
-            <li key={index}>{hint}</li>
-          ))}
-        </ul>
-      
+      <SectionHead 
+        sectionTitle="筆記"
+        hintName="notes"
+      />
         {notesLoading ? (
           <div style={{padding: "15px", border: "1px solid #9a9a9a"}}>Loading...</div>
         ) : notes && notes.length > 0 ? (

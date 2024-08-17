@@ -1,9 +1,8 @@
-import { Icon } from "@iconify/react";
 import { Button, Popconfirm } from "antd";
-import HintJSON from "../data/hint.json";
 import { openAIResult } from "./APIs/openai";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../AppContext";
+import { SectionHead } from "./SectionHead";
 
 export function TranslationSection() {
   const {
@@ -18,7 +17,6 @@ export function TranslationSection() {
     setNotes,
     darkMode
   } = useContext(AppContext);
-  const [showHint, setShowHint] = useState(false);
   const [chinese, setChinese] = useState(true);
   const [english, setEnglish] = useState(true);
   const [example, setExample] = useState(true);
@@ -106,22 +104,10 @@ useEffect(() => {
 
   return (
     <section id="translation-section">
-      <div>
-        <h2>3. 翻譯</h2>
-        <Icon
-          className="icon-questionMark"
-          icon="heroicons-outline:question-mark-circle"
-          style={{ color: "#5fa0ff", fontSize: "2rem", marginLeft: "5px" }}
-          onClick={() => setShowHint((current) => !current)}
-        />
-      </div>
-
-      <ul className={`hint-div ${ showHint ? "expand" : ""}`}>
-        {HintJSON["translation"].map((hint, index) => (
-          <li key={index}>{hint}</li>
-        ))}
-      </ul>
-
+      <SectionHead 
+        sectionTitle="翻譯"
+        hintName="translation"
+      />
       {translation.length === 0 && translationLoading ? (
           <div 
             style={{border: "1px solid #9a9a9a", padding: "15px"}}>

@@ -1,13 +1,11 @@
-import { Icon } from "@iconify/react";
 import { Button, Input, Popconfirm } from "antd";
-import HintJSON from "../data/hint.json";
 import { useContext, useState } from "react";
 import { AppContext } from "../AppContext";
+import { SectionHead } from "./SectionHead";
 
 export function ArticleSection() {
   const { article, setArticle, setSentences, darkMode } =
     useContext(AppContext);
-  const [showHint, setShowHint] = useState(false);
   const { TextArea } = Input;
 
   const clearArticle = () => {
@@ -31,22 +29,10 @@ export function ArticleSection() {
 
   return (
     <section id="article-section">
-      <div>
-        <h2>1. 輸入文章</h2>
-        <Icon
-          className="icon-questionMark"
-          icon="heroicons-outline:question-mark-circle"
-          style={{ color: "#5fa0ff", fontSize: "2rem", marginLeft: "5px" }}
-          onClick={() => setShowHint((current) => !current)}
+      <SectionHead 
+        sectionTitle="1. 輸入英文文章"
+        hintName="article"
         />
-      </div>
-
-      <ul className={`hint-div ${showHint ? 'expand' : ''}`}>
-        {HintJSON["article"].map((hint, index) => (
-          <li key={index}>{hint}</li>
-        ))}
-      </ul>
-      
       <TextArea
         className={darkMode ? "dark-mode" : ""}
         showCount
