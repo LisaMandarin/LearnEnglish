@@ -3,6 +3,7 @@ import { openAIResult } from "./APIs/openai";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../AppContext";
 import { SectionHead } from "./SectionHead";
+import { TranslationCheckbox } from "./TranslationCheckbox";
 
 export function TranslationSection() {
   const {
@@ -31,19 +32,6 @@ export function TranslationSection() {
       setTranslation([]);
       setTranslationError(null);
   };
-
-  // nameC = Chinese name, nameE = English name
-  const Checkbox = ({nameC, nameE, checked, onChange}) => (
-    <div>
-      <input 
-        type="checkbox"
-        id={nameE}
-        checked={checked}
-        onChange={onChange}
-      />
-      <label htmlFor={nameE}>{nameC}</label>
-    </div>
-  )
 
   // toggle checkboxes and save the values to lookupTerms
   useEffect(() => {
@@ -149,19 +137,19 @@ useEffect(() => {
           查詢單字
         </Button>
         <div>
-          <Checkbox 
+          <TranslationCheckbox
             nameC='中文定義'
             nameE='chinese'
             checked={chinese}
             onChange={e=>setChinese(e.target.checked)}
           />
-          <Checkbox 
+          <TranslationCheckbox 
             nameC='英文解釋'
             nameE='english'
             checked={english}
             onChange={e=>setEnglish(e.target.checked)}
           />
-          <Checkbox 
+          <TranslationCheckbox 
             nameC='例句'
             nameE='example'
             checked={example}
