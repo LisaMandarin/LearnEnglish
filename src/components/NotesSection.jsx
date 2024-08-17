@@ -4,7 +4,7 @@ import { useContext} from "react";
 import { GeneratePDF } from "./GeneratePDF";
 import { AppContext } from "../AppContext";
 import { SectionHead } from "./SectionHead";
-import { RenderNote } from "./renderNotes";
+import { RenderNote } from "./RenderNotes";
 
 export function NotesSection() {
   const { sentences, 

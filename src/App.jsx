@@ -1,29 +1,19 @@
-import { Switch } from "antd";
-import { MoonOutlined, SunOutlined } from "@ant-design/icons";
-import { useContext } from "react";
 import "./App.css";
 import { ArticleSection } from "./components/ArticleSection";
 import { SentencesSection } from "./components/SentencesSection";
 import { TranslationSection } from "./components/TranslationSection";
 import { NotesSection } from "./components/NotesSection";
-
+import { useContext } from "react";
 import { AppContext } from "./AppContext";
+import { SwitchDarkMode } from "./components/SwitchDarkMode";
 
 export default function App() {
-  const { darkMode, setDarkMode } = useContext(AppContext);
-
-  const onChange = (checked) => {
-    setDarkMode(checked);
-  };
+  const { darkMode } = useContext(AppContext) 
 
   return (
     <div className={darkMode ? "dark-mode" : ""}>
       <header>
-        <div className="switch">
-          <SunOutlined />
-          <Switch defaultChecked onChange={onChange} />
-          <MoonOutlined />
-        </div>
+        <SwitchDarkMode />
         <h1>句句通</h1>
         <div style={{textAlign: "center", color: darkMode ? "#F5F7FA" : "#1054b5"}}>
           <p>

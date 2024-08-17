@@ -13,7 +13,7 @@ export const AppProvider = ({children}) => {
     const [ translationLoading, setTranslationLoading ] = useState(false)
     const [ notesError, setNotesError ] = useState(null)
     const [ notesLoading, setNotesLoading ] = useState(false)
-    const [ darkMode, setDarkMode ] = useState(true) 
+    const [ darkMode, setDarkMode ] = useState(false) 
 
     return (
         <AppContext.Provider 
