@@ -47,10 +47,10 @@ h1 {
 }
 
 /* instructions below title */
-header > p {
+/* header > p {
   text-align: center;
   color: var(--dark-blue);
-}
+} */
 
 /* title and question mark of each section */
 section > div:first-child {
@@ -128,7 +128,7 @@ section > div:last-child button {
 
 
 /* setting for translationSection */
-#translation-section .renderingWindow li {
+/* #translation-section .renderingWindow li {
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: auto, 1fr;
@@ -142,7 +142,7 @@ section > div:last-child button {
 .translation-text {
   color: var(--dark-blue);
   grid-area: translation-text;
-}
+} */
 
 /* text next to translation buttons */
 label {

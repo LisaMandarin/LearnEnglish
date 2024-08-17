@@ -16,6 +16,7 @@ export function TranslationSection() {
     setNotesLoading,
     setNotesError,
     setNotes,
+    darkMode
   } = useContext(AppContext);
   const [showHint, setShowHint] = useState(false);
   const [chinese, setChinese] = useState(true);
@@ -121,7 +122,13 @@ useEffect(() => {
           ))}
         </ul>
 
-      <ul className="renderingWindow">
+      <ul
+        style={{
+          border: "1px solid #9a9a9a",
+          margin: "0",
+          padding: "15px",
+          paddingLeft: "30px"
+        }}>
         {translation.length === 0 && translationLoading ? (
           <span>Loading...</span>
         ) : translation.length === 0 && translationError ? (
@@ -133,9 +140,14 @@ useEffect(() => {
         ) : (
           sentences.map((s, index) => (
             <>
-              <li key={index} className="original-text">
-                {s}
-                <span className="translation-text">{translation[index]}</span>
+              <li key={index}>
+                <span
+                    style={{color: darkMode ? "white" : "black"}}
+                >{s}</span>
+                <br />
+                <span
+                  style={{color: darkMode ? "#5fa0ff" : "#b40700"}}
+                >{translation[index]}</span>
               </li>
             </>
           ))
