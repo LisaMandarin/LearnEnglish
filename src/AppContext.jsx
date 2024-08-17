@@ -1,4 +1,3 @@
-import { useStyleRegister } from 'antd/es/theme/internal'
 import React, { useState, createContext } from 'react'
 
 export const AppContext = createContext()
