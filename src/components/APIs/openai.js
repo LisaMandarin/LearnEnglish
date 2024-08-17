@@ -60,19 +60,23 @@ export async function openAIResult (termChinese, termEnglish, termExample, selec
             throw new Error('Failed to parse response from OpenAI')
         }
     }
+    const noteId = crypto.randomUUID()
     try {
         setNotesLoading(true)
+        setNotes(current => [...current, {id: noteId, wordInfo: "Loading"}])
+
         const result = await displayResult(selectedText, lookupTerms)
-        setNotes(current => {
-            return [...current, {id: crypto.randomUUID(), wordInfo: result}]
-        })
         setNotesError(null)
+        setNotes(current => 
+            current.map(note => note.id === noteId ? {id: noteId, wordInfo: result} : note)
+        )
+        
     } catch (error) {
         setNotesLoading(false)
         setNotesError(error.message)
-        setNotes(current => {
-            return [...current, {id: crypto.randomUUID(), wordInfo: error.message}]
-        })   
+        setNotes(current => 
+            current.map(note => note.id === noteId ? {id: noteId, wordInfo: error.message} : note)
+        )
     } finally {
         setNotesLoading(false)
     }

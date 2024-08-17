@@ -1,104 +1,35 @@
-import { Button, Input, Popconfirm } from "antd";
+import { Button, Popconfirm } from "antd";
 import { DownloadOutlined } from "@ant-design/icons";
-import { useContext, useState } from "react";
+import { useContext} from "react";
 import { GeneratePDF } from "./GeneratePDF";
 import { AppContext } from "../AppContext";
 import { SectionHead } from "./SectionHead";
+import { RenderNote } from "./renderNotes";
 
 export function NotesSection() {
   const { sentences, 
           translation,
-          notes, 
-          notesLoading,      
+          notes,      
           setNotes, 
           setNotesError, 
           darkMode 
            } =
     useContext(AppContext);
-  const { TextArea } = Input;
-
+  
   // clear all notes containers
   const clearNotes = () => {
       setNotes([]);
       setNotesError(null);
   };
 
-  // dynamically change the value of textarea
-  const handleTextareaChange = (value, id) => {
-    const newNotes = notes.map((n) => {
-      if (n.id === id) {
-        return { ...n, wordInfo: value };
-      }
-      return n;
-    });
-    setNotes(newNotes);
-  };
-
-  // delete note button on the top-right corner of each note
-  const deleteNote = (id) => {
-    const newNotes = notes.filter((n) => n.id !== id);
-    setNotes(newNotes);
-  };
-
-  const renderNotes =
-  <div
-    style={{
-      border: "1px solid #9a9a9a",
-      padding: "15px",
-      display: "grid",
-      gridTemplateColumns: "repeat(auto-fill, 250px)",
-      gridGap: "15px",
-    }}
-  >
-    {notes &&
-    notes.map((n) => (
-        <div 
-          key={n.id}
-          style={{
-            position: "relative",
-          }}>
-          <button
-            className={darkMode ? "dark-mode" : ""}
-            style={{
-              position: "absolute",
-              top: "5px",
-              right: "5px",
-              backgroundColor: "transparent",
-              border: "none",
-              cursor: "pointer",
-              fontSize: "1rem",
-              color: "inherit",
-              zIndex: "10"
-              }}
-            onClick={() => deleteNote(n.id)}
-          >
-            X
-          </button>
-          <TextArea
-            className={darkMode ? "dark-mode" : ""}
-            value={n.wordInfo}
-            onChange={(e) => handleTextareaChange(e.target.value, n.id)}
-            autoSize
-            style={{
-              backgroundColor: "inherit",
-              fontSize: "1rem",
-              border: "1px solid #9a9a9a",
-              boxShadow: "1px 1px 3px #9a9a9a"
-            }}
-          />
-        </div>
-    ))}
-  </div>
   return (
     <section id="notes-section">
       <SectionHead 
         sectionTitle="筆記"
         hintName="notes"
       />
-        {notesLoading ? (
-          <div style={{padding: "15px", border: "1px solid #9a9a9a"}}>Loading...</div>
-        ) : notes && notes.length > 0 ? (
-          renderNotes
+        {notes && notes.length > 0 ? (
+          <RenderNote />
         ) : (
           <div
             style={{padding: "15px", border: "1px solid #9a9a9a", color: '#9a9a9a'}}
