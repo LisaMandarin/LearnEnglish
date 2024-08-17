@@ -43,44 +43,54 @@ export function NotesSection() {
   };
 
   const renderNotes =
-    notes &&
+  <div
+    style={{
+      border: "1px solid #9a9a9a",
+      padding: "15px",
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fill, 250px)",
+      gridGap: "15px",
+    }}
+  >
+    {notes &&
     notes.map((n) => (
-      <div 
-        key={n.id}
-        style={{
-          position: "relative",
-        }}>
-        <button
-          className={darkMode ? "dark-mode" : ""}
+        <div 
+          key={n.id}
           style={{
-            position: "absolute",
-            top: "5px",
-            right: "5px",
-            backgroundColor: "transparent",
-            border: "none",
-            cursor: "pointer",
-            fontSize: "1rem",
-            color: "inherit",
-            zIndex: "10"
+            position: "relative",
+          }}>
+          <button
+            className={darkMode ? "dark-mode" : ""}
+            style={{
+              position: "absolute",
+              top: "5px",
+              right: "5px",
+              backgroundColor: "transparent",
+              border: "none",
+              cursor: "pointer",
+              fontSize: "1rem",
+              color: "inherit",
+              zIndex: "10"
+              }}
+            onClick={() => deleteNote(n.id)}
+          >
+            X
+          </button>
+          <TextArea
+            className={darkMode ? "dark-mode" : ""}
+            value={n.wordInfo}
+            onChange={(e) => handleTextareaChange(e.target.value, n.id)}
+            autoSize
+            style={{
+              backgroundColor: "inherit",
+              fontSize: "1rem",
+              border: "1px solid #9a9a9a",
+              boxShadow: "1px 1px 3px #9a9a9a"
             }}
-          onClick={() => deleteNote(n.id)}
-        >
-          X
-        </button>
-        <TextArea
-          className={darkMode ? "dark-mode" : ""}
-          value={n.wordInfo}
-          onChange={(e) => handleTextareaChange(e.target.value, n.id)}
-          autoSize
-          style={{
-            backgroundColor: "inherit",
-            fontSize: "1rem",
-            border: "1px solid #9a9a9a",
-            boxShadow: "1px 1px 3px #9a9a9a"
-          }}
-        />
-      </div>
-    ));
+          />
+        </div>
+    ))}
+  </div>
   return (
     <section id="notes-section">
       <div>
@@ -97,29 +107,20 @@ export function NotesSection() {
             <li key={index}>{hint}</li>
           ))}
         </ul>
-      <div
-        style={{
-          border: "1px solid #9a9a9a",
-          padding: "15px",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, 250px)",
-          gridGap: "15px",
-          
-        }}
-      >
+      
         {notesLoading ? (
-          <span>Loading...</span>
+          <div style={{padding: "15px", border: "1px solid #9a9a9a"}}>Loading...</div>
         ) : notes && notes.length > 0 ? (
           renderNotes
         ) : (
           <div
+            style={{padding: "15px", border: "1px solid #9a9a9a", color: '#9a9a9a'}}
             className={ darkMode ? 'dark-mode' : ''}
-            style={{color: '#9a9a9a'}}
             >
-            筆記
+            按「查詢單字」後，單字解釋會呈現在這區，更多資訊請按上方「問號」
           </div>
         )}
-      </div>
+      
       <div>
         <Popconfirm
           placement="left"

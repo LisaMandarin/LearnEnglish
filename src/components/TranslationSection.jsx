@@ -116,43 +116,38 @@ useEffect(() => {
         />
       </div>
 
-        <ul className={`hint-div ${ showHint ? "expand" : ""}`}>
-          {HintJSON["translation"].map((hint, index) => (
-            <li key={index}>{hint}</li>
-          ))}
-        </ul>
-
-      <ul
-        style={{
-          border: "1px solid #9a9a9a",
-          margin: "0",
-          padding: "15px",
-          paddingLeft: "30px"
-        }}>
-        {translation.length === 0 && translationLoading ? (
-          <span>Loading...</span>
-        ) : translation.length === 0 && translationError ? (
-          <span>{translationError}</span>
-        ) : translation.length === 0 ? (
-          <>
-            <span style={{color: '#9a9a9a'}}>按「翻譯」後，原句和翻譯會呈現在這區，更多資訊請按上方「問號」。</span> <br />
-          </>
-        ) : (
-          sentences.map((s, index) => (
-            <>
-              <li key={index}>
-                <span
-                    style={{color: darkMode ? "white" : "black"}}
-                >{s}</span>
-                <br />
-                <span
-                  style={{color: darkMode ? "#5fa0ff" : "#b40700"}}
-                >{translation[index]}</span>
-              </li>
-            </>
-          ))
-        )}
+      <ul className={`hint-div ${ showHint ? "expand" : ""}`}>
+        {HintJSON["translation"].map((hint, index) => (
+          <li key={index}>{hint}</li>
+        ))}
       </ul>
+
+      {translation.length === 0 && translationLoading ? (
+          <div 
+            style={{border: "1px solid #9a9a9a", padding: "15px"}}>
+            Loading...
+          </div>
+        ) : translation.length === 0 && translationError ? (
+          <div style={{border: "1px solid #9a9a9a", padding: "15px"}}>
+            {translationError}
+          </div>
+        ) : translation.length === 0 ? (
+          <div style={{border: "1px solid #9a9a9a", padding: "15px", color: '#9a9a9a'}}>
+            按「翻譯」後，原句和翻譯會呈現在這區，更多資訊請按上方「問號」。
+          </div>
+        ) : (
+          <ol style={{border: "1px solid #9a9a9a", padding: "11px 4px 11px 42px", margin: "0"}}>
+            {sentences.map((s, index) => (
+              <li key={index} style={{padding: "4px 11px"}}>
+                <span style={{color: darkMode ? "#F5F7FA" : "black"}}>{s}</span>
+                <br />
+                <span style={{color: darkMode ? "#5fa0ff" : "#b40700"}}>
+                  {translation[index]}
+                </span>
+              </li>
+            ))}
+          </ol>
+        )}      
       <div>
         <Popconfirm
           placement='left'

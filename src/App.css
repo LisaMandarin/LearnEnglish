@@ -46,12 +46,6 @@ h1 {
   cursor: pointer;
 }
 
-/* instructions below title */
-/* header > p {
-  text-align: center;
-  color: var(--dark-blue);
-} */
-
 /* title and question mark of each section */
 section > div:first-child {
   display: flex;
@@ -78,17 +72,17 @@ section > div:first-child {
 }
 
 /* renderingWindow of each section */
-.renderingWindow {
+/* .renderingWindow {
   border: 1px solid #9a9a9a;
   padding: var(--space-big);
   list-style-type: none;
   margin: 0px;
   font-size: 1rem;
   font-family: var(--en-font), var(--tc-font);
-}
+} */
 
 /* listing of renderingWindow */
-.renderingWindow textarea {
+/* .renderingWindow textarea {
   width: 100%;
   border: 0;
   font-family: var(--en-font), var(--tc-font);
@@ -101,7 +95,7 @@ section > div:first-child {
   content: '➣';
   display: inline-block;
   padding-right: var(--space-small);
-}
+} */
 
 /* button div */
 section > div:last-child {
@@ -112,60 +106,3 @@ section > div:last-child {
 section > div:last-child button {
   margin: var(--space-small);
 }
-
-/* setting for articleSection */
-#article-section .renderingWindow {
-  border-radius: 0;
-}
-#article-section .renderingWindow span {
-  color: #9a9a9a;
-}
-
-/* setting for sentenceSection */
-#sentences-section .renderingWindow li::before {
-  color: #9a9a9a;
-}
-
-
-/* setting for translationSection */
-/* #translation-section .renderingWindow li {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto, 1fr;
-  grid-template-areas: 
-    "arrow original-text"
-    "space translation-text";
-}
-.original-text {
-  grid-area: original-text;
-}
-.translation-text {
-  color: var(--dark-blue);
-  grid-area: translation-text;
-} */
-
-/* text next to translation buttons */
-label {
-  align-self: center;
-}
-
-/* Rendering window of NotesSection */
-/* #notes-section .renderingWindow {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 250px);
-  grid-gap: var(--space-big);
-  justify-content: center;
-  border: 1px solid #9a9a9a;
-  min-height: 3rem;
-  padding: var(--space-big);
-} */
-/* #notes-section .renderingWindow textarea {
-  height: auto;
-  padding: var(--space-big);
-  font-size: 1rem;
-  font-family: var(--en-font), var(--tc-font);
-  box-shadow: 1px, 1px, 3px rgba(0, 0, 0, 0.3);
-  border: 1px solid #9a9a9a;
-  box-shadow: 1px 1px 3px #9a9a9a;
-} */
-
