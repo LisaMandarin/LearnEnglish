@@ -1,7 +1,7 @@
 import { Button, Popconfirm } from "antd";
 import { DownloadOutlined } from "@ant-design/icons";
 import { useContext} from "react";
-import { GeneratePDF } from "./GeneratePDF";
+import { GeneratePDF } from "../utils/GeneratePDF.js";
 import { AppContext } from "../AppContext";
 import { SectionHead } from "./SectionHead";
 import { RenderNote } from "./RenderNotes";
