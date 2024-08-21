@@ -11,6 +11,7 @@ import { useContext } from "react";
 import { AppContext } from "./AppContext";
 import { SwitchDarkMode } from "./components/SwitchDarkMode";
 import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 import { Steps, theme, ConfigProvider } from "antd";
 
 
@@ -67,6 +68,7 @@ export default function App() {
           {stepCurrent === 2 && <TranslationButton />}
           {stepCurrent === 3 && <NotesButton />}        
         </div>
+        <Footer />
       </div>
     </ConfigProvider>
   );
