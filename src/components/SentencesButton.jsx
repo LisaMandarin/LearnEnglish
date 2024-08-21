@@ -1,4 +1,4 @@
-import { Popconfirm, Button } from "antd"
+import { Button, Space } from "antd"
 import { useContext } from "react";
 import { AppContext } from "../AppContext";
 import { microsoftTranslator } from "../APIs/microsoft-translator";
@@ -26,11 +26,13 @@ export function SentencesButton() {
 
     return (
         <div>
-            <Button onClick={() => prevStep()}>上一步</Button>
-            <Button type="primary" onClick={() => {ProcessSentences(); nextStep();}}>
-            翻譯
-            </Button>
-            <Button onClick={() => nextStep()}>下一步</Button>
+            <Space wrap>
+                <Button onClick={() => prevStep()}>上一步</Button>
+                <Button type="primary" onClick={() => {ProcessSentences(); nextStep();}}>
+                翻譯
+                </Button>
+                <Button onClick={() => nextStep()}>下一步</Button>
+            </Space>
         </div>
     )
 }

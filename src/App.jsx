@@ -56,7 +56,7 @@ export default function App() {
     <ConfigProvider theme={themeConfig}>
       <div 
         className={darkMode ? "dark-mode" : ""}
-        style={{height: '100vh'}}>
+        style={{minHeight: '100vh'}}>
         <SwitchDarkMode />
         <Header />
         <Steps current={stepCurrent} items={items}/>

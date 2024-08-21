@@ -1,4 +1,4 @@
-import { Button } from "antd"
+import { Button, Space } from "antd"
 import { useContext } from "react"
 import { AppContext } from "../AppContext"
 import { openAIResult } from "../APIs/openai"
@@ -72,11 +72,13 @@ export function TranslationButton() {
 
     return (
         <div>
-            <Button onClick={() => prevStep()}>上一步</Button>
-            <Button type="primary" onClick={Lookup}>
-                查詢單字
-            </Button>
-            <Button onClick={() => nextStep()}>下一步</Button>
+            <Space wrap>
+                <Button onClick={() => prevStep()}>上一步</Button>
+                <Button type="primary" onClick={Lookup}>
+                    查詢單字
+                </Button>
+                <Button onClick={() => nextStep()}>下一步</Button>
+            </Space>
         </div>
     )
 }

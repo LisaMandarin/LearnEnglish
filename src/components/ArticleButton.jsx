@@ -1,4 +1,4 @@
-import { Button, Popconfirm } from "antd";
+import { Button, Popconfirm, Space } from "antd";
 import { useContext } from "react";
 import { AppContext } from "../AppContext";
 
@@ -25,19 +25,21 @@ export function ArticleButton() {
 
     return (
         <div>
+          <Space wrap>
             <Popconfirm
-            placement='left'
-            title='確定清除文字？'
-            onConfirm={clearArticle}
-            onText='Yes'
-            cancelText='No'
+              placement='left'
+              title='確定清除文字？'
+              onConfirm={clearArticle}
+              onText='Yes'
+              cancelText='No'
             >
-            <Button>清除文字</Button>
+              <Button>清除文字</Button>
             </Popconfirm>
             <Button type="primary" onClick={() => {ProcessArticle(); nextStep();}}>
-            陳列句子
+              陳列句子
             </Button>
             <Button onClick={() => nextStep()}>下一步</Button>
+          </Space>
         </div>
     )
 }
