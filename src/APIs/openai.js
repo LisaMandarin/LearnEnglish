@@ -70,14 +70,12 @@ export async function openAIResult (termChinese, termEnglish, termExample, selec
         setNotes(current => 
             current.map(note => note.id === noteId ? {id: noteId, wordInfo: result} : note)
         )
-        return true
     } catch (error) {
         setNotesLoading(false)
         setNotesError(error.message)
         setNotes(current => 
             current.map(note => note.id === noteId ? {id: noteId, wordInfo: error.message} : note)
         )
-        return false
     } finally {
         setNotesLoading(false)
     }

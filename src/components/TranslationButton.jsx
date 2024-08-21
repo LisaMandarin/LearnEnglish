@@ -48,13 +48,16 @@ export function TranslationButton() {
     const Lookup = async () => {
         if (!chinese && !english && !example) {
             alert("請勾選「中文」、「English」、或「例句」");
-            return false;
+            return;
         }
         if (!selectedText) {
             alert("請先選取字再查單詞");
-            return false;
+            return;
         }
-        const success = await openAIResult(
+
+        nextStep();
+
+        openAIResult(
             termChinese,
             termEnglish,
             termExample,
@@ -64,21 +67,14 @@ export function TranslationButton() {
             setNotesError,
             setNotes
         );
-        return success  // a boolean value
+        
   };
-
-  const handleLookupAndNextStep = async() => {
-    const isSuccessful = await Lookup();
-    if (isSuccessful) {
-        nextStep()
-    }
-  }
 
     return (
         <div>
             <Button onClick={() => prevStep()}>上一步</Button>
-            <Button type="primary" onClick={handleLookupAndNextStep}>
-            查詢單字
+            <Button type="primary" onClick={Lookup}>
+                查詢單字
             </Button>
             <Button onClick={() => nextStep()}>下一步</Button>
         </div>
