@@ -4,14 +4,15 @@ import { SentencesSection } from "./components/SentencesSection";
 import { TranslationSection } from "./components/TranslationSection";
 import { NotesSection } from "./components/NotesSection";
 import { ArticleButton } from "./components/ArticleButton";
+import { SentencesButton } from "./components/SentencesButton";
+import { TranslationButton } from "./components/TranslationButton";
+import { NotesButton } from "./components/NotesButton";
 import { useContext } from "react";
 import { AppContext } from "./AppContext";
 import { SwitchDarkMode } from "./components/SwitchDarkMode";
 import { Header } from "./components/Header";
-import { Button, message, Steps, theme } from "antd";
-import { SentencesButton } from "./components/SentencesButton";
-import { TranslationButton } from "./components/TranslationButton";
-import { NotesButton } from "./components/NotesButton";
+import { Steps, theme, ConfigProvider } from "antd";
+
 
 export default function App() {
   const { darkMode, stepCurrent } = useContext(AppContext);
@@ -33,26 +34,40 @@ export default function App() {
       content: <NotesSection />
     },
   ];
-  const { token } = theme.useToken();
+
+  const darkTheme = {
+    algorithm: theme.darkAlgorithm
+    }
+  ;
+
+  const lightTheme = {
+    algorithm: theme.lightAlgorithm
+    }
+  ;
+
+  const themeConfig = darkMode ? darkTheme : lightTheme
+
   const items = steps.map(item => ({
     key: item.title,
     title: item.title,
   }));
 
   return (
-    <div 
-      className={darkMode ? "dark-mode" : ""}
-      style={{height: '100vh'}}>
-      <SwitchDarkMode />
-      <Header />
-      <Steps current={stepCurrent} items={items}/>
-      <div>{steps[stepCurrent].content}</div>
-      <div style={{marginTop: 24, display: 'flex', justifyContent: 'center'}}>
-        {stepCurrent === 0 && <ArticleButton />}
-        {stepCurrent === 1 && <SentencesButton />}
-        {stepCurrent === 2 && <TranslationButton />}
-        {stepCurrent === 3 && <NotesButton />}        
+    <ConfigProvider theme={themeConfig}>
+      <div 
+        className={darkMode ? "dark-mode" : ""}
+        style={{height: '100vh'}}>
+        <SwitchDarkMode />
+        <Header />
+        <Steps current={stepCurrent} items={items}/>
+        <div>{steps[stepCurrent].content}</div>
+        <div style={{marginTop: 24, display: 'flex', justifyContent: 'center'}}>
+          {stepCurrent === 0 && <ArticleButton />}
+          {stepCurrent === 1 && <SentencesButton />}
+          {stepCurrent === 2 && <TranslationButton />}
+          {stepCurrent === 3 && <NotesButton />}        
+        </div>
       </div>
-    </div>
+    </ConfigProvider>
   );
 }
