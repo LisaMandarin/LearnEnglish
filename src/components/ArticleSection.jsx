@@ -17,7 +17,7 @@ export function ArticleSection() {
     let matchedSentences = article.match(regex);
     
     if (!matchedSentences || matchedSentences.length === 0) {
-      alert('Please provide meaningful sentences.')
+      alert('請提供正確的文章，包括標點符號。')
       setArticle('')
       return
     }
