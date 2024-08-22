@@ -21,10 +21,6 @@
   color: var(--milky)
 }
 
-.dark-mode textarea::placeholder {
-  color: var(--grey);
-}
-
 #root > div {
     width: 100vw;
     padding: 3% 10%;
@@ -67,16 +63,3 @@ section > div:first-child {
   transition: max-height 0.5s ease;
 }
 
-#article-section .dark-mode .ant-input-data-count {
-  color: var(--milky);
-}
-
-/* button div */
-section > div:last-child {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-}
-section > div:last-child button {
-  margin: var(--space-small);
-}

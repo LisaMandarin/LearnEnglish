@@ -1,10 +1,7 @@
-import { Button, Popconfirm } from "antd";
-import { openAIResult } from "../APIs/openai";
-import { useContext, useEffect, useState } from "react";
+import { useContext} from "react";
 import { AppContext } from "../AppContext";
 import { SectionHead } from "./SectionHead";
 import { TranslationCheckbox } from "./TranslationCheckbox";
-import { useLookupTerms } from "./useLookupTerms";
 
 export function TranslationSection() {
   const {
@@ -12,79 +9,17 @@ export function TranslationSection() {
     translation,
     translationLoading,
     translationError,
-    setTranslation,
-    setTranslationError,
-    setNotesLoading,
-    setNotesError,
-    setNotes,
     darkMode,
+    chinese, setChinese,
+    english, setEnglish,
+    example, setExample,
   } = useContext(AppContext);
-  const [chinese, setChinese] = useState(true);
-  const [english, setEnglish] = useState(true);
-  const [example, setExample] = useState(true);
-  const [lookupTerms, setLookupTerms] = useState([]);
-  const termChinese = "traditional Chinese definition";
-  const termEnglish = "English definition";
-  const termExample = "an example sentence";
-
-  const [selectedText, setSelectedText] = useState("");
-
-  // clear textarea
-  const clearTranslation = () => {
-    setTranslation([]);
-    setTranslationError(null);
-  };
-
-  // toggle checkboxes and save the values to lookupTerms
-  useLookupTerms({
-    setLookupTerms,
-    english,
-    chinese,
-    example,
-    termChinese,
-    termEnglish,
-    termExample,
-  });
-
-  // detect text selection (desktop and mobile)
-  useEffect(() => {
-    const handleSelectionChange = () => {
-      const selection = document.getSelection();
-      const text = selection ? selection.toString().trim() : "";
-
-      setSelectedText(text);
-    };
-
-    document.addEventListener("selectionchange", handleSelectionChange);
-    document.addEventListener("touchend", handleSelectionChange);
-
-    return () => {
-      document.removeEventListener("selectionchange", handleSelectionChange);
-      document.removeEventListener("touchend", handleSelectionChange);
-    };
-  }, []);
-
-  // Look up the selected text through OpenAI
-  const Lookup = async () => {
-    if (!chinese && !english && !example) {
-      alert("請勾選「中文」、「English」、或「例句」");
-      return;
-    }
-    if (!selectedText) {
-      alert("請先選取字再查單詞");
-      return;
-    }
-    openAIResult(
-      termChinese,
-      termEnglish,
-      termExample,
-      selectedText,
-      lookupTerms,
-      setNotesLoading,
-      setNotesError,
-      setNotes
-    );
-  };
+  
+  const checkboxStyle = {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-end"
+  }
 
   return (
     <section id="translation-section">
@@ -126,40 +61,25 @@ export function TranslationSection() {
           ))}
         </ol>
       )}
-      <div>
-        <Popconfirm
-          placement="left"
-          title="碓定清除文字？"
-          onConfirm={clearTranslation}
-          okText="Yes"
-          cancelText="No"
-        >
-          <Button>清除文字</Button>
-        </Popconfirm>
-
-        <Button type="primary" onClick={Lookup}>
-          查詢單字
-        </Button>
-        <div>
-          <TranslationCheckbox
-            nameC="中文定義"
-            nameE="chinese"
-            checked={chinese}
-            onChange={(e) => setChinese(e.target.checked)}
-          />
-          <TranslationCheckbox
-            nameC="英文解釋"
-            nameE="english"
-            checked={english}
-            onChange={(e) => setEnglish(e.target.checked)}
-          />
-          <TranslationCheckbox
-            nameC="例句"
-            nameE="example"
-            checked={example}
-            onChange={(e) => setExample(e.target.checked)}
-          />
-        </div>
+      <div style={checkboxStyle}>
+        <TranslationCheckbox
+          nameC="中文定義"
+          nameE="chinese"
+          checked={chinese}
+          onChange={(e) => setChinese(e.target.checked)}
+        />
+        <TranslationCheckbox
+          nameC="英文解釋"
+          nameE="english"
+          checked={english}
+          onChange={(e) => setEnglish(e.target.checked)}
+        />
+        <TranslationCheckbox
+          nameC="例句"
+          nameE="example"
+          checked={example}
+          onChange={(e) => setExample(e.target.checked)}
+        />
       </div>
     </section>
   );

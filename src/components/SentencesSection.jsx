@@ -1,5 +1,4 @@
-import { Button, Input, Popconfirm } from "antd";
-import { microsoftTranslator } from "../APIs/microsoft-translator";
+import { Input } from "antd";
 import { useContext } from "react";
 import { AppContext } from "../AppContext";
 import { SectionHead } from "./SectionHead";
@@ -9,9 +8,6 @@ export function SentencesSection() {
     sentences,
     setSentences,
     darkMode,
-    setTranslationLoading,
-    setTranslationError,
-    setTranslation,
   } = useContext(AppContext);
   const { TextArea } = Input;
 
@@ -20,8 +16,6 @@ export function SentencesSection() {
     (acc, sentence) => acc + sentence.length,
     0
   );
-
-  const clearSentences = () => setSentences([]);
 
   const handleTextareaChange = (value, index) => {
     const newSentences = [...sentences];
@@ -33,15 +27,7 @@ export function SentencesSection() {
     setSentences(newSentences);
   };
 
-  const ProcessSentences = () => {
-    microsoftTranslator(
-      sentences,
-      setSentences,
-      setTranslationLoading,
-      setTranslationError,
-      setTranslation
-    );
-  };
+  
 
   return (
     <section id="sentences-section">
@@ -95,20 +81,7 @@ export function SentencesSection() {
         </>
       )}
 
-      <div>
-        <Popconfirm
-          placement="left"
-          title="確定清除文字？"
-          onConfirm={clearSentences}
-          okText="Yes"
-          cancelText="No"
-        >
-          <Button>清除文字</Button>
-        </Popconfirm>
-        <Button type="primary" onClick={ProcessSentences}>
-          翻譯
-        </Button>
-      </div>
+      
     </section>
   );
 }

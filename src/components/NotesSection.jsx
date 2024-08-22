@@ -1,26 +1,12 @@
-import { Button, Popconfirm } from "antd";
-import { DownloadOutlined } from "@ant-design/icons";
 import { useContext} from "react";
-import { GeneratePDF } from "../utils/GeneratePDF.js";
 import { AppContext } from "../AppContext";
 import { SectionHead } from "./SectionHead";
 import { RenderNote } from "./RenderNotes";
 
 export function NotesSection() {
-  const { sentences, 
-          translation,
-          notes,      
-          setNotes, 
-          setNotesError, 
-          darkMode 
-           } =
-    useContext(AppContext);
+  const { notes, darkMode } = useContext(AppContext);
   
-  // clear all notes containers
-  const clearNotes = () => {
-      setNotes([]);
-      setNotesError(null);
-  };
+  
 
   return (
     <section id="notes-section">
@@ -39,25 +25,7 @@ export function NotesSection() {
           </div>
         )}
       
-      <div>
-        <Popconfirm
-          placement="left"
-          title='確定清除全部筆記'
-          onConfirm={clearNotes}
-          okText='Yes'
-          cancelText='No'
-        >
-          <Button>清除全部筆記</Button>
-        </Popconfirm>
-        <Button
-          type="primary"
-          icon={<DownloadOutlined />}
-          iconPosition="end"
-          onClick={async() => await GeneratePDF(sentences, translation, notes)}
-        >
-          PDF生成
-        </Button>
-      </div>
+      
     </section>
   );
 }

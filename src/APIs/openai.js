@@ -43,7 +43,7 @@ export async function openAIResult (termChinese, termEnglish, termExample, selec
             function_call: {name: "format_response"},
             model: "gpt-3.5-turbo",
             temperature: 1.5,
-            max_tokens: 100
+            max_tokens: 250
         })
 
         const response = completion.choices[0].message.function_call.arguments
@@ -70,7 +70,6 @@ export async function openAIResult (termChinese, termEnglish, termExample, selec
         setNotes(current => 
             current.map(note => note.id === noteId ? {id: noteId, wordInfo: result} : note)
         )
-        
     } catch (error) {
         setNotesLoading(false)
         setNotesError(error.message)

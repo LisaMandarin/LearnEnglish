@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 
-export function useLookupTerms({setLookupTerms, english, chinese, example, termChinese, termEnglish, termExample}) {
+export function UseLookupTerms({setLookupTerms, english, chinese, example, termChinese, termEnglish, termExample}) {
     useEffect(() => {
         setLookupTerms(current => {
         const newTerms = new Set(current)
