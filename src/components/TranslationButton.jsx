@@ -2,7 +2,7 @@ import { Button, Space } from "antd"
 import { useContext } from "react"
 import { AppContext } from "../AppContext"
 import { openAIResult } from "../APIs/openai"
-import { UseLookupTerms } from "./UseLookupTerms"
+import { UseLookupTerms } from "./useLookupTerms"
 import { useEffect } from "react"
 
 export function TranslationButton() {
