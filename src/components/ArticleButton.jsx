@@ -17,6 +17,9 @@ export function ArticleButton() {
         setArticle('')
         return
       }
+
+      nextStep();
+
       matchedSentences = matchedSentences.map((s) => s.trim());
       if (matchedSentences) {
         setSentences(matchedSentences);
@@ -35,7 +38,7 @@ export function ArticleButton() {
             >
               <Button>清除文字</Button>
             </Popconfirm>
-            <Button type="primary" onClick={() => {ProcessArticle(); nextStep();}}>
+            <Button type="primary" onClick={ProcessArticle}>
               陳列句子
             </Button>
             <Button onClick={() => nextStep()}>下一步</Button>
