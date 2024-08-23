@@ -20,7 +20,8 @@ export function SentencesButton() {
           setSentences,
           setTranslationLoading,
           setTranslationError,
-          setTranslation
+          setTranslation,
+          nextStep,
         );
       };
 
@@ -28,7 +29,7 @@ export function SentencesButton() {
         <div>
             <Space wrap>
                 <Button onClick={() => prevStep()}>上一步</Button>
-                <Button type="primary" onClick={() => {ProcessSentences(); nextStep();}}>
+                <Button type="primary" onClick={ProcessSentences}>
                 翻譯
                 </Button>
                 <Button onClick={() => nextStep()}>下一步</Button>

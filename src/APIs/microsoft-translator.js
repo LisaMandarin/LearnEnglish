@@ -1,12 +1,15 @@
 // ----- Fetch Microsoft-translator API -----
-export function microsoftTranslator(sentences, setSentences, setLoading, setError, setTranslation) {
+export function microsoftTranslator(sentences, setSentences, setLoading, setError, setTranslation, nextStep) {
     const apiKey = import.meta.env.VITE_MICROSOFT_API_KEY
 
-    if (sentences.length === 0) return
-    
+    if (sentences.length === 0) {
+        alert('沒有句子可以翻譯，請先回到第一步輸入英文文章後按「陳列句子」。')
+        return
+    }
     setLoading(true)
     setError(null)
     setTranslation([])
+    
     
     const newSentences = sentences.map(s => s.split('\n')).flat()
     
@@ -40,7 +43,7 @@ export function microsoftTranslator(sentences, setSentences, setLoading, setErro
         }
     }
     fetchData()
-
+    nextStep()
     return () => controller.abort()
 
 }
