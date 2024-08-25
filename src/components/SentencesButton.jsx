@@ -32,7 +32,7 @@ export function SentencesButton() {
                 <Button type="primary" onClick={ProcessSentences}>
                 翻譯
                 </Button>
-                <Button onClick={() => nextStep()}>下一步</Button>
+                {/* <Button onClick={() => nextStep()}>下一步</Button> */}
             </Space>
         </div>
     )

@@ -77,7 +77,7 @@ export function TranslationButton() {
                 <Button type="primary" onClick={Lookup}>
                     查詢單字
                 </Button>
-                <Button onClick={() => nextStep()}>下一步</Button>
+                {/* <Button onClick={() => nextStep()}>下一步</Button> */}
             </Space>
         </div>
     )

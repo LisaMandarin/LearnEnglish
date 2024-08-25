@@ -41,7 +41,7 @@ export function ArticleButton() {
             <Button type="primary" onClick={ProcessArticle}>
               陳列句子
             </Button>
-            <Button onClick={() => nextStep()}>下一步</Button>
+            {/* <Button onClick={() => nextStep()}>下一步</Button> */}
           </Space>
         </div>
     )
