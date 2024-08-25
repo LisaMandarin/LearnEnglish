@@ -24,9 +24,8 @@ export function NotesButton() {
     return (
         <div>
             <Space wrap>
-                <Button onClick={() => prevStep()}>上一步</Button>
+                <Button type="primary" onClick={() => prevStep()}>回上頁查詢單字</Button>
                 <Button
-                    type="primary"
                     icon={<DownloadOutlined />}
                     iconPosition="end"
                     onClick={async() => {

@@ -57,7 +57,7 @@ export async function openAIResult (termChinese, termEnglish, termExample, selec
             return formattedResponse   
         } catch (error) {
             console.error('Error parsing JSON response: ', error, response)
-            throw new Error('Failed to parse response from OpenAI')
+            throw new Error('無法解析來自 OpenAI 的回應')
         }
     }
     const noteId = crypto.randomUUID()
