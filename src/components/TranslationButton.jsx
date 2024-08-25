@@ -78,6 +78,7 @@ export function TranslationButton() {
                     查詢單字
                 </Button>
                 {/* <Button onClick={() => nextStep()}>下一步</Button> */}
+                <Button onClick={() => nextStep()}>到筆記區</Button>
             </Space>
         </div>
     )
