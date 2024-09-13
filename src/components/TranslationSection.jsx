@@ -43,23 +43,24 @@ export function TranslationSection() {
           按「翻譯」後，原句和翻譯會呈現在這區，更多資訊請按上方「問號」。
         </div>
       ) : (
-        <ol
+        <div
           style={{
             border: "1px solid #9a9a9a",
-            padding: "11px 4px 11px 42px",
+            // padding: "11px 4px 11px 42px",
             margin: "0",
           }}
         >
           {sentences.map((s, index) => (
-            <li key={index} style={{ padding: "4px 11px" }}>
+            <div key={index} style={{ padding: "11px 11px" }}>
+              <span style={{margin: "0 4px"}}>{`${index+1}.`}</span>
               <span style={{ color: darkMode ? "#F5F7FA" : "black" }}>{s}</span>
               <br />
-              <span style={{ color: darkMode ? "#5fa0ff" : "#b40700" }}>
+              <span style={{ color: darkMode ? "#5fa0ff" : "#b40700" , paddingLeft: "14px"}}>
                 {translation[index]}
               </span>
-            </li>
+            </div>
           ))}
-        </ol>
+        </div>
       )}
       <div style={checkboxStyle}>
         <TranslationCheckbox
