@@ -17,7 +17,7 @@ export function ArticleSection() {
       <TextArea
         className={darkMode ? "dark-mode" : ""}
         showCount
-        maxLength={10000}
+        maxLength={1000}
         placeholder="請貼上英文文章，更多資訊請按上方「問號」。"
         value={article}
         onChange={(e) => setArticle(e.target.value)}
