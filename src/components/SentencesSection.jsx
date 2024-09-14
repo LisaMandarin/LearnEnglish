@@ -11,7 +11,7 @@ export function SentencesSection() {
   } = useContext(AppContext);
   const { TextArea } = Input;
 
-  const maxCount = 5000;
+  const maxCount = 1000;
   const totalCount = sentences.reduce(
     (acc, sentence) => acc + sentence.length,
     0

@@ -1,6 +1,7 @@
 import { Button, Popconfirm, Space } from "antd";
 import { useContext } from "react";
 import { AppContext } from "../AppContext";
+import nlp from "compromise";
 
 export function ArticleButton() {
     const { article, setArticle, setSentences, nextStep } = useContext(AppContext)
@@ -9,9 +10,10 @@ export function ArticleButton() {
       };
     
     const ProcessArticle = () => {
-      const regex = /[^.!?]+[.!?]+/g; // not start with .!? but end with .!?
-      let matchedSentences = article.match(regex);
-      
+      // const regex = /[^.!?]+[.!?]+/g; // not start with .!? but end with .!?
+      // let matchedSentences = article.match(regex);
+      const matchedSentences = nlp(article).sentences().out('array')
+      console.log('matchedSentences: ', matchedSentences)
       if (!matchedSentences || matchedSentences.length === 0) {
         alert('請提供正確的文章，包括標點符號。')
         setArticle('')
@@ -20,7 +22,7 @@ export function ArticleButton() {
 
       nextStep();
 
-      matchedSentences = matchedSentences.map((s) => s.trim());
+      // matchedSentences = matchedSentences.map((s) => s.trim());
       if (matchedSentences) {
         setSentences(matchedSentences);
       }
