@@ -6,6 +6,7 @@ This React project is designed to offer a comprehensive language learning tool f
 - **JavaScript**: For scripting and API interactions.
 - **CSS**: For styling the application.
 - **APIs**:
+    - compromise API: For detecting sentences in nlp.
     - Microsoft Translator API: For translating text.
     - OpenAI API: For generating detailed word information and examples.
     - jsPDF: For generating PDF documents.
